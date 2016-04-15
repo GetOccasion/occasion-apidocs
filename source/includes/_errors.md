@@ -5,7 +5,7 @@ The Occasion API uses the following error codes:
 
 Error Code | Meaning
 ---------- | -------
-401 | Unauthorized -- Your API key(s) are wrong.
+401 | Unauthorized -- Your API key(s) are wrong, or you provided insufficient credentials to a private endpoint.
 404 | Not Found -- The specified resource could not be found.
 409 | Conflict -- Using the resource in the attempted way conflicts with its state.
 422 | Unprocessable Entity -- The request data could not be processed into a valid entity. (missing params, invalid format, etc.).
