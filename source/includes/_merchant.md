@@ -30,6 +30,7 @@ HTTPS/1.1 200 OK
   "send_weekly_sales_email": true,
   "send_reminder_email": true,
   "facebook_page": "https://www.facebook.com/xxxx?fref=ts",
+  "psp_id": 1,
   "psp": {
     "id": 1,
     "name": "SpreedlyPsp",
