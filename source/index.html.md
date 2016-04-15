@@ -10,6 +10,7 @@ toc_footers:
 
 includes:
   - query
+  - products
   - errors
 
 search: true
