@@ -10,6 +10,7 @@ toc_footers:
 
 includes:
   - query
+  - merchant
   - products
   - errors
 
