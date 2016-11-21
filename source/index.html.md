@@ -22,15 +22,13 @@ search: true
 
 Welcome to the Occasion API! You can use our API to access Occasion API endpoints, which can be used to interact with all levels of functionality available to Occasion users, including: products, venues, orders, coupons, gift cards, customers, payment methods, users, calendars, etc.
 
-**Right now, the only endpoints available for query are products. However, we are rapidly expanding to include all other endpoints.**
-
 We have planned language bindings in Shell, Ruby, and Javascript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
 **Right now, query can only be made via Shell (cURL, etc.), but we plan on releasing a Javascript library followed by Ruby.**
 
 # Format
 
-All responses are in JSON. All requests should be made in JSON as well. In the future, we will force requests to be in JSON format, otherwise `415 Unsupported Media Type`
+All requests and responses are in JSON format, adhering to the [JSON API schema](http://jsonapi.org/format/). In the examples at right, we use the readable format of URLs including `[, ]` and others. Note, you'll have to format your URL to be safe before you make your request, replacing these symbols with their Unicode identifiers.
 
 # Authentication
 
