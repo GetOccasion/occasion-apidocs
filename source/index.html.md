@@ -10,8 +10,8 @@ toc_footers:
 
 includes:
   - query
-  - merchant
   - scoping
+  - merchants
   - venues
   - products
   - errors
