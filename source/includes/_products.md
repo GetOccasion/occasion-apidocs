@@ -64,7 +64,7 @@ image | true | URLs for the full image and thumbnail to display with a product
 title | true | The title of the product, such as "BYOB & Paint A Forest"
 description | true | The description for the product, explaining things in detail
 status | true | The status that will determine if the product is active for ordering.<br><br>*Possible values:*<br>**active:** Ready to accept orders<br>**inactive:** Not accepting orders<br>**expired:** Product has time slots, but none of them are open.<br>**sold_out:** Either product or all open time slots are fully booked
-price | true | The base price of the order, before applying price changing questions, tax, coupons, gift cards, etc.
+price | true | The base price of an order for this product, before applying price changing questions, tax, coupons, gift cards, etc.
 tax_percentage | true | The sales tax percentage that is applied to an order for this product
 closing_time_relative | true | Whether or not `time_slots_closed_before` below indicates time relative to the time_slot start datetime, or absolute to the current day
 time_slots_closed_before | true | The point in time before which time slots are closed for sales. Any time slot occurring between Time.now and the actual occurrence of that time slot (when the class takes place) cannot be sold.
@@ -156,7 +156,7 @@ image | true | URLs for the full image and thumbnail to display with a product
 title | true | The title of the product, such as "BYOB & Paint A Forest"
 description | true | The description for the product, explaining things in detail
 status | true | The status that will determine if the product is active for ordering.<br><br>*Possible values:*<br>**active:** Ready to accept orders<br>**inactive:** Not accepting orders<br>**expired:** Product has time slots, but none of them are open.<br>**sold_out:** Either product or all open time slots are fully booked
-price | true | The base price of the order, before applying price changing questions, tax, coupons, gift cards, etc.
+price | true | The base price of an order for this product, before applying price changing questions, tax, coupons, gift cards, etc.
 tax_percentage | true | The sales tax percentage that is applied to an order for this product
 closing_time_relative | true | Whether or not `time_slots_closed_before` below indicates time relative to the time_slot start datetime, or absolute to the current day
 time_slots_closed_before | true | The point in time before which time slots are closed for sales. Any time slot occurring between Time.now and the actual occurrence of that time slot (when the class takes place) cannot be sold.
@@ -356,7 +356,7 @@ image | true | URLs for the full image and thumbnail to display with a product
 title | true | The title of the product, such as "BYOB & Paint A Forest"
 description | true | The description for the product, explaining things in detail
 status | true | The status that will determine if the product is active for ordering.<br><br>*Possible values:*<br>**active:** Ready to accept orders<br>**inactive:** Not accepting orders<br>**expired:** Product has time slots, but none of them are open.<br>**sold_out:** Either product or all open time slots are fully booked
-price | true | The base price of the order, before applying price changing questions, tax, coupons, gift cards, etc.
+price | true | The base price of an order for this product, before applying price changing questions, tax, coupons, gift cards, etc.
 tax_percentage | true | The sales tax percentage that is applied to an order for this product
 closing_time_relative | true | Whether or not `time_slots_closed_before` below indicates time relative to the time_slot start datetime, or absolute to the current day
 time_slots_closed_before | true | The point in time before which time slots are closed for sales. Any time slot occurring between Time.now and the actual occurrence of that time slot (when the class takes place) cannot be sold.

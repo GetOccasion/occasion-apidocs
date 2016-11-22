@@ -13,6 +13,7 @@ includes:
   - scoping
   - merchants
   - products
+  - orders
   - venues
   - errors
 
