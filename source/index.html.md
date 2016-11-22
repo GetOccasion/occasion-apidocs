@@ -12,8 +12,8 @@ includes:
   - query
   - scoping
   - merchants
-  - venues
   - products
+  - venues
   - errors
 
 search: true

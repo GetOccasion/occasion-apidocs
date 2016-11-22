@@ -2,8 +2,6 @@
 
 ## Get All Venues
 
-> **Private call** | Example truncated for brevity.
-
 ```shell
 curl "http://app.getoccasion.com/api/v1/venues"
   -u "59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"
@@ -14,74 +12,28 @@ HTTPS/1.1 200 OK
 ```
 
 ```json
-[
-  {
-    "id": 1,
-    "merchant_id": 10,
-    "country_id": 228,
-    "state_id": 14,
-    "country": {
-      "id": 228,
-      "name": "United States",
-      "code": "US"
-    },
-    "state": {
-      "id": 14,
-      "name": "Illinois",
-      "code": "IL"
-    },
-    "created_at": "2015-10-23T11:00:44.539-05:00",
-    "updated_at": "2015-10-23T11:00:44.539-05:00",
-    "time_zone": "America/Chicago",
-    "name": "My Classroom",
-    "email": "email@example.com",
-    "address": "1111 Main Street",
-    "city": "Chicago",
-    "zip": "60047",
-    "phone": "999-999-9999",
-    "website": "www.example.com",
-    "capacity": 5,
-    "public": false
-  }
-]
-```
-
-> **Public call** | Example truncated for brevity.
-
-```shell
-curl "http://app.getoccasion.com/api/v1/venues"
-  -u "59a8517fd9458b46d4ee59f8fd717fb80d:"
-```
-
-```http
-HTTPS/1.1 200 OK
-```
-
-```json
-[
-  {
-    "country_id": 228,
-    "state_id": 14,
-    "country": {
-      "id": 228,
-      "name": "United States",
-      "code": "US"
-    },
-    "state": {
-      "id": 14,
-      "name": "Illinois",
-      "code": "IL"
-    },
-    "time_zone": "America/Chicago",
-    "name": "My Classroom",
-    "email": "email@example.com",
-    "address": "1111 Main Street",
-    "city": "Chicago",
-    "zip": "60047",
-    "phone": "999-999-9999",
-    "website": "www.example.com"
-  }
-]
+{
+  "data": [
+    {
+      "type": "venues",
+      "id": "n2hs7dh",
+      "attributes": {
+        "name": "The Playplace",
+        "address": "123 Main Street",
+        "city": "Chicago",
+        "state": "Illinois",
+        "zip": "60614",
+        "country": "United States",
+        "website": "www.example.com",
+        "email": "admin@example.com",
+        "capacity": 100,
+        "phone": "(999) 999-9999",
+        "public": "true",
+        "time_zone": "America/Chicago"
+      }
+    }
+  ]
+}
 ```
 
 This endpoint retrieves all venues. If made in a public context, only venues `where(public: true)` are returned.
@@ -96,34 +48,32 @@ Notable response fields include:
 
 Field | Public | Description
 ----- | ------ | -----------
-time_zone | true | The time zone that the venue operates in
 name | true | The name of the venue
-email | true | The email of the venue
 address | true | The street address of the venue
 city | true | The city the venue is located in
+state | true | The state the venue is located in
 zip | true | The ZIP code of the venue
-phone | true | The phone number of the venue
+country | true | The country the venue is located in
 website | true | The venue's website
+email | true | The email of the venue
 capacity | false | The number of open orders that a venue can have for any product
+phone | true | The phone number of the venue
 public | false | If `false`, the venue should not be displayed as open for business
+time_zone | true | The time zone that the venue operates in
 
 ### Associations
 
 Possible associations to include are:
 
-Association | Default | Public | Description
------------ | ------- | ------ | -----------
-country | true | true | The country that the venue is located in
-state | true | true | The state/province the venue is located in
-products | false | true | All the products that belong to the venue
-merchant | false | true | The merchant that the venue belongs to
+Association | Description
+----------- | -----------
+merchant | The merchant that the venue belongs to
+products | All the products offered at the venue
 
 ## Get a Specific Venue
 
-> **Private call**
-
 ```shell
-curl "http://app.getoccasion.com/api/v1/venues/12"
+curl "http://app.getoccasion.com/api/v1/venues/n2hs7dh"
   -u "59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"
 ```
 
@@ -133,68 +83,24 @@ HTTPS/1.1 200 OK
 
 ```json
 {
-  "id": 1,
-  "merchant_id": 10,
-  "country_id": 228,
-  "state_id": 14,
-  "country": {
-    "id": 228,
-    "name": "United States",
-    "code": "US"
-  },
-  "state": {
-    "id": 14,
-    "name": "Illinois",
-    "code": "IL"
-  },
-  "created_at": "2015-10-23T11:00:44.539-05:00",
-  "updated_at": "2015-10-23T11:00:44.539-05:00",
-  "time_zone": "America/Chicago",
-  "name": "My Classroom",
-  "email": "email@example.com",
-  "address": "1111 Main Street",
-  "city": "Chicago",
-  "zip": "60047",
-  "phone": "999-999-9999",
-  "website": "www.example.com",
-  "capacity": 5,
-  "public": false
-}
-```
-
-> **Public call**
-
-```shell
-curl "http://app.getoccasion.com/api/v1/venues/12"
-  -u "59a8517fd9458b46d4ee59f8fd717fb80d:"
-```
-
-```http
-HTTPS/1.1 200 OK
-```
-
-```json
-{
-  "country_id": 228,
-  "state_id": 14,
-  "country": {
-    "id": 228,
-    "name": "United States",
-    "code": "US"
-  },
-  "state": {
-    "id": 14,
-    "name": "Illinois",
-    "code": "IL"
-  },
-  "time_zone": "America/Chicago",
-  "name": "My Classroom",
-  "email": "email@example.com",
-  "address": "1111 Main Street",
-  "city": "Chicago",
-  "zip": "60047",
-  "phone": "999-999-9999",
-  "website": "www.example.com"
+  "data": {
+    "type": "venues",
+    "id": "n2hs7dh",
+    "attributes": {
+      "name": "The Playplace",
+      "address": "123 Main Street",
+      "city": "Chicago",
+      "state": "Illinois",
+      "zip": "60614",
+      "country": "United States",
+      "website": "www.example.com",
+      "email": "admin@example.com",
+      "capacity": 100,
+      "phone": "(999) 999-9999",
+      "public": "true",
+      "time_zone": "America/Chicago"
+    }
+  }
 }
 ```
 
@@ -216,24 +122,24 @@ Notable response fields include:
 
 Field | Public | Description
 ----- | ------ | -----------
-time_zone | true | The time zone that the venue operates in
 name | true | The name of the venue
-email | true | The email of the venue
 address | true | The street address of the venue
 city | true | The city the venue is located in
+state | true | The state the venue is located in
 zip | true | The ZIP code of the venue
-phone | true | The phone number of the venue
+country | true | The country the venue is located in
 website | true | The venue's website
+email | true | The email of the venue
 capacity | false | The number of open orders that a venue can have for any product
+phone | true | The phone number of the venue
 public | false | If `false`, the venue should not be displayed as open for business
+time_zone | true | The time zone that the venue operates in
 
 ### Associations
 
 Possible associations to include are:
 
-Association | Default | Public | Description
------------ | ------- | ------ | -----------
-country | true | true | The country that the venue is located in
-state | true | true | The state/province the venue is located in
-products | false | true | All the products that belong to the venue
-merchant | false | true | The merchant that the venue belongs to
+Association | Description
+----------- | -----------
+merchant | The merchant that the venue belongs to
+products | All the products offered at the venue
