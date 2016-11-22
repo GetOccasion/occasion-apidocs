@@ -52,7 +52,7 @@ This endpoint retrieves all products.
 
 ### HTTP Request
 
-`GET http://example.com/api/v1/products`
+`GET https://app.getoccasion.com/api/v1/products`
 
 ### Response Body
 
@@ -138,7 +138,7 @@ This endpoint retrieves a specific product.
 
 ### HTTP Request
 
-`GET http://example.com/api/v1/products/:id`
+`GET https://app.getoccasion.com/api/v1/products/:id`
 
 ### URL Parameters
 
@@ -338,7 +338,7 @@ This request retrieves a specific product with its attributes, which are needed 
 
 ### HTTP Request
 
-`GET http://example.com/api/v1/products/:id?include=attrs.attribute_options,attrs.field_types`
+`GET https://app.getoccasion.com/api/v1/products/:id?include=attrs.attribute_options,attrs.field_types`
 
 ### URL Parameters
 

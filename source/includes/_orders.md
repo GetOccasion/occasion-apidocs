@@ -44,7 +44,7 @@ This endpoint retrieves all orders.
 
 ### HTTP Request
 
-`GET http://example.com/api/v1/orders`
+`GET https://app.getoccasion.com/api/v1/orders`
 
 ### Response Body
 

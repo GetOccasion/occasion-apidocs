@@ -16,7 +16,7 @@ HTTPS/1.1 200 OK
       "type": "merchants",
       "id": "67sdeas",
       "attributes": {
-        "profile_picture": "http://example.com/assets/logo.jpg",
+        "profile_picture": "https://app.getoccasion.com/assets/logo.jpg",
         "created_at": "2015-10-23T11:00:44.539-05:00",
         "updated_at": "2015-10-23T11:00:44.539-05:00",
         "name": "My Business Name",
@@ -33,7 +33,7 @@ This endpoint retrieves the merchant corresponding to your provided API credenti
 
 ### HTTP Request
 
-`GET http://example.com/api/v1/merchants`
+`GET https://app.getoccasion.com/api/v1/merchants`
 
 ### Response Body
 
@@ -63,7 +63,7 @@ HTTPS/1.1 200 OK
       "type": "merchants",
       "id": "67sdeas",
       "attributes": {
-        "profile_picture": "http://example.com/assets/logo.jpg",
+        "profile_picture": "https://app.getoccasion.com/assets/logo.jpg",
         "created_at": "2015-10-23T11:00:44.539-05:00",
         "updated_at": "2015-10-23T11:00:44.539-05:00",
         "name": "My Business Name",

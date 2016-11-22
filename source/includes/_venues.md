@@ -40,7 +40,7 @@ This endpoint retrieves all venues. If made in a public context, only venues `wh
 
 ### HTTP Request
 
-`GET http://example.com/api/v1/venues`
+`GET https://app.getoccasion.com/api/v1/venues`
 
 ### Response Body
 
@@ -108,7 +108,7 @@ This endpoint retrieves a specific venue. If made in a public context, only a ve
 
 ### HTTP Request
 
-`GET http://example.com/api/v1/venues/:id`
+`GET https://app.getoccasion.com/api/v1/venues/:id`
 
 ### URL Parameters
 
