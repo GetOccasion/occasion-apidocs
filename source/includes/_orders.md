@@ -20,15 +20,15 @@ HTTPS/1.1 200 OK
       "attributes": {
         "verification_code": "kASn37a",
         "status": "booked",
-        "price": 15.0,
-        "tax": 0.0,
-        "tax_percentage": 10.0,
-        "coupon_amount": 1.0,
+        "price": "15.0",
+        "tax": "0.0",
+        "tax_percentage": "10.0",
+        "coupon_amount": "1.0",
         "coupon_description": "$1.00",
         "quantity": 1,
         "summary": "This is a complex summary of the order.",
         "description": "This is the title of the product ordered.",
-        "balance": 0.0,
+        "balance": "0.0",
         "session_identifier": "k37a8h-uw7gnc5-jqy6D0-k9287a",
         "customer_name": "Jane Smith",
         "customer_email": "jane@example.com",
@@ -104,15 +104,15 @@ HTTPS/1.1 200 OK
     "attributes": {
       "verification_code": "kASn37a",
       "status": "booked",
-      "price": 15.4,
-      "tax": 1.40,
-      "tax_percentage": 10.0,
-      "coupon_amount": 1.0,
+      "price": "15.4",
+      "tax": "1.40",
+      "tax_percentage": "10.0",
+      "coupon_amount": "1.0",
       "coupon_description": "$1.00",
       "quantity": 1,
       "summary": "This is a complex summary of the order.",
       "description": "This is the title of the product ordered.",
-      "balance": 0.0,
+      "balance": "0.0",
       "session_identifier": "k37a8h-uw7gnc5-jqy6D0-k9287a",
       "customer_name": "Jane Smith",
       "customer_email": "jane@example.com",
@@ -233,14 +233,14 @@ Content-Type: application/json
           {
             "type": "transactions",
             "attributes": {
-              "amount": 5.0,
+              "amount": "5.0",
               "payment_method_token": "H7gJ8GtEfCdLi88uRD6FhfrtOPTizjt"
             }
           },
           {
             "type": "transactions",
             "attributes": {
-              "amount": 5.0,
+              "amount": "5.0",
               "gift_card_code": "CODE1X"
             }
           }
@@ -263,15 +263,15 @@ HTTPS/1.1 201 Created
     "attributes": {
       "verification_code": "kASn37a",
       "status": "booked",
-      "price": 10.0,
-      "tax": 0.0,
-      "tax_percentage": 10.0,
-      "coupon_amount": 1.0,
+      "price": "10.0",
+      "tax": "0.0",
+      "tax_percentage": "10.0",
+      "coupon_amount": "1.0",
       "coupon_description": "$1.00",
       "quantity": 1,
       "summary": "This is a complex summary of the order.",
       "description": "This is the title of the product ordered.",
-      "balance": 0.0,
+      "balance": "0.0",
       "session_identifier": "any-key-you-want",
       "customer_name": "Jane Smith",
       "customer_email": "jane@example.com",
@@ -348,3 +348,82 @@ occurrences | Occurrences of the timeslot that the order was purchased for
 order_items | The items purchased with the order, instead of a product
 product | The product that the order is for
 transactions | Transactions to pay for the order
+
+## Get The Price Of An Order
+
+```http
+POST /api/v1/orders/price HTTPS/1.1
+Host: app.getoccasion.com
+Authorization: Basic NTlhZTdiN2FlOWUyZTllMDFhOTUwODI5MGU1OTk=
+Content-Type: application/json
+```
+
+```json
+{
+  "data": {
+    "type": "orders",
+    "relationships": {
+      "attribute_values": {
+        "data": [
+          {
+            "type": "attribute_values",
+            "attributes": {
+              "attr_id": "12n83qa",
+              "value": "6shen2as"
+            }
+          }
+        ]
+      },
+      "coupon": {
+        "data": { "type": "coupons", "id": "gYw6eas" }
+      },
+      "product": {
+        "data": { "type": "products", "id": "bteyn26" }
+      }
+    }
+  }
+}
+```
+
+```http
+HTTPS/1.1 200 OK
+```
+
+```json
+{
+  "data": {
+    "type": "orders",
+    "attributes": {
+      "subtotal": "10.0",
+      "coupon": "1.0",
+      "tax": "2.0",
+      "total": "11.0"
+    }
+  }
+}
+```
+
+This endpoint calculates the price of an order
+
+### HTTP Request
+
+`POST https://app.getoccasion.com/api/v1/orders/price`
+
+### Request Body
+
+Field | Description | Required?
+----- | ----------- | ---------
+attribute_values | Values for the attributes that affect the price of the order | false
+coupon | The coupon that has an impact on the price of the order | false
+product | The product that defines the base price, attributes, and tax_percentage of the order | true
+
+### Response Body
+
+Notable response fields include:
+
+Field | Description
+----- | -----------
+subtotal | The price of the order before adding tax or coupons. product.price + attributes
+coupon | The amount that the coupon discounts from the order
+tax | The amount paid in tax, based on the tax_percentage
+total | The final price of the order that is to be paid by the customer
