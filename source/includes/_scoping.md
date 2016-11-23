@@ -31,3 +31,19 @@ curl "http://app.getoccasion.com/api/v1/products/37shd72"
 ```
 
 > Product with id='37shd72' will be returned. No merchant scope is required because this is a request to a specific product for a specific merchant.
+
+```shell
+curl "http://app.getoccasion.com/api/v1/products?merchant_id=jsh8e0a"
+  -X POST
+  -u "59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"
+```
+
+> Created product belonging to merchant with id='jsh8e0a' will be returned.
+
+```shell
+curl "http://app.getoccasion.com/api/v1/products"
+  -X POST
+  -u "59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"
+```
+
+> 400 Bad Request will be returned because the product cannot be created without a merchant scope.
