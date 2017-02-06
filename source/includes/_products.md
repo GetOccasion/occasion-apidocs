@@ -29,7 +29,6 @@ HTTPS/1.1 200 OK
         "status": "active",
         "created_at": "2015-10-23T11:00:44.539-05:00",
         "updated_at": "2015-10-23T11:00:44.539-05:00",
-        "price": "10.0",
         "tax_percentage": "3.75",
         "closing_time_relative": true,
         "time_slots_closed_before": "2000-01-01T00:00:00.000Z",
@@ -64,10 +63,9 @@ image | true | URLs for the full image and thumbnail to display with a product
 title | true | The title of the product, such as "BYOB & Paint A Forest"
 description | true | The description for the product, explaining things in detail
 status | true | The status that will determine if the product is active for ordering.<br><br>*Possible values:*<br>**active:** Ready to accept orders<br>**inactive:** Not accepting orders<br>**expired:** Product has time slots, but none of them are open.<br>**sold_out:** Either product or all open time slots are fully booked
-price | true | The base price of an order for this product, before applying price changing questions, tax, coupons, gift cards, etc.
 tax_percentage | true | The sales tax percentage that is applied to an order for this product
-closing_time_relative | true | Whether or not `time_slots_closed_before` below indicates time relative to the time_slot start datetime, or absolute to the current day
-time_slots_closed_before | true | The point in time before which time slots are closed for sales. Any time slot occurring between Time.now and the actual occurrence of that time slot (when the class takes place) cannot be sold.
+closing_time_relative | true | Whether or not `time_slots_closed_before` below indicates time relative to the time_slot start datetime, or indicates an absolute time
+time_slots_closed_before | true | The point in time after which time slots are closed for sales. Any time slot occurring between this time and the actual occurrence of that time slot (when the class takes place) cannot be sold.
 show_occurrence_availability | true | If `true`, show how many open seats there are for a time slot
 show_time_slot_duration | true | If `true`, display the duration of a time slot
 widget_contact_title | true | The title to display above a section regarding customer contact information (email, first_name, last_name, zip)
@@ -116,7 +114,6 @@ HTTPS/1.1 200 OK
       "status": "active",
       "created_at": "2015-10-23T11:00:44.539-05:00",
       "updated_at": "2015-10-23T11:00:44.539-05:00",
-      "price": "10.0",
       "tax_percentage": "3.75",
       "closing_time_relative": true,
       "time_slots_closed_before": "2000-01-01T00:00:00.000Z",
@@ -156,10 +153,9 @@ image | true | URLs for the full image and thumbnail to display with a product
 title | true | The title of the product, such as "BYOB & Paint A Forest"
 description | true | The description for the product, explaining things in detail
 status | true | The status that will determine if the product is active for ordering.<br><br>*Possible values:*<br>**active:** Ready to accept orders<br>**inactive:** Not accepting orders<br>**expired:** Product has time slots, but none of them are open.<br>**sold_out:** Either product or all open time slots are fully booked
-price | true | The base price of an order for this product, before applying price changing questions, tax, coupons, gift cards, etc.
 tax_percentage | true | The sales tax percentage that is applied to an order for this product
-closing_time_relative | true | Whether or not `time_slots_closed_before` below indicates time relative to the time_slot start datetime, or absolute to the current day
-time_slots_closed_before | true | The point in time before which time slots are closed for sales. Any time slot occurring between Time.now and the actual occurrence of that time slot (when the class takes place) cannot be sold.
+closing_time_relative | true | Whether or not `time_slots_closed_before` below indicates time relative to the time_slot start datetime, or indicates an absolute time
+time_slots_closed_before | true | The point in time after which time slots are closed for sales. Any time slot occurring between this time and the actual occurrence of that time slot (when the class takes place) cannot be sold.
 show_occurrence_availability | true | If `true`, show how many open seats there are for a time slot
 show_time_slot_duration | true | If `true`, display the duration of a time slot
 widget_contact_title | true | The title to display above a section regarding customer contact information (email, first_name, last_name, zip)
@@ -208,7 +204,6 @@ HTTPS/1.1 200 OK
       "status": "active",
       "created_at": "2015-10-23T11:00:44.539-05:00",
       "updated_at": "2015-10-23T11:00:44.539-05:00",
-      "price": "10.0",
       "tax_percentage": "3.75",
       "closing_time_relative": true,
       "time_slots_closed_before": "2000-01-01T00:00:00.000Z",
@@ -358,8 +353,8 @@ description | true | The description for the product, explaining things in detai
 status | true | The status that will determine if the product is active for ordering.<br><br>*Possible values:*<br>**active:** Ready to accept orders<br>**inactive:** Not accepting orders<br>**expired:** Product has time slots, but none of them are open.<br>**sold_out:** Either product or all open time slots are fully booked
 price | true | The base price of an order for this product, before applying price changing questions, tax, coupons, gift cards, etc.
 tax_percentage | true | The sales tax percentage that is applied to an order for this product
-closing_time_relative | true | Whether or not `time_slots_closed_before` below indicates time relative to the time_slot start datetime, or absolute to the current day
-time_slots_closed_before | true | The point in time before which time slots are closed for sales. Any time slot occurring between Time.now and the actual occurrence of that time slot (when the class takes place) cannot be sold.
+closing_time_relative | true | Whether or not `time_slots_closed_before` below indicates time relative to the time_slot start datetime, or indicates an absolute time
+time_slots_closed_before | true | The point in time after which time slots are closed for sales. Any time slot occurring between this time and the actual occurrence of that time slot (when the class takes place) cannot be sold.
 show_occurrence_availability | true | If `true`, show how many open seats there are for a time slot
 show_time_slot_duration | true | If `true`, display the duration of a time slot
 widget_contact_title | true | The title to display above a section regarding customer contact information (email, first_name, last_name, zip)

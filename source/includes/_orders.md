@@ -20,13 +20,14 @@ HTTPS/1.1 200 OK
       "attributes": {
         "verification_code": "kASn37a",
         "status": "booked",
+        "created_at": "2015-10-23T11:00:44.539-05:00",
+        "updated_at": "2015-10-23T11:00:44.539-05:00",
         "price": "15.0",
         "tax": "0.0",
         "tax_percentage": "10.0",
         "coupon_amount": "1.0",
         "coupon_description": "$1.00",
         "quantity": 1,
-        "summary": "This is a complex summary of the order.",
         "description": "This is the title of the product ordered.",
         "balance": "0.0",
         "session_identifier": "k37a8h-uw7gnc5-jqy6D0-k9287a",
@@ -60,7 +61,6 @@ tax_percentage | true | The sales tax percentage that was applied to the order
 coupon_amount | true | The amount that the coupon used for this order took off from the order price
 coupon_description | true | A readable version of the coupon amount: if a fixed discount coupon, then `'$X.XX'`, if a percentage discount, then `'X.X%'`
 quantity | true | The quantity of this order that was purchased
-summary | true | A lengthy description of the order, incorporating multiple elements to "summarize" the completed order to the customer
 description | true | The title of the product or order items purchased with this order
 balance | false | The total balance left to be paid on this order
 session_identifier | false | An identifier used to associate this order with a session of an order form (conversion tracking, etc.)
@@ -82,6 +82,7 @@ currency | The currency used to purchase the order
 customer | The customer that purchased the order
 merchant | The merchant that sold this order
 occurrences | Occurrences of the timeslot that the order was purchased for
+order_items | The items purchased with the order, instead of a product
 product | The product that the order is for
 transactions | Transactions to pay for the order
 
@@ -104,13 +105,14 @@ HTTPS/1.1 200 OK
     "attributes": {
       "verification_code": "kASn37a",
       "status": "booked",
+      "created_at": "2015-10-23T11:00:44.539-05:00",
+      "updated_at": "2015-10-23T11:00:44.539-05:00",
       "price": "15.4",
       "tax": "1.40",
       "tax_percentage": "10.0",
       "coupon_amount": "1.0",
       "coupon_description": "$1.00",
       "quantity": 1,
-      "summary": "This is a complex summary of the order.",
       "description": "This is the title of the product ordered.",
       "balance": "0.0",
       "session_identifier": "k37a8h-uw7gnc5-jqy6D0-k9287a",
@@ -149,7 +151,6 @@ tax_percentage | true | The sales tax percentage that was applied to the order
 coupon_amount | true | The amount that the coupon used for this order took off from the order price
 coupon_description | true | A readable version of the coupon amount: if a fixed discount coupon, then `'$X.XX'`, if a percentage discount, then `'X.X%'`
 quantity | true | The quantity of this order that was purchased
-summary | true | A lengthy description of the order, incorporating multiple elements to "summarize" the completed order to the customer
 description | true | The title of the product or order items purchased with this order
 balance | false | The total balance left to be paid on this order
 session_identifier | false | An identifier used to associate this order with a session of an order form (conversion tracking, etc.)
@@ -263,13 +264,14 @@ HTTPS/1.1 201 Created
     "attributes": {
       "verification_code": "kASn37a",
       "status": "booked",
+      "created_at": "2015-10-23T11:00:44.539-05:00",
+      "updated_at": "2015-10-23T11:00:44.539-05:00",
       "price": "10.0",
       "tax": "0.0",
       "tax_percentage": "10.0",
       "coupon_amount": "1.0",
       "coupon_description": "$1.00",
       "quantity": 1,
-      "summary": "This is a complex summary of the order.",
       "description": "This is the title of the product ordered.",
       "balance": "0.0",
       "session_identifier": "any-key-you-want",
@@ -323,7 +325,6 @@ tax_percentage | true | The sales tax percentage that was applied to the order
 coupon_amount | true | The amount that the coupon used for this order took off from the order price
 coupon_description | true | A readable version of the coupon amount: if a fixed discount coupon, then `'$X.XX'`, if a percentage discount, then `'X.X%'`
 quantity | true | The quantity of this order that was purchased
-summary | true | A lengthy description of the order, incorporating multiple elements to "summarize" the completed order to the customer
 description | true | The title of the product or order items purchased with this order
 balance | false | The total balance left to be paid on this order
 session_identifier | false | An identifier used to associate this order with a session of an order form (conversion tracking, etc.)

@@ -48,7 +48,7 @@ tax_percentage | true | The sales tax percentage that the merchant applies to ea
 facebook_page | true | The Facebook page URL for the merchant's business
 
 ```shell
-curl "http://app.getoccasion.com/api/v1/merchants?include=currency"
+curl "http://app.getoccasion.com/api/v1/merchants?include=business_type,currency"
   -u "59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"
 ```
 
@@ -72,6 +72,12 @@ HTTPS/1.1 200 OK
         "facebook_page": "https://www.facebook.com/xxxx?fref=ts"
       },
       "relationships": {
+        "business_type": {
+          "data": {
+            "type": "business_types",
+            "id": "k87a7w"
+          }
+        },
         "currency": {
           "data": {
             "type": "currencies",
@@ -82,6 +88,13 @@ HTTPS/1.1 200 OK
     }
   ],
   "included": [
+    {
+      "type": "business_types",
+      "id": "k87a7w",
+      "attributes": {
+        "name": "Ice Rink",
+      }
+    },
     {
       "type": "currencies",
       "id": "7ek2ya",
@@ -100,4 +113,5 @@ Possible associations to include are:
 
 Association | Description
 ----------- | -----------
+business_type | The type of business that the merchant is
 currency | The currency that the merchant accepts
