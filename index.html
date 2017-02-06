@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>Occasion API Documentation</title>
+    <title>API Reference</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -91,7 +91,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -102,6 +102,8 @@
       <img src="images/logo.png" />
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
+              <a href="#" data-language-name="ruby">ruby</a>
+              <a href="#" data-language-name="python">python</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -110,7 +112,7 @@
       <div id="toc">
       </div>
         <ul class="toc-footer">
-            <li><a href='https://app.getoccasion.com/users/sign_up'>Sign Up for an Account</a></li>
+            <li><a href='#'>Sign Up for a Developer Key</a></li>
             <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
         </ul>
     </div>
@@ -119,481 +121,147 @@
       <div class="content">
         <h1 id="introduction">Introduction</h1>
 
-<p>Welcome to the Occasion API! You can use our API to access Occasion API endpoints, which can be used to interact with all levels of functionality available to Occasion users, including: products, venues, orders, coupons, gift cards, customers, payment methods, users, calendars, etc.</p>
+<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
 
-<p>We have planned language bindings in Shell, Ruby, and Javascript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
 
-<p><strong>Right now, query can only be made via Shell (cURL, etc.), but we plan on releasing a Javascript library followed by Ruby.</strong></p>
-
-<h1 id="format">Format</h1>
-
-<p>All responses are in JSON. All requests should be made in JSON as well. In the future, we will force requests to be in JSON format, otherwise <code class="prettyprint">415 Unsupported Media Type</code></p>
+<p>This example API documentation page was created with <a href="https://github.com/tripit/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&rsquo;s documentation.</p>
 
 <h1 id="authentication">Authentication</h1>
 
 <blockquote>
 <p>To authorize, use this code:</p>
 </blockquote>
-<pre class="highlight shell"><code><span class="c"># With cURL, you can make use of the -u option to create a basic authentication header</span>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
 curl <span class="s2">"api_endpoint_here"</span>
-  -u <span class="s2">"[API_LOGIN]:[API_SECRET]"</span>
+  -H <span class="s2">"Authorization: meowmeowmeow"</span>
 </code></pre>
 
 <blockquote>
-<p>Make sure to insert your own API login and secret keys.</p>
+<p>Make sure to replace <code class="prettyprint">meowmeowmeow</code> with your API key.</p>
 </blockquote>
 
-<p>Unless otherwise noted, all calls to Occasion API use <a href="https://en.wikipedia.org/wiki/Basic_access_authentication">HTTP basic authentication</a> over HTTPS.</p>
+<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
 
-<p>Basic authentication requires a login key and a secret key. You can find your API keys on your <a href="https://app.getoccasion.com/users/edit">account page</a>. You must be signed into your account to view this page.</p>
+<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
 
-<p>Occasion requires that at the very least your API login key be provided with all queries made to our servers. Some endpoints are public, and only require an API login key. Others are private, and require that your API secret key be provided as well. Unless noted otherwise, all endpoints are public.</p>
+<p><code class="prettyprint">Authorization: meowmeowmeow</code></p>
 
-<p>The data that an endpoint responds with may vary depending of whether or not a secret key was provided. For example, making a public call to <code class="prettyprint">GET /products</code> will respond with a list of all your products, but any sensitive information will not be included. Making a private call (the secret key included) to the same endpoint will respond with all of your products, with all their information included. This allows you to use the API in a public environment without having to worry about any sensitive data being compromised. The difference between response bodies will be noted in the information regarding each endpoint.</p>
+<aside class="notice">
+You must replace <code>meowmeowmeow</code> with your personal API key.
+</aside>
 
-          <h1 id="query-interface">Query Interface</h1>
+<h1 id="kittens">Kittens</h1>
 
-<h2 id="filtering">Filtering</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"http://app.getoccasion.com/api/v1/products?venue_id=10"</span>
-  -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
+<h2 id="get-all-kittens">Get All Kittens</h2>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
+<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
+</code></pre>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
+<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+</code></pre>
+<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
+  -H <span class="s2">"Authorization: meowmeowmeow"</span>
 </code></pre>
 
 <blockquote>
-<p>Only products with venue_id=10 will be rendered in the response.</p>
+<p>The above command returns JSON structured like this:</p>
 </blockquote>
-
-<p>Attaching any field/value pair of a record as a query parameter will allow you to filter the response by that field, responding only with records that meet your conditions.</p>
-
-<h3 id="url-parameters">URL Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>[field_name]<br><em>optional</em></td>
-<td>none</td>
-<td>The field to filter records by</td>
-</tr>
-</tbody></table>
-
-<h2 id="sorting">Sorting</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"http://app.getoccasion.com/api/v1/products?sort=updated_at"</span>
-  -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
-</code></pre>
-
-<blockquote>
-<p>Products will be sorted in ascending updated_at order.</p>
-</blockquote>
-<pre class="highlight shell"><code>curl <span class="s2">"http://app.getoccasion.com/api/v1/products?sort=-updated_at,title"</span>
-  -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
-</code></pre>
-
-<blockquote>
-<p>Products will be sorted in descending updated_at order, then ascending title order</p>
-</blockquote>
-
-<p>Specifying a <code class="prettyprint">sort</code> parameter in your query will respond with the collection sorted by your specified field, in ascending order. Attaching a <code class="prettyprint">-</code> sign in front of the value will sort in descending order.</p>
-
-<h3 id="url-parameters">URL Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>sort<br><em>optional</em></td>
-<td>id</td>
-<td>The fields to sort by</td>
-</tr>
-</tbody></table>
-
-<h2 id="pagination">Pagination</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"http://app.getoccasion.com/api/v1/products?per_page=5&amp;page=1"</span>
-  -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
-</code></pre>
-
-<blockquote>
-<p>Products will be paginated in groups of 5, with the second page rendered as the response.</p>
-</blockquote>
-
-<p>Specifying pagination params <code class="prettyprint">page</code> and <code class="prettyprint">per_page</code> allow you to paginate the response of the collection you are querying.</p>
-
-<h3 id="url-parameters">URL Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>per_page<br><em>optional</em></td>
-<td>10</td>
-<td>The number of records per page</td>
-</tr>
-<tr>
-<td>page<br><em>optional</em></td>
-<td>0</td>
-<td>Which page of records to respond with</td>
-</tr>
-</tbody></table>
-
-<h2 id="fields">Fields</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"http://app.getoccasion.com/api/v1/products?fields=title,description"</span>
-  -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
-</code></pre>
-
-<blockquote>
-<p>Products will only be rendered with their title and description fields.</p>
-</blockquote>
-
-<p>Specifying <code class="prettyprint">fields</code> query parameters will only render those fields of the records in the response.</p>
-
-<h3 id="url-parameters">URL Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>fields<br><em>optional</em></td>
-<td>all fields</td>
-<td>The fields to render in the response</td>
-</tr>
-</tbody></table>
-
-<h2 id="include">Include</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"http://app.getoccasion.com/api/v1/products?include=merchant,venue"</span>
-  -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
-</code></pre>
-
-<blockquote>
-<p>Products will be rendered with their merchant and venue associated records included. <em>Example truncated for brevity.</em></p>
-</blockquote>
-<pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-</code></pre>
 <pre class="highlight json"><code><span class="p">[</span><span class="w">
   </span><span class="p">{</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"merchant_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"venue_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"merchant"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"A Business"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"venue"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Our Location"</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-
-<p>Specifying <code class="prettyprint">include</code> query parameters will render associations of records in the response body of each record.</p>
-
-<h3 id="url-parameters">URL Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Default</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>include<br><em>optional</em></td>
-<td>varies by record model</td>
-<td>The associations to include in the response</td>
-</tr>
-</tbody></table>
-
-          <h1 id="merchants">Merchants</h1>
-
-<p><strong>Based on the API credentials that Occasion issues to you, you may have access to our entire database of merchants (that have opted-in to allow you access), or you may only have access to your own merchant account. These endpoints will only return those merchants you have access to, so if the latter case is true, these endpoints will only return your own merchant account regardless of query.</strong></p>
-
-<p>If your credentials permit you to access every merchant, every query (other than <code class="prettyprint">/api/v1/merchants</code>) must include a <code class="prettyprint">merchant_id</code> param to filter the query by. You cannot do a top level query to <code class="prettyprint">/api/v1/orders</code>, it must be <code class="prettyprint">/api/v1/orders?merchant_id=XX</code></p>
-
-<h2 id="get-all-merchants">Get All Merchants</h2>
-
-<blockquote>
-<p><strong>Private call</strong> | Example truncated for brevity.</p>
-</blockquote>
-<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/merchants"</span>
-  -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
-</code></pre>
-<pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-</code></pre>
-<pre class="highlight json"><code><span class="p">[{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"profile_picture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Logo.jpg"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Business Name"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"net_balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12000.0"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"time_zone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Chicago"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"business_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Skate Rink"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"paying"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"tax_percentage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"free_trial_ends_at_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"free_trial_volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1000.0"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"free_trial_days_left"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"free_trial_volume_left"</span><span class="p">:</span><span class="w"> </span><span class="s2">"500.0"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"send_weekly_sales_email"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"send_reminder_email"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"facebook_page"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.facebook.com/xxxx?fref=ts"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"psp_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"psp"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SpreedlyPsp"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"payment_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Credit Card"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"can_refund"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
   </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$"</span><span class="w">
+  </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
   </span><span class="p">}</span><span class="w">
-</span><span class="p">}]</span><span class="w">
+</span><span class="p">]</span><span class="w">
 </span></code></pre>
 
-<blockquote>
-<p><strong>Public call</strong></p>
-</blockquote>
-<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/merchants"</span>
-  -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:"</span>
-</code></pre>
-<pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-</code></pre>
-<pre class="highlight json"><code><span class="p">[{</span><span class="w">
-  </span><span class="nt">"profile_picture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Logo.jpg"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Business Name"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"time_zone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Chicago"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"tax_percentage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"facebook_page"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.facebook.com/xxxx?fref=ts"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}]</span><span class="w">
-</span></code></pre>
-
-<p>This endpoint returns all merchants that you are authorized to access.</p>
+<p>This endpoint retrieves all kittens.</p>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://app.getoccasion.com/api/v1/merchants</code></p>
+<p><code class="prettyprint">GET http://example.com/api/kittens</code></p>
 
-<h3 id="response-body">Response Body</h3>
-
-<p>Notable response fields include:</p>
+<h3 id="query-parameters">Query Parameters</h3>
 
 <table><thead>
 <tr>
-<th>Field</th>
-<th>Public</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>profile_picture</td>
-<td>true</td>
-<td>The URL for the merchant&rsquo;s logo image</td>
-</tr>
-<tr>
-<td>name</td>
-<td>true</td>
-<td>The name of the business</td>
-</tr>
-<tr>
-<td>net_balance</td>
-<td>false</td>
-<td>The sum of the amounts of all cashable transactions minus the operator fees, i.e. how much money can be withdrawn to a bank account</td>
-</tr>
-<tr>
-<td>time_zone</td>
-<td>true</td>
-<td>The timezone that the merchant operates in</td>
-</tr>
-<tr>
-<td>business_type</td>
-<td>false</td>
-<td>The type of business that the merchant operates: <code class="prettyprint">&#39;Art Studio&#39;</code>, <code class="prettyprint">&#39;Dance Studio&#39;</code>, etc.</td>
-</tr>
-<tr>
-<td>paying</td>
-<td>false</td>
-<td>Whether or not the merchant is paying for Occasion</td>
-</tr>
-<tr>
-<td>tax_percentage</td>
-<td>true</td>
-<td>The sales tax percentage that the merchant applies to each order subtotal</td>
-</tr>
-<tr>
-<td>free_trial_ends_at_date</td>
-<td>false</td>
-<td>The date after which the merchant must start paying to use Occasion</td>
-</tr>
-<tr>
-<td>free_trial_volume</td>
-<td>false</td>
-<td>The sales volume that a merchant is allowed to reach before they must start paying to use Occasion</td>
-</tr>
-<tr>
-<td>free_trial_days_left</td>
-<td>false</td>
-<td>The number of days left until the merchant must pay to continue using Occasion</td>
-</tr>
-<tr>
-<td>free_trial_volume_left</td>
-<td>false</td>
-<td>The sales volume remaining before a merchant must pay to continue using Occasion</td>
-</tr>
-<tr>
-<td>send_weekly_sales_email</td>
-<td>false</td>
-<td>If <code class="prettyprint">true</code>, merchant will receive a weekly email summarizing their order sales</td>
-</tr>
-<tr>
-<td>send_reminder_email</td>
-<td>false</td>
-<td>If <code class="prettyprint">true</code>, merchant will send out a reminder email to customers 3 days before their booked event</td>
-</tr>
-<tr>
-<td>facebook_page</td>
-<td>true</td>
-<td>The Facebook page URL for the merchant&rsquo;s business</td>
-</tr>
-<tr>
-<td>psp</td>
-<td>false</td>
-<td>The payment service provider that the merchant uses to process payments</td>
-</tr>
-<tr>
-<td>&#x25B8; name</td>
-<td></td>
-<td>The name of the PSP.<br><br><em>Possible values:</em> <code class="prettyprint">&quot;Cash&quot;</code>,<code class="prettyprint">&quot;SpreedlyPsp&quot;</code>,<br><code class="prettyprint">&quot;QantaniIdeal&quot;</code></td>
-</tr>
-<tr>
-<td>&#x25B8; payment_description</td>
-<td></td>
-<td>The description of how payments are processed.<br><br><em>Possible values:</em><br><code class="prettyprint">&quot;Cash&quot;</code> - Merchant only accepts cash<br><code class="prettyprint">&quot;Credit Card&quot;</code> - Merchant accepts credit cards/Paypal/eCheck<br><code class="prettyprint">&quot;iDEAL&quot;</code> - Merchant accepts bank accounts through iDEAL network</td>
-</tr>
-<tr>
-<td>&#x25B8; can_refund</td>
-<td></td>
-<td>Whether or not the merchant can refund transactions with this PSP.</td>
-</tr>
-</tbody></table>
-
-<h3 id="associations">Associations</h3>
-
-<p>Possible associations to include are:</p>
-
-<table><thead>
-<tr>
-<th>Association</th>
+<th>Parameter</th>
 <th>Default</th>
-<th>Public</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>psp</td>
-<td>true</td>
+<td>include_cats</td>
 <td>false</td>
-<td>The payment service provider that the merchant uses to process payments</td>
+<td>If set to true, the result will also include cats.</td>
 </tr>
 <tr>
-<td>currency</td>
+<td>available</td>
 <td>true</td>
-<td>true</td>
-<td>The currency that the merchant accepts</td>
+<td>If set to false, the result will include kittens that have already been adopted.</td>
 </tr>
 </tbody></table>
 
-<h2 id="get-a-specific-merchant">Get A Specific Merchant</h2>
+<aside class="success">
+Remember — a happy kitten is an authenticated kitten!
+</aside>
+
+<h2 id="get-a-specific-kitten">Get a Specific Kitten</h2>
+<pre class="highlight ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
+<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">kittn</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
+<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</code></pre>
+<pre class="highlight shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
+  -H <span class="s2">"Authorization: meowmeowmeow"</span>
+</code></pre>
 
 <blockquote>
-<p><strong>Private call</strong></p>
+<p>The above command returns JSON structured like this:</p>
 </blockquote>
-<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/merchants/:id"</span>
-  -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
-</code></pre>
-<pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-</code></pre>
 <pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"profile_picture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Logo.jpg"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Business Name"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"net_balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12000.0"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"time_zone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Chicago"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"business_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Skate Rink"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"paying"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"tax_percentage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"free_trial_ends_at_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"free_trial_volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1000.0"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"free_trial_days_left"</span><span class="p">:</span><span class="w"> </span><span class="s2">"15"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"free_trial_volume_left"</span><span class="p">:</span><span class="w"> </span><span class="s2">"500.0"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"send_weekly_sales_email"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"send_reminder_email"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"facebook_page"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.facebook.com/xxxx?fref=ts"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"psp_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"psp"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SpreedlyPsp"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"payment_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Credit Card"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"can_refund"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
+  </span><span class="nt">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
 
-<blockquote>
-<p><strong>Public call</strong></p>
-</blockquote>
-<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/merchants/:id"</span>
-  -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:"</span>
-</code></pre>
-<pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-</code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"profile_picture"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Logo.jpg"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Business Name"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"time_zone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Chicago"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"tax_percentage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"facebook_page"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://www.facebook.com/xxxx?fref=ts"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"$"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
+<p>This endpoint retrieves a specific kitten.</p>
 
-<p>This endpoint returns a specific merchant.</p>
+<aside class="warning">Inside HTML code blocks like this one, you can&rsquo;t use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://app.getoccasion.com/api/v1/merchants/:id</code></p>
+<p><code class="prettyprint">GET http://example.com/kittens/&lt;ID&gt;</code></p>
 
 <h3 id="url-parameters">URL Parameters</h3>
 
@@ -604,1799 +272,16 @@ curl <span class="s2">"api_endpoint_here"</span>
 </tr>
 </thead><tbody>
 <tr>
-<td>id</td>
-<td>The ID of the merchant to retrieve</td>
-</tr>
-</tbody></table>
-
-<h3 id="response-body">Response Body</h3>
-
-<p>Notable response fields include:</p>
-
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Public</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>profile_picture</td>
-<td>true</td>
-<td>The URL for the merchant&rsquo;s logo image</td>
-</tr>
-<tr>
-<td>name</td>
-<td>true</td>
-<td>The name of the business</td>
-</tr>
-<tr>
-<td>net_balance</td>
-<td>false</td>
-<td>The sum of the amounts of all cashable transactions minus the operator fees, i.e. how much money can be withdrawn to a bank account</td>
-</tr>
-<tr>
-<td>time_zone</td>
-<td>true</td>
-<td>The timezone that the merchant operates in</td>
-</tr>
-<tr>
-<td>business_type</td>
-<td>false</td>
-<td>The type of business that the merchant operates: <code class="prettyprint">&#39;Art Studio&#39;</code>, <code class="prettyprint">&#39;Dance Studio&#39;</code>, etc.</td>
-</tr>
-<tr>
-<td>paying</td>
-<td>false</td>
-<td>Whether or not the merchant is paying for Occasion</td>
-</tr>
-<tr>
-<td>tax_percentage</td>
-<td>true</td>
-<td>The sales tax percentage that the merchant applies to each order subtotal</td>
-</tr>
-<tr>
-<td>free_trial_ends_at_date</td>
-<td>false</td>
-<td>The date after which the merchant must start paying to use Occasion</td>
-</tr>
-<tr>
-<td>free_trial_volume</td>
-<td>false</td>
-<td>The sales volume that a merchant is allowed to reach before they must start paying to use Occasion</td>
-</tr>
-<tr>
-<td>free_trial_days_left</td>
-<td>false</td>
-<td>The number of days left until the merchant must pay to continue using Occasion</td>
-</tr>
-<tr>
-<td>free_trial_volume_left</td>
-<td>false</td>
-<td>The sales volume remaining before a merchant must pay to continue using Occasion</td>
-</tr>
-<tr>
-<td>send_weekly_sales_email</td>
-<td>false</td>
-<td>If <code class="prettyprint">true</code>, merchant will receive a weekly email summarizing their order sales</td>
-</tr>
-<tr>
-<td>send_reminder_email</td>
-<td>false</td>
-<td>If <code class="prettyprint">true</code>, merchant will send out a reminder email to customers 3 days before their booked event</td>
-</tr>
-<tr>
-<td>facebook_page</td>
-<td>true</td>
-<td>The Facebook page URL for the merchant&rsquo;s business</td>
-</tr>
-<tr>
-<td>psp</td>
-<td>false</td>
-<td>The payment service provider that the merchant uses to process payments</td>
-</tr>
-<tr>
-<td>&#x25B8; name</td>
-<td></td>
-<td>The name of the PSP.<br><br><em>Possible values:</em> <code class="prettyprint">&quot;Cash&quot;</code>,<code class="prettyprint">&quot;SpreedlyPsp&quot;</code>,<br><code class="prettyprint">&quot;QantaniIdeal&quot;</code></td>
-</tr>
-<tr>
-<td>&#x25B8; payment_description</td>
-<td></td>
-<td>The description of how payments are processed.<br><br><em>Possible values:</em><br><code class="prettyprint">&quot;Cash&quot;</code> - Merchant only accepts cash<br><code class="prettyprint">&quot;Credit Card&quot;</code> - Merchant accepts credit cards/Paypal/eCheck<br><code class="prettyprint">&quot;iDEAL&quot;</code> - Merchant accepts bank accounts through iDEAL network</td>
-</tr>
-<tr>
-<td>&#x25B8; can_refund</td>
-<td></td>
-<td>Whether or not the merchant can refund transactions with this PSP.</td>
-</tr>
-</tbody></table>
-
-<h3 id="associations">Associations</h3>
-
-<p>Possible associations to include are:</p>
-
-<table><thead>
-<tr>
-<th>Association</th>
-<th>Default</th>
-<th>Public</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>psp</td>
-<td>true</td>
-<td>false</td>
-<td>The payment service provider that the merchant uses to process payments</td>
-</tr>
-<tr>
-<td>currency</td>
-<td>true</td>
-<td>true</td>
-<td>The currency that the merchant accepts</td>
-</tr>
-</tbody></table>
-
-          <h1 id="venues">Venues</h1>
-
-<h2 id="get-all-venues">Get All Venues</h2>
-
-<blockquote>
-<p><strong>Private call</strong> | Example truncated for brevity.</p>
-</blockquote>
-<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/venues"</span>
-  -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
-</code></pre>
-<pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-</code></pre>
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"merchant_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"country_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">228</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"state_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">228</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United States"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Illinois"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IL"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"time_zone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Chicago"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Classroom"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email@example.com"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1111 Main Street"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Chicago"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"60047"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"999-999-9999"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"website"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.example.com"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"public"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p><strong>Public call</strong> | Example truncated for brevity.</p>
-</blockquote>
-<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/venues"</span>
-  -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:"</span>
-</code></pre>
-<pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-</code></pre>
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"country_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">228</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"state_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">228</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United States"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Illinois"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IL"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"time_zone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Chicago"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Classroom"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email@example.com"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1111 Main Street"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Chicago"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"60047"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"999-999-9999"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"website"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.example.com"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-
-<p>This endpoint retrieves all venues. If made in a public context, only venues <code class="prettyprint">where(public: true)</code> are returned.</p>
-
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">GET https://app.getoccasion.com/api/v1/venues</code></p>
-
-<h3 id="response-body">Response Body</h3>
-
-<p>Notable response fields include:</p>
-
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Public</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>time_zone</td>
-<td>true</td>
-<td>The time zone that the venue operates in</td>
-</tr>
-<tr>
-<td>name</td>
-<td>true</td>
-<td>The name of the venue</td>
-</tr>
-<tr>
-<td>email</td>
-<td>true</td>
-<td>The email of the venue</td>
-</tr>
-<tr>
-<td>address</td>
-<td>true</td>
-<td>The street address of the venue</td>
-</tr>
-<tr>
-<td>city</td>
-<td>true</td>
-<td>The city the venue is located in</td>
-</tr>
-<tr>
-<td>zip</td>
-<td>true</td>
-<td>The ZIP code of the venue</td>
-</tr>
-<tr>
-<td>phone</td>
-<td>true</td>
-<td>The phone number of the venue</td>
-</tr>
-<tr>
-<td>website</td>
-<td>true</td>
-<td>The venue&rsquo;s website</td>
-</tr>
-<tr>
-<td>capacity</td>
-<td>false</td>
-<td>The number of open orders that a venue can have for any product</td>
-</tr>
-<tr>
-<td>public</td>
-<td>false</td>
-<td>If <code class="prettyprint">false</code>, the venue should not be displayed as open for business</td>
-</tr>
-</tbody></table>
-
-<h3 id="associations">Associations</h3>
-
-<p>Possible associations to include are:</p>
-
-<table><thead>
-<tr>
-<th>Association</th>
-<th>Default</th>
-<th>Public</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>country</td>
-<td>true</td>
-<td>true</td>
-<td>The country that the venue is located in</td>
-</tr>
-<tr>
-<td>state</td>
-<td>true</td>
-<td>true</td>
-<td>The state/province the venue is located in</td>
-</tr>
-<tr>
-<td>products</td>
-<td>false</td>
-<td>true</td>
-<td>All the products that belong to the venue</td>
-</tr>
-<tr>
-<td>merchant</td>
-<td>false</td>
-<td>true</td>
-<td>The merchant that the venue belongs to</td>
-</tr>
-</tbody></table>
-
-<h2 id="get-a-specific-venue">Get a Specific Venue</h2>
-
-<blockquote>
-<p><strong>Private call</strong></p>
-</blockquote>
-<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/venues/12"</span>
-  -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
-</code></pre>
-<pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-</code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"merchant_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"country_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">228</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"state_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">228</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United States"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Illinois"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IL"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"time_zone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Chicago"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Classroom"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email@example.com"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1111 Main Street"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Chicago"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"60047"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"999-999-9999"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"website"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.example.com"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"public"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p><strong>Public call</strong></p>
-</blockquote>
-<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/venues/12"</span>
-  -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:"</span>
-</code></pre>
-<pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-</code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"country_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">228</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"state_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"country"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">228</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"United States"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"state"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Illinois"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"IL"</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"time_zone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"America/Chicago"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Classroom"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"email@example.com"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1111 Main Street"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Chicago"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"60047"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"999-999-9999"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"website"</span><span class="p">:</span><span class="w"> </span><span class="s2">"www.example.com"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<p>This endpoint retrieves a specific venue. If made in a public context, only a venue <code class="prettyprint">where(public: true)</code> can be returned.</p>
-
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">GET https://app.getoccasion.com/api/v1/venues/:id</code></p>
-
-<h3 id="url-parameters">URL Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>The ID of the venue to retrieve</td>
-</tr>
-</tbody></table>
-
-<h3 id="response-body">Response Body</h3>
-
-<p>Notable response fields include:</p>
-
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Public</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>time_zone</td>
-<td>true</td>
-<td>The time zone that the venue operates in</td>
-</tr>
-<tr>
-<td>name</td>
-<td>true</td>
-<td>The name of the venue</td>
-</tr>
-<tr>
-<td>email</td>
-<td>true</td>
-<td>The email of the venue</td>
-</tr>
-<tr>
-<td>address</td>
-<td>true</td>
-<td>The street address of the venue</td>
-</tr>
-<tr>
-<td>city</td>
-<td>true</td>
-<td>The city the venue is located in</td>
-</tr>
-<tr>
-<td>zip</td>
-<td>true</td>
-<td>The ZIP code of the venue</td>
-</tr>
-<tr>
-<td>phone</td>
-<td>true</td>
-<td>The phone number of the venue</td>
-</tr>
-<tr>
-<td>website</td>
-<td>true</td>
-<td>The venue&rsquo;s website</td>
-</tr>
-<tr>
-<td>capacity</td>
-<td>false</td>
-<td>The number of open orders that a venue can have for any product</td>
-</tr>
-<tr>
-<td>public</td>
-<td>false</td>
-<td>If <code class="prettyprint">false</code>, the venue should not be displayed as open for business</td>
-</tr>
-</tbody></table>
-
-<h3 id="associations">Associations</h3>
-
-<p>Possible associations to include are:</p>
-
-<table><thead>
-<tr>
-<th>Association</th>
-<th>Default</th>
-<th>Public</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>country</td>
-<td>true</td>
-<td>true</td>
-<td>The country that the venue is located in</td>
-</tr>
-<tr>
-<td>state</td>
-<td>true</td>
-<td>true</td>
-<td>The state/province the venue is located in</td>
-</tr>
-<tr>
-<td>products</td>
-<td>false</td>
-<td>true</td>
-<td>All the products that belong to the venue</td>
-</tr>
-<tr>
-<td>merchant</td>
-<td>false</td>
-<td>true</td>
-<td>The merchant that the venue belongs to</td>
-</tr>
-</tbody></table>
-
-          <h1 id="products">Products</h1>
-
-<h2 id="get-all-products">Get All Products</h2>
-
-<blockquote>
-<p><strong>Private call</strong> | Example truncated for brevity.</p>
-</blockquote>
-<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/products"</span>
-  -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
-</code></pre>
-<pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-</code></pre>
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"merchant_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"venue_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"thumb"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Art Class"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sign up to paint a teapot."</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"order_button_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Finalize order"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"38asnd2"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"post_transactional_message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Thank you for ordering."</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.0"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"time_slots_closed_before"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2000-01-01T00:00:00.000Z"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"embed_button_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Book now"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"show_occurrence_availability"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"tax_percentage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"widget_contact_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Customer Information"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"widget_occurrences_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Select which day you would like to reserve"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"widget_attributes_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Additional Questions"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"widget_payment_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payment Information"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"widget_total_due_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Total Due Today"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"template_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8195</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"show_time_slot_duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"sells_gift_cards"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"widget_gift_card_recipient_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gift Card Recipient"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"gift_card_redemption_message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"To redeem your gift card, visit our website."</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"from_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Business Name"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"email_subject"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Thanks for ordering our product!"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://occ.sn/p/n/sdj291"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p><strong>Public call</strong> | Example truncated for brevity.</p>
-</blockquote>
-<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/products"</span>
-  -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:"</span>
-</code></pre>
-<pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-</code></pre>
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"thumb"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Art Class"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sign up to paint a teapot."</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"order_button_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Finalize order"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"post_transactional_message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Thank you for ordering."</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.0"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"time_slots_closed_before"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2000-01-01T00:00:00.000Z"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"embed_button_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Book now"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"show_occurrence_availability"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"tax_percentage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"widget_contact_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Customer Information"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"widget_occurrences_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Select which day you would like to reserve"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"widget_attributes_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Additional Questions"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"widget_payment_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payment Information"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"widget_total_due_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Total Due Today"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"show_time_slot_duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"sells_gift_cards"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"widget_gift_card_recipient_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gift Card Recipient"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://occ.sn/p/n/sdj291"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-
-<p>This endpoint retrieves all products.</p>
-
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">GET https://app.getoccasion.com/api/v1/products</code></p>
-
-<h3 id="response-body">Response Body</h3>
-
-<p>Notable response fields include:</p>
-
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Public</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>image</td>
-<td>true</td>
-<td>URLs for the full image and thumbnail to display with a product</td>
-</tr>
-<tr>
-<td>title</td>
-<td>true</td>
-<td>The title of the product, such as &ldquo;BYOB &amp; Paint A Forest&rdquo;</td>
-</tr>
-<tr>
-<td>description</td>
-<td>true</td>
-<td>The description for the product, explaining things in detail</td>
-</tr>
-<tr>
-<td>order_button_text</td>
-<td>true</td>
-<td>The text to display in the submit order button on an order widget</td>
-</tr>
-<tr>
-<td>status</td>
-<td>true</td>
-<td>The status that will determine if the product is active for ordering.<br><br><em>Possible values:</em><br><strong>active:</strong> Ready to accept orders<br><strong>inactive:</strong> Not accepting orders<br><strong>expired:</strong> Product has time slots, but none of them are open.<br><strong>sold_out:</strong> Either product or all open time slots are fully booked</td>
-</tr>
-<tr>
-<td>token</td>
-<td>false</td>
-<td>The token uniquely identifying a product on Occasion, in place of ID. <strong>Cannot be used in place of ID in calls, yet, unless as</strong> <code class="prettyprint">GET /products?token=[token]</code></td>
-</tr>
-<tr>
-<td>post_transactional_message</td>
-<td>true</td>
-<td>The message to display after an order has been completed</td>
-</tr>
-<tr>
-<td>price</td>
-<td>true</td>
-<td>The base price of the order, before applying price changing questions, tax, coupons, gift cards, etc.</td>
-</tr>
-<tr>
-<td>time_slots_closed_before</td>
-<td>true</td>
-<td>The point in time before which time slots are closed for sales. Any time slot occurring between Time.now and the actual occurrence of that time slot (when the class takes place) cannot be sold.</td>
-</tr>
-<tr>
-<td>embed_button_text</td>
-<td>true</td>
-<td>The text to display in an embed button that opens an order widget</td>
-</tr>
-<tr>
-<td>show_occurrence_availability</td>
-<td>true</td>
-<td>If <code class="prettyprint">true</code>, show how many open seats there are for a time slot</td>
-</tr>
-<tr>
-<td>tax_percentage</td>
-<td>true</td>
-<td>The sales tax percentage that is applied to the subtotal of an order for this product</td>
-</tr>
-<tr>
-<td>widget_contact_title</td>
-<td>true</td>
-<td>The title to display above a section regarding customer contact information (email, first_name, last_name, zip)</td>
-</tr>
-<tr>
-<td>widget_occurrences_title</td>
-<td>true</td>
-<td>The title to display above a section regarding choosing a time slot</td>
-</tr>
-<tr>
-<td>widget_attributes_title</td>
-<td>true</td>
-<td>The title to display above a section asking additional questions based off custom attributes</td>
-</tr>
-<tr>
-<td>widget_payment_title</td>
-<td>true</td>
-<td>The title to display above a section asking for payment information like credit card details</td>
-</tr>
-<tr>
-<td>widget_total_due_title</td>
-<td>true</td>
-<td>The title to display above a section indicating the total price of the order</td>
-</tr>
-<tr>
-<td>widget_gift_card_recipient_title</td>
-<td>true</td>
-<td>The title to display above a section asking for the details of a gift card recipient (name, email, personal message), if the product <code class="prettyprint">sells_gift_cards</code></td>
-</tr>
-<tr>
-<td>template_id</td>
-<td>false</td>
-<td>The ID of the template product that this product has been duplicated from</td>
-</tr>
-<tr>
-<td>capacity</td>
-<td>false</td>
-<td>The amount of orders that can be reserved (booked but having not occurred yet) for a product</td>
-</tr>
-<tr>
-<td>show_time_slot_duration</td>
-<td>true</td>
-<td>If <code class="prettyprint">true</code>, display the duration of a time slot</td>
-</tr>
-<tr>
-<td>sells_gift_cards</td>
-<td>true</td>
-<td>If <code class="prettyprint">true</code>, display the gift card attributes in an order widget and create a gift card with the order, with a value equal to the total price of the order</td>
-</tr>
-<tr>
-<td>gift_card_redemption_message</td>
-<td>false</td>
-<td>The message to display in additional to a gift card&rsquo;s personal message, typically instructing a recipient on how to redeem their gift card</td>
-</tr>
-<tr>
-<td>from_name</td>
-<td>false</td>
-<td>The <code class="prettyprint">from</code> name on the email sent to a customer after they complete an order</td>
-</tr>
-<tr>
-<td>email_subject</td>
-<td>false</td>
-<td>The <code class="prettyprint">subject</code> line on the email sent to a customer after they complete an order</td>
-</tr>
-<tr>
-<td>url</td>
-<td>true</td>
-<td>The short URL to send someone to to purchase an order for a product</td>
-</tr>
-</tbody></table>
-
-<h3 id="associations">Associations</h3>
-
-<p>Possible associations to include are:</p>
-
-<table><thead>
-<tr>
-<th>Association</th>
-<th>Default</th>
-<th>Public</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>merchant</td>
-<td>false</td>
-<td>true</td>
-<td>The merchant that the product belongs to</td>
-</tr>
-<tr>
-<td>venue</td>
-<td>false</td>
-<td>true</td>
-<td>The venue that the product belongs to</td>
-</tr>
-</tbody></table>
-
-<h2 id="get-a-specific-product">Get a Specific Product</h2>
-
-<blockquote>
-<p><strong>Private call</strong></p>
-</blockquote>
-<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/products/12"</span>
- -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
-</code></pre>
-<pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-</code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
- </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
- </span><span class="nt">"merchant_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
- </span><span class="nt">"venue_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w">
- </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-   </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg"</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"thumb"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-     </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg"</span><span class="w">
-   </span><span class="p">}</span><span class="w">
- </span><span class="p">},</span><span class="w">
- </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Art Class"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sign up to paint a teapot."</span><span class="p">,</span><span class="w">
- </span><span class="nt">"order_button_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Finalize order"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"38asnd2"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"post_transactional_message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Thank you for ordering."</span><span class="p">,</span><span class="w">
- </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.0"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"time_slots_closed_before"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2000-01-01T00:00:00.000Z"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"embed_button_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Book now"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"show_occurrence_availability"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
- </span><span class="nt">"tax_percentage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"widget_contact_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Customer Information"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"widget_occurrences_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Select which day you would like to reserve"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"widget_attributes_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Additional Questions"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"widget_payment_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payment Information"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"widget_total_due_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Total Due Today"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"template_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8195</span><span class="p">,</span><span class="w">
- </span><span class="nt">"capacity"</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span><span class="w">
- </span><span class="nt">"show_time_slot_duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
- </span><span class="nt">"sells_gift_cards"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
- </span><span class="nt">"widget_gift_card_recipient_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gift Card Recipient"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"gift_card_redemption_message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"To redeem your gift card, visit our website."</span><span class="p">,</span><span class="w">
- </span><span class="nt">"from_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Business Name"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"email_subject"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Thanks for ordering our product!"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://occ.sn/p/n/sdj291"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p><strong>Public call</strong></p>
-</blockquote>
-<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/products/12"</span>
- -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:"</span>
-</code></pre>
-<pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-</code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
- </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-   </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg"</span><span class="p">,</span><span class="w">
-   </span><span class="nt">"thumb"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-     </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg"</span><span class="w">
-   </span><span class="p">}</span><span class="w">
- </span><span class="p">},</span><span class="w">
- </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Art Class"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sign up to paint a teapot."</span><span class="p">,</span><span class="w">
- </span><span class="nt">"order_button_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Finalize order"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"post_transactional_message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Thank you for ordering."</span><span class="p">,</span><span class="w">
- </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.0"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"time_slots_closed_before"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2000-01-01T00:00:00.000Z"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"embed_button_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Book now"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"show_occurrence_availability"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
- </span><span class="nt">"tax_percentage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2.0"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"widget_contact_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Customer Information"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"widget_occurrences_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Select which day you would like to reserve"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"widget_attributes_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Additional Questions"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"widget_payment_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payment Information"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"widget_total_due_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Total Due Today"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"show_time_slot_duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
- </span><span class="nt">"sells_gift_cards"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
- </span><span class="nt">"widget_gift_card_recipient_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gift Card Recipient"</span><span class="p">,</span><span class="w">
- </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"http://occ.sn/p/n/sdj291"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<p>This endpoint retrieves a specific product.</p>
-
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">GET https://app.getoccasion.com/api/v1/products/:id</code></p>
-
-<h3 id="url-parameters">URL Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>The ID of the product to retrieve</td>
-</tr>
-</tbody></table>
-
-<h3 id="response-body">Response Body</h3>
-
-<p>Notable response elements include:</p>
-
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Public</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>image</td>
-<td>true</td>
-<td>URLs for the full image and thumbnail to display with a product</td>
-</tr>
-<tr>
-<td>title</td>
-<td>true</td>
-<td>The title of the product, such as &ldquo;BYOB &amp; Paint A Forest&rdquo;</td>
-</tr>
-<tr>
-<td>description</td>
-<td>true</td>
-<td>The description for the product, explaining things in detail</td>
-</tr>
-<tr>
-<td>order_button_text</td>
-<td>true</td>
-<td>The text to display in the submit order button on an order widget</td>
-</tr>
-<tr>
-<td>status</td>
-<td>true</td>
-<td>The status that will determine if the product is active for ordering.<br><br><em>Possible values:</em><br><strong>active:</strong> Ready to accept orders<br><strong>inactive:</strong> Not accepting orders<br><strong>expired:</strong> Product has time slots, but none of them are open.<br><strong>sold_out:</strong> Either product or all open time slots are fully booked</td>
-</tr>
-<tr>
-<td>token</td>
-<td>false</td>
-<td>The token uniquely identifying a product on Occasion, in place of ID. <strong>Cannot be used in place of ID in calls, yet, unless as</strong> <code class="prettyprint">GET /products?token=[token]</code></td>
-</tr>
-<tr>
-<td>post_transactional_message</td>
-<td>true</td>
-<td>The message to display after an order has been completed</td>
-</tr>
-<tr>
-<td>price</td>
-<td>true</td>
-<td>The base price of the order, before applying price changing questions, tax, coupons, gift cards, etc.</td>
-</tr>
-<tr>
-<td>time_slots_closed_before</td>
-<td>true</td>
-<td>The point in time before which time slots are closed for sales. Any time slot occurring between Time.now and the actual occurrence of that time slot (when the class takes place) cannot be sold.</td>
-</tr>
-<tr>
-<td>embed_button_text</td>
-<td>true</td>
-<td>The text to display in an embed button that opens an order widget</td>
-</tr>
-<tr>
-<td>show_occurrence_availability</td>
-<td>true</td>
-<td>If <code class="prettyprint">true</code>, show how many open seats there are for a time slot</td>
-</tr>
-<tr>
-<td>tax_percentage</td>
-<td>true</td>
-<td>The sales tax percentage that is applied to the subtotal of an order for this product</td>
-</tr>
-<tr>
-<td>widget_contact_title</td>
-<td>true</td>
-<td>The title to display above a section regarding customer contact information (email, first_name, last_name, zip)</td>
-</tr>
-<tr>
-<td>widget_occurrences_title</td>
-<td>true</td>
-<td>The title to display above a section regarding choosing a time slot</td>
-</tr>
-<tr>
-<td>widget_attributes_title</td>
-<td>true</td>
-<td>The title to display above a section asking additional questions based off custom attributes</td>
-</tr>
-<tr>
-<td>widget_payment_title</td>
-<td>true</td>
-<td>The title to display above a section asking for payment information like credit card details</td>
-</tr>
-<tr>
-<td>widget_total_due_title</td>
-<td>true</td>
-<td>The title to display above a section indicating the total price of the order</td>
-</tr>
-<tr>
-<td>widget_gift_card_recipient_title</td>
-<td>true</td>
-<td>The title to display above a section asking for the details of a gift card recipient (name, email, personal message), if the product <code class="prettyprint">sells_gift_cards</code></td>
-</tr>
-<tr>
-<td>template_id</td>
-<td>false</td>
-<td>The ID of the template product that this product has been duplicated from</td>
-</tr>
-<tr>
-<td>capacity</td>
-<td>false</td>
-<td>The amount of orders that can be reserved (booked but having not occurred yet) for a product</td>
-</tr>
-<tr>
-<td>show_time_slot_duration</td>
-<td>true</td>
-<td>If <code class="prettyprint">true</code>, display the duration of a time slot</td>
-</tr>
-<tr>
-<td>sells_gift_cards</td>
-<td>true</td>
-<td>If <code class="prettyprint">true</code>, display the gift card attributes in an order widget and create a gift card with the order, with a value equal to the total price of the order</td>
-</tr>
-<tr>
-<td>gift_card_redemption_message</td>
-<td>false</td>
-<td>The message to display in additional to a gift card&rsquo;s personal message, typically instructing a recipient on how to redeem their gift card</td>
-</tr>
-<tr>
-<td>from_name</td>
-<td>false</td>
-<td>The <code class="prettyprint">from</code> name on the email sent to a customer after they complete an order</td>
-</tr>
-<tr>
-<td>email_subject</td>
-<td>false</td>
-<td>The <code class="prettyprint">subject</code> line on the email sent to a customer after they complete an order</td>
-</tr>
-<tr>
-<td>url</td>
-<td>true</td>
-<td>The short URL to send someone to to purchase an order for a product</td>
-</tr>
-</tbody></table>
-
-<h3 id="associations">Associations</h3>
-
-<p>Possible associations to include are:</p>
-
-<table><thead>
-<tr>
-<th>Association</th>
-<th>Default</th>
-<th>Public</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>merchant</td>
-<td>false</td>
-<td>true</td>
-<td>The merchant that the product belongs to</td>
-</tr>
-<tr>
-<td>venue</td>
-<td>false</td>
-<td>true</td>
-<td>The venue that the product belongs to</td>
-</tr>
-</tbody></table>
-
-          <h1 id="orders">Orders</h1>
-
-<h2 id="get-all-orders">Get All Orders</h2>
-
-<blockquote>
-<p><strong>Private call</strong> | Example truncated for brevity.</p>
-</blockquote>
-<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/orders"</span>
-  -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
-</code></pre>
-<pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-</code></pre>
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"verification_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20S39A"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"booked"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"merchant_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"currency_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"occurrence_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">32923</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"product_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3092</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.0"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"session_identifier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"kejas-1s2kb-n2fha-37sba"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"coupon_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">203</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"coupon_amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5.0"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"coupon_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My product"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"quickorder"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"tax_percentage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"referrer_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"customer_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Smith"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"customer_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john@example.com"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"customer_zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00000"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"payment_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p><strong>Public call</strong> | Example truncated for brevity.</p>
-</blockquote>
-<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/orders"</span>
-  -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:"</span>
-</code></pre>
-<pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-</code></pre>
-<pre class="highlight json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"verification_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20S39A"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"booked"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"merchant_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"currency_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"occurrence_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">32923</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"product_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3092</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.0"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"coupon_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">203</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"coupon_amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5.0"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"coupon_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My product"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"tax_percentage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"referrer_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"payment_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-
-<p>This endpoint retrieves all orders.</p>
-
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">GET https://app.getoccasion.com/api/v1/orders</code></p>
-
-<h3 id="response-body">Response Body</h3>
-
-<p>Notable response fields include:</p>
-
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Public</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>verification_code</td>
-<td>true</td>
-<td>The verification code for the order</td>
-</tr>
-<tr>
-<td>status</td>
-<td>true</td>
-<td>The status of the order.<br><br><em>Possible values:</em><br><strong>reserved:</strong> Order made, waiting for payment / payment processing<br><strong>dropped:</strong> Payment failed<br><strong>booked:</strong> Order completed, payment received or no payment required<br><strong>canceled:</strong> Order canceled by merchant</td>
-</tr>
-<tr>
-<td>price</td>
-<td>true</td>
-<td>The total price for this order</td>
-</tr>
-<tr>
-<td>balance</td>
-<td>false</td>
-<td>The amount of the order that has been paid</td>
-</tr>
-<tr>
-<td>quantity</td>
-<td>true</td>
-<td>The amount of availability slots booked in this order</td>
-</tr>
-<tr>
-<td>summary</td>
-<td>true</td>
-<td>A text block representing a summary of all the options selected by the customer</td>
-</tr>
-<tr>
-<td>session_identifier</td>
-<td>false</td>
-<td>A unique identifier generated each time the order widget is loaded, to prevent duplicate orders</td>
-</tr>
-<tr>
-<td>coupon_amount</td>
-<td>true</td>
-<td>The decimal amount that the coupon of this order deducted from the price</td>
-</tr>
-<tr>
-<td>coupon_description</td>
-<td>true</td>
-<td>The readable description of the coupon amount (-$10.00, 10.00%)</td>
-</tr>
-<tr>
-<td>description</td>
-<td>true</td>
-<td>The product title that offers a description of the order</td>
-</tr>
-<tr>
-<td>quickorder</td>
-<td>false</td>
-<td>Whether or not this order was made using the merchant&rsquo;s backend quickorder panel</td>
-</tr>
-<tr>
-<td>tax_percentage</td>
-<td>true</td>
-<td>The percentage tax applied to the order</td>
-</tr>
-<tr>
-<td>referrer_id</td>
-<td>true</td>
-<td>The ID of the order that was used to refer the customer that booked this order</td>
-</tr>
-<tr>
-<td>payment_status</td>
-<td>true</td>
-<td>The status of the payments for this order<br><br><em>Possible values:</em><br><strong>completed:</strong> Sum of payments is equal to order price<br><strong>awaiting_customer_payment:</strong> Customer still needs to initiate a payment<br><strong>processing:</strong> Customer initiated a payment that is still processing<br><strong>failed:</strong> Customer initiated a payment that has failed during processing<br><strong>unknown:</strong> The status of payments is not known</td>
-</tr>
-</tbody></table>
-
-<h3 id="associations">Associations</h3>
-
-<p>Possible associations to include are:</p>
-
-<table><thead>
-<tr>
-<th>Association</th>
-<th>Public</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>currency</td>
-<td>true</td>
-<td>The currency the order was purchased in</td>
-</tr>
-<tr>
-<td>occurrence</td>
-<td>true</td>
-<td>A single availability occurrence of the time_slot booked (a time_slot may have multiple occurrences)</td>
-</tr>
-<tr>
-<td>coupon</td>
-<td>true</td>
-<td>The coupon that was used when purchasing this order</td>
-</tr>
-<tr>
-<td>customer</td>
-<td>true</td>
-<td>The customer that purchased this order</td>
-</tr>
-<tr>
-<td>merchant</td>
-<td>true</td>
-<td>The merchant that sold this order</td>
-</tr>
-<tr>
-<td>product</td>
-<td>true</td>
-<td>The product listing that this order is for</td>
-</tr>
-<tr>
-<td>attribute_values</td>
-<td>true</td>
-<td>The options selected by the customer for each individual attribute</td>
-</tr>
-<tr>
-<td>transactions</td>
-<td>true</td>
-<td>The transactions that have paid out this order (or refunded it)</td>
-</tr>
-<tr>
-<td>comments</td>
-<td>true</td>
-<td>Notes the merchant has made to the order for their own internal use</td>
-</tr>
-</tbody></table>
-
-<h2 id="get-a-specific-order">Get a Specific Order</h2>
-
-<blockquote>
-<p><strong>Private call</strong> | Example truncated for brevity.</p>
-</blockquote>
-<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/orders/:id"</span>
-  -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
-</code></pre>
-<pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-</code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"verification_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20S39A"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"booked"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"merchant_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"currency_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"occurrence_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">32923</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"product_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3092</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.0"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"session_identifier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"posa2l-1464336107064"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"coupon_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">203</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"coupon_amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5.0"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"coupon_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My product"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"quickorder"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"tax_percentage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"referrer_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"customer_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Smith"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"customer_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john@example.com"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"customer_zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00000"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"payment_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p><strong>Public call</strong> | Example truncated for brevity.</p>
-</blockquote>
-<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/orders/:id"</span>
-  -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:"</span>
-</code></pre>
-<pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-</code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"verification_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20S39A"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"booked"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"merchant_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"currency_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"occurrence_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">32923</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"product_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3092</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.0"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"coupon_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">203</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"coupon_amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5.0"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"coupon_description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My product"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"tax_percentage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"referrer_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"payment_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<p>This endpoint retrieves a specific order.</p>
-
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">GET https://app.getoccasion.com/api/v1/orders/:id</code></p>
-
-<h3 id="url-parameters">URL Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>The ID of the order to retrieve</td>
-</tr>
-</tbody></table>
-
-<h3 id="response-body">Response Body</h3>
-
-<p>Notable response fields include:</p>
-
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Public</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>verification_code</td>
-<td>true</td>
-<td>The verification code for the order</td>
-</tr>
-<tr>
-<td>status</td>
-<td>true</td>
-<td>The status of the order.<br><br><em>Possible values:</em><br><strong>reserved:</strong> Order made, waiting for payment / payment processing<br><strong>dropped:</strong> Payment failed<br><strong>booked:</strong> Order completed, payment received or no payment required<br><strong>canceled:</strong> Order canceled by merchant</td>
-</tr>
-<tr>
-<td>price</td>
-<td>true</td>
-<td>The total price for this order</td>
-</tr>
-<tr>
-<td>balance</td>
-<td>false</td>
-<td>The amount of the order that has been paid</td>
-</tr>
-<tr>
-<td>quantity</td>
-<td>true</td>
-<td>The amount of availability slots booked in this order</td>
-</tr>
-<tr>
-<td>summary</td>
-<td>true</td>
-<td>A text block representing a summary of all the options selected by the customer</td>
-</tr>
-<tr>
-<td>session_identifier</td>
-<td>false</td>
-<td>A unique identifier generated each time the order widget is loaded, to prevent duplicate orders</td>
-</tr>
-<tr>
-<td>coupon_amount</td>
-<td>true</td>
-<td>The decimal amount that the coupon of this order deducted from the price</td>
-</tr>
-<tr>
-<td>coupon_description</td>
-<td>true</td>
-<td>The readable description of the coupon amount (-$10.00, 10.00%)</td>
-</tr>
-<tr>
-<td>description</td>
-<td>true</td>
-<td>The product title that offers a description of the order</td>
-</tr>
-<tr>
-<td>quickorder</td>
-<td>false</td>
-<td>Whether or not this order was made using the merchant&rsquo;s backend quickorder panel</td>
-</tr>
-<tr>
-<td>tax_percentage</td>
-<td>true</td>
-<td>The percentage tax applied to the order</td>
-</tr>
-<tr>
-<td>referrer_id</td>
-<td>true</td>
-<td>The ID of the order that was used to refer the customer that booked this order</td>
-</tr>
-<tr>
-<td>payment_status</td>
-<td>true</td>
-<td>The status of the payments for this order<br><br><em>Possible values:</em><br><strong>completed:</strong> Sum of payments is equal to order price<br><strong>awaiting_customer_payment:</strong> Customer still needs to initiate a payment<br><strong>processing:</strong> Customer initiated a payment that is still processing<br><strong>failed:</strong> Customer initiated a payment that has failed during processing<br><strong>unknown:</strong> The status of payments is not known</td>
-</tr>
-</tbody></table>
-
-<h3 id="associations">Associations</h3>
-
-<p>Possible associations to include are:</p>
-
-<table><thead>
-<tr>
-<th>Association</th>
-<th>Public</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>currency</td>
-<td>true</td>
-<td>The currency the order was purchased in</td>
-</tr>
-<tr>
-<td>occurrence</td>
-<td>true</td>
-<td>A single availability occurrence of the time_slot booked (a time_slot may have multiple occurrences)</td>
-</tr>
-<tr>
-<td>coupon</td>
-<td>true</td>
-<td>The coupon that was used when purchasing this order</td>
-</tr>
-<tr>
-<td>customer</td>
-<td>true</td>
-<td>The customer that purchased this order</td>
-</tr>
-<tr>
-<td>merchant</td>
-<td>true</td>
-<td>The merchant that sold this order</td>
-</tr>
-<tr>
-<td>product</td>
-<td>true</td>
-<td>The product listing that this order is for</td>
-</tr>
-<tr>
-<td>attribute_values</td>
-<td>true</td>
-<td>The options selected by the customer for each individual attribute</td>
-</tr>
-<tr>
-<td>transactions</td>
-<td>true</td>
-<td>The transactions that have paid out this order (or refunded it)</td>
-</tr>
-<tr>
-<td>comments</td>
-<td>true</td>
-<td>Notes the merchant has made to the order for their own internal use</td>
-</tr>
-</tbody></table>
-
-<h2 id="create-an-order">Create an Order</h2>
-<pre class="highlight http"><code><span class="nf">POST</span> <span class="nn">/api/v1/orders</span> <span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span>
-<span class="na">Host</span><span class="p">:</span> <span class="s">app.getoccasion.com</span>
-<span class="na">Authorization</span><span class="p">:</span> <span class="s">Basic fdQWxhZGRpbjpvcd4ee59f8GVuIHNlc2==</span>
-<span class="na">Content-Type</span><span class="p">:</span> <span class="s">application/json</span>
-</code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"order"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"merchant_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"product_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3092</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"session_identifier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"posa2l-1464336107064"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"time_slot_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"210120392919"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"payment_method_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12an38cbag3klbh2g1mdkajm4ah2jvtd8a"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"attribute_values"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"attr_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">15</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"YES"</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"attr_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">16</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20"</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">]</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">201</span> <span class="ne">Created</span>
-</code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"verification_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20S39A"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"booked"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"merchant_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"currency_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"occurrence_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">32923</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"product_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3092</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.0"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.0"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"session_identifier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"posa2l-1464336107064"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"coupon_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"coupon_amount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"coupon_description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My product"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"quickorder"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"tax_percentage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"referrer_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"customer_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"John Smith"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"customer_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"john@example.com"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"customer_zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00000"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"payment_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<blockquote>
-<p><strong>Public call</strong> | Example truncated for brevity.</p>
-</blockquote>
-<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/orders/:id"</span>
-  -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:"</span>
-</code></pre>
-<pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-</code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"customer_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"verification_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20S39A"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"booked"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"merchant_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"currency_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"occurrence_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">32923</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"product_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">3092</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10.0"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"summary"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"coupon_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"coupon_amount"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"coupon_description"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My product"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"tax_percentage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"referrer_id"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-  </span><span class="nt">"payment_status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"completed"</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<p>This endpoint creates a new order</p>
-
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">POST https://app.getoccasion.com/api/v1/orders</code></p>
-
-<h3 id="request-body">Request Body</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>merchant_id</td>
-<td>The ID of the merchant that is selling this order</td>
-</tr>
-<tr>
-<td>product_id</td>
-<td>The ID of the product this order is for</td>
-</tr>
-<tr>
-<td>customer_id</td>
-<td>The ID of the customer booking this order</td>
-</tr>
-<tr>
-<td>session_identifier</td>
-<td>A unique identifier to distinguish a session of the order widget from all others (prevents duplicate orders)</td>
-</tr>
-<tr>
-<td>time_slot_id</td>
-<td>The ID of the time slot the customer is booking</td>
-</tr>
-<tr>
-<td>payment_method_token</td>
-<td>The token for the payment method the customer is using to purchase this order</td>
-</tr>
-<tr>
-<td>attribute_values</td>
-<td>The options selected for each attribute of the order</td>
-</tr>
-</tbody></table>
-
-<h3 id="response-body">Response Body</h3>
-
-<p>Notable response fields include:</p>
-
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Public</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>verification_code</td>
-<td>true</td>
-<td>The verification code for the order</td>
-</tr>
-<tr>
-<td>status</td>
-<td>true</td>
-<td>The status of the order.<br><br><em>Possible values:</em><br><strong>reserved:</strong> Order made, waiting for payment / payment processing<br><strong>dropped:</strong> Payment failed<br><strong>booked:</strong> Order completed, payment received or no payment required<br><strong>canceled:</strong> Order canceled by merchant</td>
-</tr>
-<tr>
-<td>price</td>
-<td>true</td>
-<td>The total price for this order</td>
-</tr>
-<tr>
-<td>balance</td>
-<td>false</td>
-<td>The amount of the order that has been paid</td>
-</tr>
-<tr>
-<td>quantity</td>
-<td>true</td>
-<td>The amount of availability slots booked in this order</td>
-</tr>
-<tr>
-<td>summary</td>
-<td>true</td>
-<td>A text block representing a summary of all the options selected by the customer</td>
-</tr>
-<tr>
-<td>session_identifier</td>
-<td>false</td>
-<td>A unique identifier generated each time the order widget is loaded, to prevent duplicate orders</td>
-</tr>
-<tr>
-<td>coupon_amount</td>
-<td>true</td>
-<td>The decimal amount that the coupon of this order deducted from the price</td>
-</tr>
-<tr>
-<td>coupon_description</td>
-<td>true</td>
-<td>The readable description of the coupon amount (-$10.00, 10.00%)</td>
-</tr>
-<tr>
-<td>description</td>
-<td>true</td>
-<td>The product title that offers a description of the order</td>
-</tr>
-<tr>
-<td>quickorder</td>
-<td>false</td>
-<td>Whether or not this order was made using the merchant&rsquo;s backend quickorder panel</td>
-</tr>
-<tr>
-<td>tax_percentage</td>
-<td>true</td>
-<td>The percentage tax applied to the order</td>
-</tr>
-<tr>
-<td>referrer_id</td>
-<td>true</td>
-<td>The ID of the order that was used to refer the customer that booked this order</td>
-</tr>
-<tr>
-<td>payment_status</td>
-<td>true</td>
-<td>The status of the payments for this order<br><br><em>Possible values:</em><br><strong>completed:</strong> Sum of payments is equal to order price<br><strong>awaiting_customer_payment:</strong> Customer still needs to initiate a payment<br><strong>processing:</strong> Customer initiated a payment that is still processing<br><strong>failed:</strong> Customer initiated a payment that has failed during processing<br><strong>unknown:</strong> The status of payments is not known</td>
-</tr>
-</tbody></table>
-
-<h3 id="associations">Associations</h3>
-
-<p>Possible associations to include are:</p>
-
-<table><thead>
-<tr>
-<th>Association</th>
-<th>Public</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>currency</td>
-<td>true</td>
-<td>The currency the order was purchased in</td>
-</tr>
-<tr>
-<td>occurrence</td>
-<td>true</td>
-<td>A single availability occurrence of the time_slot booked (a time_slot may have multiple occurrences)</td>
-</tr>
-<tr>
-<td>coupon</td>
-<td>true</td>
-<td>The coupon that was used when purchasing this order</td>
-</tr>
-<tr>
-<td>customer</td>
-<td>true</td>
-<td>The customer that purchased this order</td>
-</tr>
-<tr>
-<td>merchant</td>
-<td>true</td>
-<td>The merchant that sold this order</td>
-</tr>
-<tr>
-<td>product</td>
-<td>true</td>
-<td>The product listing that this order is for</td>
-</tr>
-<tr>
-<td>attribute_values</td>
-<td>true</td>
-<td>The options selected by the customer for each individual attribute</td>
-</tr>
-<tr>
-<td>transactions</td>
-<td>true</td>
-<td>The transactions that have paid out this order (or refunded it)</td>
-</tr>
-<tr>
-<td>comments</td>
-<td>true</td>
-<td>Notes the merchant has made to the order for their own internal use</td>
+<td>ID</td>
+<td>The ID of the kitten to retrieve</td>
 </tr>
 </tbody></table>
 
           <h1 id="errors">Errors</h1>
 
-<p>The Occasion API uses the following error codes:</p>
+<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files&hellip;just save them to the `includes` folder and add them to the top of your `index.md`&rsquo;s frontmatter. Files are included in the order listed.</aside>
+
+<p>The Kittn API uses the following error codes:</p>
 
 <table><thead>
 <tr>
@@ -2405,24 +290,40 @@ curl <span class="s2">"api_endpoint_here"</span>
 </tr>
 </thead><tbody>
 <tr>
+<td>400</td>
+<td>Bad Request &ndash; Your request sucks</td>
+</tr>
+<tr>
 <td>401</td>
-<td>Unauthorized &ndash; Your API key(s) are wrong, or you provided insufficient credentials to a private endpoint.</td>
+<td>Unauthorized &ndash; Your API key is wrong</td>
+</tr>
+<tr>
+<td>403</td>
+<td>Forbidden &ndash; The kitten requested is hidden for administrators only</td>
 </tr>
 <tr>
 <td>404</td>
-<td>Not Found &ndash; The specified resource could not be found.</td>
+<td>Not Found &ndash; The specified kitten could not be found</td>
 </tr>
 <tr>
-<td>409</td>
-<td>Conflict &ndash; Using the resource in the attempted way conflicts with its state.</td>
+<td>405</td>
+<td>Method Not Allowed &ndash; You tried to access a kitten with an invalid method</td>
 </tr>
 <tr>
-<td>422</td>
-<td>Unprocessable Entity &ndash; The request data could not be processed into a valid entity. (missing params, invalid format, etc.).</td>
+<td>406</td>
+<td>Not Acceptable &ndash; You requested a format that isn&rsquo;t json</td>
+</tr>
+<tr>
+<td>410</td>
+<td>Gone &ndash; The kitten requested has been removed from our servers</td>
+</tr>
+<tr>
+<td>418</td>
+<td>I&rsquo;m a teapot</td>
 </tr>
 <tr>
 <td>429</td>
-<td>Too Many Requests &ndash; You&rsquo;ve made too many requests in the last 24 hours.</td>
+<td>Too Many Requests &ndash; You&rsquo;re requesting too many kittens! Slow down!</td>
 </tr>
 <tr>
 <td>500</td>
@@ -2430,7 +331,7 @@ curl <span class="s2">"api_endpoint_here"</span>
 </tr>
 <tr>
 <td>503</td>
-<td>Service Unavailable &ndash; We&rsquo;re temporarily offline for maintenance. Please try again later.</td>
+<td>Service Unavailable &ndash; We&rsquo;re temporarially offline for maintanance. Please try again later.</td>
 </tr>
 </tbody></table>
 
@@ -2438,6 +339,8 @@ curl <span class="s2">"api_endpoint_here"</span>
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="shell">shell</a>
+                <a href="#" data-language-name="ruby">ruby</a>
+                <a href="#" data-language-name="python">python</a>
           </div>
       </div>
     </div>
