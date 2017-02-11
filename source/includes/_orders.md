@@ -80,6 +80,7 @@ comments | Comments made on the order by the merchant
 coupon | The coupon used with the order
 currency | The currency used to purchase the order
 customer | The customer that purchased the order
+gift_card | The gift card that may have been purchased by this order
 merchant | The merchant that sold this order
 occurrences | Occurrences of the timeslot that the order was purchased for
 order_items | The items purchased with the order, instead of a product
@@ -170,6 +171,7 @@ comments | Comments made on the order by the merchant
 coupon | The coupon used with the order
 currency | The currency used to purchase the order
 customer | The customer that purchased the order
+gift_card | The gift card that may have been purchased by this order
 merchant | The merchant that sold this order
 occurrences | Occurrences of the timeslot that the order was purchased for
 order_items | The items purchased with the order, instead of a product
@@ -344,6 +346,7 @@ comments | Comments made on the order by the merchant
 coupon | The coupon used with the order
 currency | The currency used to purchase the order
 customer | The customer that purchased the order
+gift_card | The gift card that may have been purchased by this order
 merchant | The merchant that sold this order
 occurrences | Occurrences of the timeslot that the order was purchased for
 order_items | The items purchased with the order, instead of a product
