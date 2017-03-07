@@ -111,14 +111,13 @@
       </div>
         <ul class="toc-footer">
             <li><a href='https://app.getoccasion.com/users/sign_up'>Sign Up for an Account</a></li>
+            <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
         <h1 id="introduction">Introduction</h1>
-
-<h3 id="the-occasion-api-is-in-beta-we-are-currently-developing-the-endpoints-and-might-change-them-we-will-freeze-them-in-the-near-future">The Occasion API is in BETA. We are currently developing the endpoints and might change them. We will freeze them in the near future.</h3>
 
 <p>Welcome to the Occasion API! You can use our API to access Occasion API endpoints, which can be used to interact with all levels of functionality available to Occasion users, including: products, venues, orders, coupons, gift cards, customers, payment methods, users, calendars, etc.</p>
 
@@ -541,6 +540,10 @@ curl <span class="s2">"api_endpoint_here"</span>
 <td>currency</td>
 <td>The currency that the merchant accepts</td>
 </tr>
+<tr>
+<td>venues</td>
+<td>The venues that the merchant operates</td>
+</tr>
 </tbody></table>
 
           <h1 id="products">Products</h1>
@@ -579,7 +582,8 @@ curl <span class="s2">"api_endpoint_here"</span>
         </span><span class="nt">"widget_payment_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payment Information"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"widget_total_due_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Total Due Today"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"order_button_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Finalize order"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"post_transactional_message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Thank you for ordering."</span><span class="w">
+        </span><span class="nt">"post_transactional_message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Thank you for ordering."</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"is_session"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
@@ -682,6 +686,11 @@ curl <span class="s2">"api_endpoint_here"</span>
 <td>post_transactional_message</td>
 <td>true</td>
 <td>The message to display after an order has been completed</td>
+</tr>
+<tr>
+<td>is_session</td>
+<td>true</td>
+<td><code class="prettyprint">true</code> if this product is a session product, that only allows for all time slots to be purchased at once</td>
 </tr>
 </tbody></table>
 
@@ -1419,6 +1428,10 @@ curl <span class="s2">"api_endpoint_here"</span>
 <td>The customer that purchased the order</td>
 </tr>
 <tr>
+<td>gift_card</td>
+<td>The gift card that may have been purchased by this order</td>
+</tr>
+<tr>
 <td>merchant</td>
 <td>The merchant that sold this order</td>
 </tr>
@@ -1610,6 +1623,10 @@ curl <span class="s2">"api_endpoint_here"</span>
 <tr>
 <td>customer</td>
 <td>The customer that purchased the order</td>
+</tr>
+<tr>
+<td>gift_card</td>
+<td>The gift card that may have been purchased by this order</td>
 </tr>
 <tr>
 <td>merchant</td>
@@ -1947,6 +1964,10 @@ curl <span class="s2">"api_endpoint_here"</span>
 <tr>
 <td>customer</td>
 <td>The customer that purchased the order</td>
+</tr>
+<tr>
+<td>gift_card</td>
+<td>The gift card that may have been purchased by this order</td>
 </tr>
 <tr>
 <td>merchant</td>
