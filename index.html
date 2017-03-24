@@ -583,7 +583,7 @@ curl <span class="s2">"api_endpoint_here"</span>
         </span><span class="nt">"widget_total_due_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Total Due Today"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"order_button_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Finalize order"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"post_transactional_message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Thank you for ordering."</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"is_session"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+        </span><span class="nt">"sells_sessions"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
       </span><span class="p">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
@@ -688,9 +688,9 @@ curl <span class="s2">"api_endpoint_here"</span>
 <td>The message to display after an order has been completed</td>
 </tr>
 <tr>
-<td>is_session</td>
+<td>sells_sessions</td>
 <td>true</td>
-<td><code class="prettyprint">true</code> if this product is a session product, that only allows for all time slots to be purchased at once</td>
+<td><code class="prettyprint">true</code> if this product sells sessions, which means it only allows for all time slots to be purchased at once</td>
 </tr>
 </tbody></table>
 
