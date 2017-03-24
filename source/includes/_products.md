@@ -41,7 +41,7 @@ HTTPS/1.1 200 OK
         "widget_total_due_title": "Total Due Today",
         "order_button_text": "Finalize order",
         "post_transactional_message": "Thank you for ordering.",
-        "is_session": false
+        "sells_sessions": false
       }
     }
   ]
@@ -76,7 +76,7 @@ widget_payment_title | true | The title to display above a section asking for pa
 widget_total_due_title | true | The title to display above a section indicating the total price of the order
 order_button_text | true | The text to display in the submit order button on an order widget
 post_transactional_message | true | The message to display after an order has been completed
-is_session | true | `true` if this product is a session product, that only allows for all time slots to be purchased at once
+sells_sessions | true | `true` if this product sells sessions, which means it only allows for all time slots to be purchased at once
 
 ### Associations
 
