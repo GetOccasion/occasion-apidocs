@@ -115,4 +115,3 @@ Association | Description
 ----------- | -----------
 business_type | The type of business that the merchant is
 currency | The currency that the merchant accepts
-venues | The venues that the merchant operates

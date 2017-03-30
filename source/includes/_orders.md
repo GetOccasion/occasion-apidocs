@@ -63,7 +63,7 @@ coupon_description | true | A readable version of the coupon amount: if a fixed 
 quantity | true | The quantity of this order that was purchased
 description | true | The title of the product or order items purchased with this order
 balance | false | The total balance left to be paid on this order
-session_identifier | false | An identifier used to associate this order with a session of an order form (conversion tracking, etc.)
+session_identifier | false | A unique identifier used to associate this order with a session of an order form (conversion tracking, etc.)
 customer_name | false | The name the customer used to purchase this order
 customer_email | false | The email the customer used to purchase this order
 customer_zip | false | The zip code the customer used to purchase this order
@@ -82,7 +82,7 @@ currency | The currency used to purchase the order
 customer | The customer that purchased the order
 gift_card | The gift card that may have been purchased by this order
 merchant | The merchant that sold this order
-occurrences | Occurrences of the timeslot that the order was purchased for
+occurrences | Occurrences of the timeslots that were purchased by the order
 order_items | The items purchased with the order, instead of a product
 product | The product that the order is for
 transactions | Transactions to pay for the order
@@ -154,7 +154,7 @@ coupon_description | true | A readable version of the coupon amount: if a fixed 
 quantity | true | The quantity of this order that was purchased
 description | true | The title of the product or order items purchased with this order
 balance | false | The total balance left to be paid on this order
-session_identifier | false | An identifier used to associate this order with a session of an order form (conversion tracking, etc.)
+session_identifier | false | A unique identifier used to associate this order with a session of an order form (conversion tracking, etc.)
 customer_name | false | The name the customer used to purchase this order
 customer_email | false | The email the customer used to purchase this order
 customer_zip | false | The zip code the customer used to purchase this order
@@ -173,7 +173,7 @@ currency | The currency used to purchase the order
 customer | The customer that purchased the order
 gift_card | The gift card that may have been purchased by this order
 merchant | The merchant that sold this order
-occurrences | Occurrences of the timeslot that the order was purchased for
+occurrences | Occurrences of the timeslots that were purchased by the order
 order_items | The items purchased with the order, instead of a product
 product | The product that the order is for
 transactions | Transactions to pay for the order
@@ -192,8 +192,7 @@ Content-Type: application/json
   "data": {
     "type": "orders",
     "attributes": {
-      "session_identifier": "any-key-you-want",
-      "time_slot_id": "2016090823451"
+      "session_identifier": "any-unique-key",
     },
     "relationships": {
       "attribute_values": {
@@ -201,15 +200,23 @@ Content-Type: application/json
           {
             "type": "attribute_values",
             "attributes": {
-              "attr_id": "12n83qa",
               "value": "6shen2as"
+            },
+            "relationships": {
+              "attribute": {
+                "data": { "type": "attributes", "id": "12n83qa" }
+              }
             }
           },
           {
             "type": "attribute_values",
             "attributes": {
-              "attr_id": "82has32",
               "value": "Text value"
+            },
+            "relationships": {
+              "attribute": {
+                "data": { "type": "attributes", "id": "82has32" }
+              }
             }
           }
         ]
@@ -231,20 +238,45 @@ Content-Type: application/json
       "product": {
         "data": { "type": "products", "id": "bteyn26" }
       },
+      "time_slots": {
+        "data": [
+          { "type": "time_slots", "id": "7hwq5de" },
+          { "type": "time_slots", "id": "97eh2sa" }
+        ]
+      },
       "transactions": {
         "data": [
           {
             "type": "transactions",
             "attributes": {
               "amount": "5.0",
-              "payment_method_token": "H7gJ8GtEfCdLi88uRD6FhfrtOPTizjt"
+            },
+            "relationships": {
+              "payment_method": {
+                "data": { "type": "credit_cards", "id": "H7gJ8GtEfCdLi88uRD6FhfrtOPTizjt" }
+              }
             }
           },
           {
             "type": "transactions",
             "attributes": {
               "amount": "5.0",
-              "gift_card_code": "CODE1X"
+            },
+            "relationships": {
+              "payment_method": {
+                "data": { "type": "gift_cards", "id": "D3HJ8GtEfCdLixGh3D6FhfrtOPTh6w5e" }
+              }
+            }
+          },
+          {
+            "type": "transactions",
+            "attributes": {
+              "amount": "5.0",
+            },
+            "relationships": {
+              "payment_method": {
+                "data": { "type": "paypals", "id": "3D6FhfrtOPTh6w5eH7gJ8GtEfCdL" }
+              }
             }
           }
         ]
@@ -276,7 +308,7 @@ HTTPS/1.1 201 Created
       "quantity": 1,
       "description": "This is the title of the product ordered.",
       "balance": "0.0",
-      "session_identifier": "any-key-you-want",
+      "session_identifier": "any-unique-key",
       "customer_name": "Jane Smith",
       "customer_email": "jane@example.com",
       "customer_zip": "00000",
@@ -297,9 +329,8 @@ This endpoint creates a new order
 Field | Description | Required?
 ----- | ----------- | ---------
 session_identifier | An ID you can input for tracking sessions, form data, conversions, etc. | false
-time_slot_id | The ID of the time_slot being booked | false
 attribute_values | Values for each attribute of the product being ordered | false
-&#x203a;attr_id | The id of the attribute this attribute_value is for | true
+&#x203a;attribute | The attribute this attribute_value is for | true
 &#x203a;value | The value or "answer" for the attribute. If the attribute has attribute_options, this value will be the ID of the selected attribute option. Otherwise, it is just a value. | true
 coupon | The coupon used to receive a discount on the order | false
 customer | The customer purchasing the order | true
@@ -308,10 +339,10 @@ customer | The customer purchasing the order | true
 &#x203a;last_name | The last name of the customer | true
 &#x203a;zip | The zip of the customer | true
 product | The product being ordered | true
-transactions | The transactions (credit card, gift card) that pay for the order. The total amount paid for across transactions must equal the order price. | If order has price
+time_slots | The time slots being ordered | true
+transactions | The transactions (credit card, paypal, gift card) that pay for the order. The total amount paid for across transactions must equal the order price. | If order has price
 &#x203a;amount | The amount that this transaction is paying for. | true
-&#x203a;gift_card_code | The code of the gift card being used to pay for this transaction. | false
-&#x203a;payment_method_token | The payment method token (from Spreedly), representing a payment method to pay for this transaction | false
+&#x203a;payment_method | The payment method used to purchase the transaction.<br><br>*Possible types:*<br>**credit_cards**<br>**gift_cards**<br>**paypals** | true
 
 ### Response Body
 
@@ -329,7 +360,7 @@ coupon_description | true | A readable version of the coupon amount: if a fixed 
 quantity | true | The quantity of this order that was purchased
 description | true | The title of the product or order items purchased with this order
 balance | false | The total balance left to be paid on this order
-session_identifier | false | An identifier used to associate this order with a session of an order form (conversion tracking, etc.)
+session_identifier | false | A unique identifier used to associate this order with a session of an order form (conversion tracking, etc.)
 customer_name | false | The name the customer used to purchase this order
 customer_email | false | The email the customer used to purchase this order
 customer_zip | false | The zip code the customer used to purchase this order
@@ -372,8 +403,12 @@ Content-Type: application/json
           {
             "type": "attribute_values",
             "attributes": {
-              "attr_id": "12n83qa",
               "value": "6shen2as"
+            },
+            "relationships": {
+              "attribute": {
+                "data": { "type": "attributes", "id": "12n83qa" }
+              }
             }
           }
         ]
@@ -418,6 +453,8 @@ This endpoint calculates the price of an order
 Field | Description | Required?
 ----- | ----------- | ---------
 attribute_values | Values for the attributes that affect the price of the order | false
+&#x203a;attribute | The attribute this attribute_value is for | true
+&#x203a;value | The value or "answer" for the attribute. If the attribute has attribute_options, this value will be the ID of the selected attribute option. Otherwise, it is just a value. | true
 coupon | The coupon that has an impact on the price of the order | false
 product | The product that defines the base price, attributes, and tax_percentage of the order | true
 

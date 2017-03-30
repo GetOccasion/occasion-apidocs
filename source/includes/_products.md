@@ -18,29 +18,32 @@ HTTPS/1.1 200 OK
       "type": "products",
       "id": "38asnd2",
       "attributes": {
+        "closing_time_relative": true,
+        "created_at": "2015-10-23T11:00:44.539-05:00",
+        "description": "Sign up to paint a teapot.",
+        "email_subject": "Your order has been completed!",
+        "from_email": "Teapot Cafe",
         "image": {
           "url": "https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg",
           "thumb": {
             "url": "https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg"
           }
         },
-        "title": "My Art Class",
-        "description": "Sign up to paint a teapot.",
-        "status": "active",
-        "created_at": "2015-10-23T11:00:44.539-05:00",
-        "updated_at": "2015-10-23T11:00:44.539-05:00",
-        "tax_percentage": "3.75",
-        "closing_time_relative": true,
-        "time_slots_closed_before": "2000-01-01T00:00:00.000Z",
+        "is_session": true,
+        "order_button_text": "Finalize order",
+        "post_transactional_message": "Thank you for ordering.",
         "show_occurrence_availability": true,
         "show_time_slot_duration": false,
+        "status": "active",
+        "tax_percentage": "3.75",
+        "time_slots_closed_before": "2000-01-01T00:00:00.000Z",
+        "title": "My Art Class",
+        "updated_at": "2015-10-23T11:00:44.539-05:00",
+        "widget_attributes_title": "Additional Questions",
         "widget_contact_title": "Customer Information",
         "widget_occurrences_title": "Select which day you would like to reserve",
-        "widget_attributes_title": "Additional Questions",
         "widget_payment_title": "Payment Information",
         "widget_total_due_title": "Total Due Today",
-        "order_button_text": "Finalize order",
-        "post_transactional_message": "Thank you for ordering."
       }
     }
   ]
@@ -59,22 +62,25 @@ Notable response fields include:
 
 Field | Public | Description
 ----- | ------ | -----------
-image | true | URLs for the full image and thumbnail to display with a product
-title | true | The title of the product, such as "BYOB & Paint A Forest"
-description | true | The description for the product, explaining things in detail
+closing_time_relative | true | Whether or not `time_slots_closed_before` below indicates time relative to the time_slot start datetime, or indicates an absolute time.
+description | true | The description for the product, explaining things in detail.
+email_subject | false | The subject of the email that is sent after an order for this product is completed.
+from_name | false | The from name of the email that is sent after an order for this product is completed.
+image | true | URLs for the full image and thumbnail to display with a product.
+is_session | true | If true, the product is a session with attendees.
+order_button_text | true | The text to display in the submit button on an order widget for this product.
+post_transactional_message | true | The message to display after an order for this product has been completed.
+show_occurrence_availability | true | If `true`, show how many open seats there are for a time slot on an order widget for this product.
+show_time_slot_duration | true | If `true`, display the duration of time slots on an order widget for this product.
 status | true | The status that will determine if the product is active for ordering.<br><br>*Possible values:*<br>**active:** Ready to accept orders<br>**inactive:** Not accepting orders<br>**expired:** Product has time slots, but none of them are open.<br>**sold_out:** Either product or all open time slots are fully booked
-tax_percentage | true | The sales tax percentage that is applied to an order for this product
-closing_time_relative | true | Whether or not `time_slots_closed_before` below indicates time relative to the time_slot start datetime, or indicates an absolute time
+tax_percentage | true | The sales tax percentage that is applied to an order for this product.
 time_slots_closed_before | true | The point in time after which time slots are closed for sales. Any time slot occurring between this time and the actual occurrence of that time slot (when the class takes place) cannot be sold.
-show_occurrence_availability | true | If `true`, show how many open seats there are for a time slot
-show_time_slot_duration | true | If `true`, display the duration of a time slot
-widget_contact_title | true | The title to display above a section regarding customer contact information (email, first_name, last_name, zip)
-widget_occurrences_title | true | The title to display above a section regarding choosing a time slot
-widget_attributes_title | true | The title to display above a section asking additional questions based off custom attributes
-widget_payment_title | true | The title to display above a section asking for payment information like credit card details
-widget_total_due_title | true | The title to display above a section indicating the total price of the order
-order_button_text | true | The text to display in the submit order button on an order widget
-post_transactional_message | true | The message to display after an order has been completed
+title | true | The title of the product, such as "BYOB & Paint A Forest".
+widget_attributes_title | true | The title to display above a section asking additional questions based off custom attributes.
+widget_contact_title | true | The title to display above a section regarding customer contact information (email, first_name, last_name, zip).
+widget_occurrences_title | true | The title to display above a section regarding choosing a time slot.
+widget_payment_title | true | The title to display above a section asking for payment information like credit card details.
+widget_total_due_title | true | The title to display above a section indicating the total price of the order.
 
 ### Associations
 
@@ -82,7 +88,7 @@ Possible associations to include are:
 
 Association | Description
 ----------- | -----------
-attrs | The attributes of the product (questions to answer for an order)
+attributes | The attributes of the product (questions to answer for an order)
 merchant | The merchant that the product belongs to
 venue | The venue that the product belongs to
 
@@ -103,29 +109,32 @@ HTTPS/1.1 200 OK
     "type": "products",
     "id": "38asnd2",
     "attributes": {
+      "closing_time_relative": true,
+      "created_at": "2015-10-23T11:00:44.539-05:00",
+      "description": "Sign up to paint a teapot.",
+      "email_subject": "Your order has been completed!",
+      "from_email": "Teapot Cafe",
       "image": {
         "url": "https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg",
         "thumb": {
           "url": "https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg"
         }
       },
-      "title": "My Art Class",
-      "description": "Sign up to paint a teapot.",
-      "status": "active",
-      "created_at": "2015-10-23T11:00:44.539-05:00",
-      "updated_at": "2015-10-23T11:00:44.539-05:00",
-      "tax_percentage": "3.75",
-      "closing_time_relative": true,
-      "time_slots_closed_before": "2000-01-01T00:00:00.000Z",
+      "is_session": true,
+      "order_button_text": "Finalize order",
+      "post_transactional_message": "Thank you for ordering.",
       "show_occurrence_availability": true,
       "show_time_slot_duration": false,
+      "status": "active",
+      "tax_percentage": "3.75",
+      "time_slots_closed_before": "2000-01-01T00:00:00.000Z",
+      "title": "My Art Class",
+      "updated_at": "2015-10-23T11:00:44.539-05:00",
+      "widget_attributes_title": "Additional Questions",
       "widget_contact_title": "Customer Information",
       "widget_occurrences_title": "Select which day you would like to reserve",
-      "widget_attributes_title": "Additional Questions",
       "widget_payment_title": "Payment Information",
       "widget_total_due_title": "Total Due Today",
-      "order_button_text": "Finalize order",
-      "post_transactional_message": "Thank you for ordering."
     }
   }
 }
@@ -149,22 +158,25 @@ Notable response fields include:
 
 Field | Public | Description
 ----- | ------ | -----------
-image | true | URLs for the full image and thumbnail to display with a product
-title | true | The title of the product, such as "BYOB & Paint A Forest"
-description | true | The description for the product, explaining things in detail
+closing_time_relative | true | Whether or not `time_slots_closed_before` below indicates time relative to the time_slot start datetime, or indicates an absolute time.
+description | true | The description for the product, explaining things in detail.
+email_subject | false | The subject of the email that is sent after an order for this product is completed.
+from_name | false | The from name of the email that is sent after an order for this product is completed.
+image | true | URLs for the full image and thumbnail to display with a product.
+is_session | true | If true, the product is a session with attendees.
+order_button_text | true | The text to display in the submit button on an order widget for this product.
+post_transactional_message | true | The message to display after an order for this product has been completed.
+show_occurrence_availability | true | If `true`, show how many open seats there are for a time slot on an order widget for this product.
+show_time_slot_duration | true | If `true`, display the duration of time slots on an order widget for this product.
 status | true | The status that will determine if the product is active for ordering.<br><br>*Possible values:*<br>**active:** Ready to accept orders<br>**inactive:** Not accepting orders<br>**expired:** Product has time slots, but none of them are open.<br>**sold_out:** Either product or all open time slots are fully booked
-tax_percentage | true | The sales tax percentage that is applied to an order for this product
-closing_time_relative | true | Whether or not `time_slots_closed_before` below indicates time relative to the time_slot start datetime, or indicates an absolute time
+tax_percentage | true | The sales tax percentage that is applied to an order for this product.
 time_slots_closed_before | true | The point in time after which time slots are closed for sales. Any time slot occurring between this time and the actual occurrence of that time slot (when the class takes place) cannot be sold.
-show_occurrence_availability | true | If `true`, show how many open seats there are for a time slot
-show_time_slot_duration | true | If `true`, display the duration of a time slot
-widget_contact_title | true | The title to display above a section regarding customer contact information (email, first_name, last_name, zip)
-widget_occurrences_title | true | The title to display above a section regarding choosing a time slot
-widget_attributes_title | true | The title to display above a section asking additional questions based off custom attributes
-widget_payment_title | true | The title to display above a section asking for payment information like credit card details
-widget_total_due_title | true | The title to display above a section indicating the total price of the order
-order_button_text | true | The text to display in the submit order button on an order widget
-post_transactional_message | true | The message to display after an order has been completed
+title | true | The title of the product, such as "BYOB & Paint A Forest".
+widget_attributes_title | true | The title to display above a section asking additional questions based off custom attributes.
+widget_contact_title | true | The title to display above a section regarding customer contact information (email, first_name, last_name, zip).
+widget_occurrences_title | true | The title to display above a section regarding choosing a time slot.
+widget_payment_title | true | The title to display above a section asking for payment information like credit card details.
+widget_total_due_title | true | The title to display above a section indicating the total price of the order.
 
 ### Associations
 
@@ -172,7 +184,7 @@ Possible associations to include are:
 
 Association | Description
 ----------- | -----------
-attrs | The attributes of the product (questions to answer for an order)
+attributes | The attributes of the product (questions to answer for an order)
 merchant | The merchant that the product belongs to
 venue | The venue that the product belongs to
 
@@ -193,32 +205,35 @@ HTTPS/1.1 200 OK
     "type": "products",
     "id": "38asnd2",
     "attributes": {
+      "closing_time_relative": true,
+      "created_at": "2015-10-23T11:00:44.539-05:00",
+      "description": "Sign up to paint a teapot.",
+      "email_subject": "Your order has been completed!",
+      "from_email": "Teapot Cafe",
       "image": {
         "url": "https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg",
         "thumb": {
           "url": "https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg"
         }
       },
-      "title": "My Art Class",
-      "description": "Sign up to paint a teapot.",
-      "status": "active",
-      "created_at": "2015-10-23T11:00:44.539-05:00",
-      "updated_at": "2015-10-23T11:00:44.539-05:00",
-      "tax_percentage": "3.75",
-      "closing_time_relative": true,
-      "time_slots_closed_before": "2000-01-01T00:00:00.000Z",
+      "is_session": true,
+      "order_button_text": "Finalize order",
+      "post_transactional_message": "Thank you for ordering.",
       "show_occurrence_availability": true,
       "show_time_slot_duration": false,
+      "status": "active",
+      "tax_percentage": "3.75",
+      "time_slots_closed_before": "2000-01-01T00:00:00.000Z",
+      "title": "My Art Class",
+      "updated_at": "2015-10-23T11:00:44.539-05:00",
+      "widget_attributes_title": "Additional Questions",
       "widget_contact_title": "Customer Information",
       "widget_occurrences_title": "Select which day you would like to reserve",
-      "widget_attributes_title": "Additional Questions",
       "widget_payment_title": "Payment Information",
       "widget_total_due_title": "Total Due Today",
-      "order_button_text": "Finalize order",
-      "post_transactional_message": "Thank you for ordering."
     },
     "relationships": {
-      "attrs": {
+      "attributes": {
         "data": [
           { "type": "attributes", "id": "h6sbeekj" },
           { "type": "attributes", "id": "72yas0iu" }
@@ -333,7 +348,7 @@ This request retrieves a specific product with its attributes, which are needed 
 
 ### HTTP Request
 
-`GET https://app.getoccasion.com/api/v1/products/:id?include=attrs.attribute_options,attrs.field_types`
+`GET https://app.getoccasion.com/api/v1/products/:id?include=attributes.attribute_options,attributes.field_types`
 
 ### URL Parameters
 
@@ -347,24 +362,26 @@ Notable response fields include:
 
 Field | Public | Description
 ----- | ------ | -----------
-image | true | URLs for the full image and thumbnail to display with a product
-title | true | The title of the product, such as "BYOB & Paint A Forest"
-description | true | The description for the product, explaining things in detail
+closing_time_relative | true | Whether or not `time_slots_closed_before` below indicates time relative to the time_slot start datetime, or indicates an absolute time.
+description | true | The description for the product, explaining things in detail.
+email_subject | false | The subject of the email that is sent after an order for this product is completed.
+from_name | false | The from name of the email that is sent after an order for this product is completed.
+image | true | URLs for the full image and thumbnail to display with a product.
+is_session | true | If true, the product is a session with attendees.
+order_button_text | true | The text to display in the submit button on an order widget for this product.
+post_transactional_message | true | The message to display after an order for this product has been completed.
+show_occurrence_availability | true | If `true`, show how many open seats there are for a time slot on an order widget for this product.
+show_time_slot_duration | true | If `true`, display the duration of time slots on an order widget for this product.
 status | true | The status that will determine if the product is active for ordering.<br><br>*Possible values:*<br>**active:** Ready to accept orders<br>**inactive:** Not accepting orders<br>**expired:** Product has time slots, but none of them are open.<br>**sold_out:** Either product or all open time slots are fully booked
-price | true | The base price of an order for this product, before applying price changing questions, tax, coupons, gift cards, etc.
-tax_percentage | true | The sales tax percentage that is applied to an order for this product
-closing_time_relative | true | Whether or not `time_slots_closed_before` below indicates time relative to the time_slot start datetime, or indicates an absolute time
+tax_percentage | true | The sales tax percentage that is applied to an order for this product.
 time_slots_closed_before | true | The point in time after which time slots are closed for sales. Any time slot occurring between this time and the actual occurrence of that time slot (when the class takes place) cannot be sold.
-show_occurrence_availability | true | If `true`, show how many open seats there are for a time slot
-show_time_slot_duration | true | If `true`, display the duration of a time slot
-widget_contact_title | true | The title to display above a section regarding customer contact information (email, first_name, last_name, zip)
-widget_occurrences_title | true | The title to display above a section regarding choosing a time slot
-widget_attributes_title | true | The title to display above a section asking additional questions based off custom attributes
-widget_payment_title | true | The title to display above a section asking for payment information like credit card details
-widget_total_due_title | true | The title to display above a section indicating the total price of the order
-order_button_text | true | The text to display in the submit order button on an order widget
-post_transactional_message | true | The message to display after an order has been completed
-attrs | true | The attributes of the product. Each has a value in an order for this product.
+title | true | The title of the product, such as "BYOB & Paint A Forest".
+widget_attributes_title | true | The title to display above a section asking additional questions based off custom attributes.
+widget_contact_title | true | The title to display above a section regarding customer contact information (email, first_name, last_name, zip).
+widget_occurrences_title | true | The title to display above a section regarding choosing a time slot.
+widget_payment_title | true | The title to display above a section asking for payment information like credit card details.
+widget_total_due_title | true | The title to display above a section indicating the total price of the order.
+attributes | true | The attributes of the product. Each has a value in an order for this product.
 &#x203a; title | true | The title of the attribute - the question to be answered.
 &#x203a; position | true | The position of this question in the order form
 &#x203a; parameters | true | Object containing optional parameters for the attribute
@@ -386,8 +403,8 @@ Possible associations to include are:
 
 Association | Description
 ----------- | -----------
-attrs | The attributes of the product (questions to answer for an order)
-attrs.attribute_options | The options of each attribute of the product
-attrs.field_type | The field type for each attribute of the product
+attributes | The attributes of the product (questions to answer for an order)
+attributes.attribute_options | The options of each attribute of the product
+attributes.field_type | The field type for each attribute of the product
 merchant | The merchant that the product belongs to
 venue | The venue that the product belongs to
