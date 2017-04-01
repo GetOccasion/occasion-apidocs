@@ -540,10 +540,6 @@ curl <span class="s2">"api_endpoint_here"</span>
 <td>currency</td>
 <td>The currency that the merchant accepts</td>
 </tr>
-<tr>
-<td>venues</td>
-<td>The venues that the merchant operates</td>
-</tr>
 </tbody></table>
 
           <h1 id="products">Products</h1>
@@ -560,31 +556,33 @@ curl <span class="s2">"api_endpoint_here"</span>
       </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"products"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"38asnd2"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"closing_time_relative"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sign up to paint a teapot."</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"email_subject"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your order has been completed!"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"from_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Teapot Cafe"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg"</span><span class="p">,</span><span class="w">
           </span><span class="nt">"thumb"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
             </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg"</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Art Class"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sign up to paint a teapot."</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"tax_percentage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.75"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"closing_time_relative"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"time_slots_closed_before"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2000-01-01T00:00:00.000Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"show_occurrence_availability"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"show_time_slot_duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"widget_contact_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Customer Information"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"widget_occurrences_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Select which day you would like to reserve"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"widget_attributes_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Additional Questions"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"widget_payment_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payment Information"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"widget_total_due_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Total Due Today"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"sells_sessions"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
         </span><span class="nt">"order_button_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Finalize order"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"post_transactional_message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Thank you for ordering."</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"sells_sessions"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-      </span><span class="p">}</span><span class="w">
+        </span><span class="nt">"show_occurrence_availability"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"show_time_slot_duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"tax_percentage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.75"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"time_slots_closed_before"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2000-01-01T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Art Class"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"widget_attributes_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Additional Questions"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"widget_contact_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Customer Information"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"widget_occurrences_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Select which day you would like to reserve"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"widget_payment_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payment Information"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"widget_total_due_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Total Due Today"</span><span class="p">,</span><span class="w">
+      </span><span class="err">}</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -608,19 +606,54 @@ curl <span class="s2">"api_endpoint_here"</span>
 </tr>
 </thead><tbody>
 <tr>
-<td>image</td>
+<td>closing_time_relative</td>
 <td>true</td>
-<td>URLs for the full image and thumbnail to display with a product</td>
-</tr>
-<tr>
-<td>title</td>
-<td>true</td>
-<td>The title of the product, such as &ldquo;BYOB &amp; Paint A Forest&rdquo;</td>
+<td>Whether or not <code class="prettyprint">time_slots_closed_before</code> below indicates time relative to the time_slot start datetime, or indicates an absolute time.</td>
 </tr>
 <tr>
 <td>description</td>
 <td>true</td>
-<td>The description for the product, explaining things in detail</td>
+<td>The description for the product, explaining things in detail.</td>
+</tr>
+<tr>
+<td>email_subject</td>
+<td>false</td>
+<td>The subject of the email that is sent after an order for this product is completed.</td>
+</tr>
+<tr>
+<td>from_name</td>
+<td>false</td>
+<td>The from name of the email that is sent after an order for this product is completed.</td>
+</tr>
+<tr>
+<td>image</td>
+<td>true</td>
+<td>URLs for the full image and thumbnail to display with a product.</td>
+</tr>
+<tr>
+<td>sells_sessions</td>
+<td>true</td>
+<td><code class="prettyprint">true</code> if this product sells sessions, which means it only allows for all time slots to be purchased at once</td>
+</tr>
+<tr>
+<td>order_button_text</td>
+<td>true</td>
+<td>The text to display in the submit button on an order widget for this product.</td>
+</tr>
+<tr>
+<td>post_transactional_message</td>
+<td>true</td>
+<td>The message to display after an order for this product has been completed.</td>
+</tr>
+<tr>
+<td>show_occurrence_availability</td>
+<td>true</td>
+<td>If <code class="prettyprint">true</code>, show how many open seats there are for a time slot on an order widget for this product.</td>
+</tr>
+<tr>
+<td>show_time_slot_duration</td>
+<td>true</td>
+<td>If <code class="prettyprint">true</code>, display the duration of time slots on an order widget for this product.</td>
 </tr>
 <tr>
 <td>status</td>
@@ -630,12 +663,7 @@ curl <span class="s2">"api_endpoint_here"</span>
 <tr>
 <td>tax_percentage</td>
 <td>true</td>
-<td>The sales tax percentage that is applied to an order for this product</td>
-</tr>
-<tr>
-<td>closing_time_relative</td>
-<td>true</td>
-<td>Whether or not <code class="prettyprint">time_slots_closed_before</code> below indicates time relative to the time_slot start datetime, or indicates an absolute time</td>
+<td>The sales tax percentage that is applied to an order for this product.</td>
 </tr>
 <tr>
 <td>time_slots_closed_before</td>
@@ -643,54 +671,34 @@ curl <span class="s2">"api_endpoint_here"</span>
 <td>The point in time after which time slots are closed for sales. Any time slot occurring between this time and the actual occurrence of that time slot (when the class takes place) cannot be sold.</td>
 </tr>
 <tr>
-<td>show_occurrence_availability</td>
+<td>title</td>
 <td>true</td>
-<td>If <code class="prettyprint">true</code>, show how many open seats there are for a time slot</td>
-</tr>
-<tr>
-<td>show_time_slot_duration</td>
-<td>true</td>
-<td>If <code class="prettyprint">true</code>, display the duration of a time slot</td>
-</tr>
-<tr>
-<td>widget_contact_title</td>
-<td>true</td>
-<td>The title to display above a section regarding customer contact information (email, first_name, last_name, zip)</td>
-</tr>
-<tr>
-<td>widget_occurrences_title</td>
-<td>true</td>
-<td>The title to display above a section regarding choosing a time slot</td>
+<td>The title of the product, such as &ldquo;BYOB &amp; Paint A Forest&rdquo;.</td>
 </tr>
 <tr>
 <td>widget_attributes_title</td>
 <td>true</td>
-<td>The title to display above a section asking additional questions based off custom attributes</td>
+<td>The title to display above a section asking additional questions based off custom attributes.</td>
+</tr>
+<tr>
+<td>widget_contact_title</td>
+<td>true</td>
+<td>The title to display above a section regarding customer contact information (email, first_name, last_name, zip).</td>
+</tr>
+<tr>
+<td>widget_occurrences_title</td>
+<td>true</td>
+<td>The title to display above a section regarding choosing a time slot.</td>
 </tr>
 <tr>
 <td>widget_payment_title</td>
 <td>true</td>
-<td>The title to display above a section asking for payment information like credit card details</td>
+<td>The title to display above a section asking for payment information like credit card details.</td>
 </tr>
 <tr>
 <td>widget_total_due_title</td>
 <td>true</td>
-<td>The title to display above a section indicating the total price of the order</td>
-</tr>
-<tr>
-<td>order_button_text</td>
-<td>true</td>
-<td>The text to display in the submit order button on an order widget</td>
-</tr>
-<tr>
-<td>post_transactional_message</td>
-<td>true</td>
-<td>The message to display after an order has been completed</td>
-</tr>
-<tr>
-<td>sells_sessions</td>
-<td>true</td>
-<td><code class="prettyprint">true</code> if this product sells sessions, which means it only allows for all time slots to be purchased at once</td>
+<td>The title to display above a section indicating the total price of the order.</td>
 </tr>
 </tbody></table>
 
@@ -705,7 +713,7 @@ curl <span class="s2">"api_endpoint_here"</span>
 </tr>
 </thead><tbody>
 <tr>
-<td>attrs</td>
+<td>attributes</td>
 <td>The attributes of the product (questions to answer for an order)</td>
 </tr>
 <tr>
@@ -729,30 +737,33 @@ curl <span class="s2">"api_endpoint_here"</span>
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"products"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"38asnd2"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"closing_time_relative"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sign up to paint a teapot."</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"email_subject"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your order has been completed!"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"from_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Teapot Cafe"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"thumb"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Art Class"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sign up to paint a teapot."</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"tax_percentage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.75"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"closing_time_relative"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"time_slots_closed_before"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2000-01-01T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"is_session"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"order_button_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Finalize order"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"post_transactional_message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Thank you for ordering."</span><span class="p">,</span><span class="w">
       </span><span class="nt">"show_occurrence_availability"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
       </span><span class="nt">"show_time_slot_duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"tax_percentage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.75"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"time_slots_closed_before"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2000-01-01T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Art Class"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"widget_attributes_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Additional Questions"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"widget_contact_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Customer Information"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"widget_occurrences_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Select which day you would like to reserve"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"widget_attributes_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Additional Questions"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"widget_payment_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payment Information"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"widget_total_due_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Total Due Today"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"order_button_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Finalize order"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"post_transactional_message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Thank you for ordering."</span><span class="w">
-    </span><span class="p">}</span><span class="w">
+    </span><span class="err">}</span><span class="w">
   </span><span class="p">}</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
@@ -789,19 +800,54 @@ curl <span class="s2">"api_endpoint_here"</span>
 </tr>
 </thead><tbody>
 <tr>
-<td>image</td>
+<td>closing_time_relative</td>
 <td>true</td>
-<td>URLs for the full image and thumbnail to display with a product</td>
-</tr>
-<tr>
-<td>title</td>
-<td>true</td>
-<td>The title of the product, such as &ldquo;BYOB &amp; Paint A Forest&rdquo;</td>
+<td>Whether or not <code class="prettyprint">time_slots_closed_before</code> below indicates time relative to the time_slot start datetime, or indicates an absolute time.</td>
 </tr>
 <tr>
 <td>description</td>
 <td>true</td>
-<td>The description for the product, explaining things in detail</td>
+<td>The description for the product, explaining things in detail.</td>
+</tr>
+<tr>
+<td>email_subject</td>
+<td>false</td>
+<td>The subject of the email that is sent after an order for this product is completed.</td>
+</tr>
+<tr>
+<td>from_name</td>
+<td>false</td>
+<td>The from name of the email that is sent after an order for this product is completed.</td>
+</tr>
+<tr>
+<td>image</td>
+<td>true</td>
+<td>URLs for the full image and thumbnail to display with a product.</td>
+</tr>
+<tr>
+<td>is_session</td>
+<td>true</td>
+<td>If true, the product is a session with attendees.</td>
+</tr>
+<tr>
+<td>order_button_text</td>
+<td>true</td>
+<td>The text to display in the submit button on an order widget for this product.</td>
+</tr>
+<tr>
+<td>post_transactional_message</td>
+<td>true</td>
+<td>The message to display after an order for this product has been completed.</td>
+</tr>
+<tr>
+<td>show_occurrence_availability</td>
+<td>true</td>
+<td>If <code class="prettyprint">true</code>, show how many open seats there are for a time slot on an order widget for this product.</td>
+</tr>
+<tr>
+<td>show_time_slot_duration</td>
+<td>true</td>
+<td>If <code class="prettyprint">true</code>, display the duration of time slots on an order widget for this product.</td>
 </tr>
 <tr>
 <td>status</td>
@@ -811,12 +857,7 @@ curl <span class="s2">"api_endpoint_here"</span>
 <tr>
 <td>tax_percentage</td>
 <td>true</td>
-<td>The sales tax percentage that is applied to an order for this product</td>
-</tr>
-<tr>
-<td>closing_time_relative</td>
-<td>true</td>
-<td>Whether or not <code class="prettyprint">time_slots_closed_before</code> below indicates time relative to the time_slot start datetime, or indicates an absolute time</td>
+<td>The sales tax percentage that is applied to an order for this product.</td>
 </tr>
 <tr>
 <td>time_slots_closed_before</td>
@@ -824,49 +865,34 @@ curl <span class="s2">"api_endpoint_here"</span>
 <td>The point in time after which time slots are closed for sales. Any time slot occurring between this time and the actual occurrence of that time slot (when the class takes place) cannot be sold.</td>
 </tr>
 <tr>
-<td>show_occurrence_availability</td>
+<td>title</td>
 <td>true</td>
-<td>If <code class="prettyprint">true</code>, show how many open seats there are for a time slot</td>
-</tr>
-<tr>
-<td>show_time_slot_duration</td>
-<td>true</td>
-<td>If <code class="prettyprint">true</code>, display the duration of a time slot</td>
-</tr>
-<tr>
-<td>widget_contact_title</td>
-<td>true</td>
-<td>The title to display above a section regarding customer contact information (email, first_name, last_name, zip)</td>
-</tr>
-<tr>
-<td>widget_occurrences_title</td>
-<td>true</td>
-<td>The title to display above a section regarding choosing a time slot</td>
+<td>The title of the product, such as &ldquo;BYOB &amp; Paint A Forest&rdquo;.</td>
 </tr>
 <tr>
 <td>widget_attributes_title</td>
 <td>true</td>
-<td>The title to display above a section asking additional questions based off custom attributes</td>
+<td>The title to display above a section asking additional questions based off custom attributes.</td>
+</tr>
+<tr>
+<td>widget_contact_title</td>
+<td>true</td>
+<td>The title to display above a section regarding customer contact information (email, first_name, last_name, zip).</td>
+</tr>
+<tr>
+<td>widget_occurrences_title</td>
+<td>true</td>
+<td>The title to display above a section regarding choosing a time slot.</td>
 </tr>
 <tr>
 <td>widget_payment_title</td>
 <td>true</td>
-<td>The title to display above a section asking for payment information like credit card details</td>
+<td>The title to display above a section asking for payment information like credit card details.</td>
 </tr>
 <tr>
 <td>widget_total_due_title</td>
 <td>true</td>
-<td>The title to display above a section indicating the total price of the order</td>
-</tr>
-<tr>
-<td>order_button_text</td>
-<td>true</td>
-<td>The text to display in the submit order button on an order widget</td>
-</tr>
-<tr>
-<td>post_transactional_message</td>
-<td>true</td>
-<td>The message to display after an order has been completed</td>
+<td>The title to display above a section indicating the total price of the order.</td>
 </tr>
 </tbody></table>
 
@@ -881,7 +907,7 @@ curl <span class="s2">"api_endpoint_here"</span>
 </tr>
 </thead><tbody>
 <tr>
-<td>attrs</td>
+<td>attributes</td>
 <td>The attributes of the product (questions to answer for an order)</td>
 </tr>
 <tr>
@@ -905,32 +931,35 @@ curl <span class="s2">"api_endpoint_here"</span>
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"products"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"38asnd2"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"closing_time_relative"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sign up to paint a teapot."</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"email_subject"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your order has been completed!"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"from_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Teapot Cafe"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg"</span><span class="p">,</span><span class="w">
         </span><span class="nt">"thumb"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
           </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg"</span><span class="w">
         </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Art Class"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sign up to paint a teapot."</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"tax_percentage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.75"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"closing_time_relative"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"time_slots_closed_before"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2000-01-01T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"is_session"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"order_button_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Finalize order"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"post_transactional_message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Thank you for ordering."</span><span class="p">,</span><span class="w">
       </span><span class="nt">"show_occurrence_availability"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
       </span><span class="nt">"show_time_slot_duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"tax_percentage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.75"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"time_slots_closed_before"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2000-01-01T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Art Class"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"widget_attributes_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Additional Questions"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"widget_contact_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Customer Information"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"widget_occurrences_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Select which day you would like to reserve"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"widget_attributes_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Additional Questions"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"widget_payment_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payment Information"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"widget_total_due_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Total Due Today"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"order_button_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Finalize order"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"post_transactional_message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Thank you for ordering."</span><span class="w">
-    </span><span class="p">},</span><span class="w">
+    </span><span class="err">}</span><span class="p">,</span><span class="w">
     </span><span class="nt">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"attrs"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attributes"</span><span class="p">,</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h6sbeekj"</span><span class="w"> </span><span class="p">},</span><span class="w">
           </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attributes"</span><span class="p">,</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"72yas0iu"</span><span class="w"> </span><span class="p">}</span><span class="w">
@@ -1045,7 +1074,7 @@ curl <span class="s2">"api_endpoint_here"</span>
 
 <h3 id="http-request">HTTP Request</h3>
 
-<p><code class="prettyprint">GET https://app.getoccasion.com/api/v1/products/:id?include=attrs.attribute_options,attrs.field_types</code></p>
+<p><code class="prettyprint">GET https://app.getoccasion.com/api/v1/products/:id?include=attributes.attribute_options,attributes.field_types</code></p>
 
 <h3 id="url-parameters">URL Parameters</h3>
 
@@ -1073,19 +1102,54 @@ curl <span class="s2">"api_endpoint_here"</span>
 </tr>
 </thead><tbody>
 <tr>
-<td>image</td>
+<td>closing_time_relative</td>
 <td>true</td>
-<td>URLs for the full image and thumbnail to display with a product</td>
-</tr>
-<tr>
-<td>title</td>
-<td>true</td>
-<td>The title of the product, such as &ldquo;BYOB &amp; Paint A Forest&rdquo;</td>
+<td>Whether or not <code class="prettyprint">time_slots_closed_before</code> below indicates time relative to the time_slot start datetime, or indicates an absolute time.</td>
 </tr>
 <tr>
 <td>description</td>
 <td>true</td>
-<td>The description for the product, explaining things in detail</td>
+<td>The description for the product, explaining things in detail.</td>
+</tr>
+<tr>
+<td>email_subject</td>
+<td>false</td>
+<td>The subject of the email that is sent after an order for this product is completed.</td>
+</tr>
+<tr>
+<td>from_name</td>
+<td>false</td>
+<td>The from name of the email that is sent after an order for this product is completed.</td>
+</tr>
+<tr>
+<td>image</td>
+<td>true</td>
+<td>URLs for the full image and thumbnail to display with a product.</td>
+</tr>
+<tr>
+<td>is_session</td>
+<td>true</td>
+<td>If true, the product is a session with attendees.</td>
+</tr>
+<tr>
+<td>order_button_text</td>
+<td>true</td>
+<td>The text to display in the submit button on an order widget for this product.</td>
+</tr>
+<tr>
+<td>post_transactional_message</td>
+<td>true</td>
+<td>The message to display after an order for this product has been completed.</td>
+</tr>
+<tr>
+<td>show_occurrence_availability</td>
+<td>true</td>
+<td>If <code class="prettyprint">true</code>, show how many open seats there are for a time slot on an order widget for this product.</td>
+</tr>
+<tr>
+<td>show_time_slot_duration</td>
+<td>true</td>
+<td>If <code class="prettyprint">true</code>, display the duration of time slots on an order widget for this product.</td>
 </tr>
 <tr>
 <td>status</td>
@@ -1093,19 +1157,9 @@ curl <span class="s2">"api_endpoint_here"</span>
 <td>The status that will determine if the product is active for ordering.<br><br><em>Possible values:</em><br><strong>active:</strong> Ready to accept orders<br><strong>inactive:</strong> Not accepting orders<br><strong>expired:</strong> Product has time slots, but none of them are open.<br><strong>sold_out:</strong> Either product or all open time slots are fully booked</td>
 </tr>
 <tr>
-<td>price</td>
-<td>true</td>
-<td>The base price of an order for this product, before applying price changing questions, tax, coupons, gift cards, etc.</td>
-</tr>
-<tr>
 <td>tax_percentage</td>
 <td>true</td>
-<td>The sales tax percentage that is applied to an order for this product</td>
-</tr>
-<tr>
-<td>closing_time_relative</td>
-<td>true</td>
-<td>Whether or not <code class="prettyprint">time_slots_closed_before</code> below indicates time relative to the time_slot start datetime, or indicates an absolute time</td>
+<td>The sales tax percentage that is applied to an order for this product.</td>
 </tr>
 <tr>
 <td>time_slots_closed_before</td>
@@ -1113,52 +1167,37 @@ curl <span class="s2">"api_endpoint_here"</span>
 <td>The point in time after which time slots are closed for sales. Any time slot occurring between this time and the actual occurrence of that time slot (when the class takes place) cannot be sold.</td>
 </tr>
 <tr>
-<td>show_occurrence_availability</td>
+<td>title</td>
 <td>true</td>
-<td>If <code class="prettyprint">true</code>, show how many open seats there are for a time slot</td>
-</tr>
-<tr>
-<td>show_time_slot_duration</td>
-<td>true</td>
-<td>If <code class="prettyprint">true</code>, display the duration of a time slot</td>
-</tr>
-<tr>
-<td>widget_contact_title</td>
-<td>true</td>
-<td>The title to display above a section regarding customer contact information (email, first_name, last_name, zip)</td>
-</tr>
-<tr>
-<td>widget_occurrences_title</td>
-<td>true</td>
-<td>The title to display above a section regarding choosing a time slot</td>
+<td>The title of the product, such as &ldquo;BYOB &amp; Paint A Forest&rdquo;.</td>
 </tr>
 <tr>
 <td>widget_attributes_title</td>
 <td>true</td>
-<td>The title to display above a section asking additional questions based off custom attributes</td>
+<td>The title to display above a section asking additional questions based off custom attributes.</td>
+</tr>
+<tr>
+<td>widget_contact_title</td>
+<td>true</td>
+<td>The title to display above a section regarding customer contact information (email, first_name, last_name, zip).</td>
+</tr>
+<tr>
+<td>widget_occurrences_title</td>
+<td>true</td>
+<td>The title to display above a section regarding choosing a time slot.</td>
 </tr>
 <tr>
 <td>widget_payment_title</td>
 <td>true</td>
-<td>The title to display above a section asking for payment information like credit card details</td>
+<td>The title to display above a section asking for payment information like credit card details.</td>
 </tr>
 <tr>
 <td>widget_total_due_title</td>
 <td>true</td>
-<td>The title to display above a section indicating the total price of the order</td>
+<td>The title to display above a section indicating the total price of the order.</td>
 </tr>
 <tr>
-<td>order_button_text</td>
-<td>true</td>
-<td>The text to display in the submit order button on an order widget</td>
-</tr>
-<tr>
-<td>post_transactional_message</td>
-<td>true</td>
-<td>The message to display after an order has been completed</td>
-</tr>
-<tr>
-<td>attrs</td>
+<td>attributes</td>
 <td>true</td>
 <td>The attributes of the product. Each has a value in an order for this product.</td>
 </tr>
@@ -1245,15 +1284,15 @@ curl <span class="s2">"api_endpoint_here"</span>
 </tr>
 </thead><tbody>
 <tr>
-<td>attrs</td>
+<td>attributes</td>
 <td>The attributes of the product (questions to answer for an order)</td>
 </tr>
 <tr>
-<td>attrs.attribute_options</td>
+<td>attributes.attribute_options</td>
 <td>The options of each attribute of the product</td>
 </tr>
 <tr>
-<td>attrs.field_type</td>
+<td>attributes.field_type</td>
 <td>The field type for each attribute of the product</td>
 </tr>
 <tr>
@@ -1373,7 +1412,7 @@ curl <span class="s2">"api_endpoint_here"</span>
 <tr>
 <td>session_identifier</td>
 <td>false</td>
-<td>An identifier used to associate this order with a session of an order form (conversion tracking, etc.)</td>
+<td>A unique identifier used to associate this order with a session of an order form (conversion tracking, etc.)</td>
 </tr>
 <tr>
 <td>customer_name</td>
@@ -1437,7 +1476,7 @@ curl <span class="s2">"api_endpoint_here"</span>
 </tr>
 <tr>
 <td>occurrences</td>
-<td>Occurrences of the timeslot that the order was purchased for</td>
+<td>Occurrences of the timeslots that were purchased by the order</td>
 </tr>
 <tr>
 <td>order_items</td>
@@ -1570,7 +1609,7 @@ curl <span class="s2">"api_endpoint_here"</span>
 <tr>
 <td>session_identifier</td>
 <td>false</td>
-<td>An identifier used to associate this order with a session of an order form (conversion tracking, etc.)</td>
+<td>A unique identifier used to associate this order with a session of an order form (conversion tracking, etc.)</td>
 </tr>
 <tr>
 <td>customer_name</td>
@@ -1634,7 +1673,7 @@ curl <span class="s2">"api_endpoint_here"</span>
 </tr>
 <tr>
 <td>occurrences</td>
-<td>Occurrences of the timeslot that the order was purchased for</td>
+<td>Occurrences of the timeslots that were purchased by the order</td>
 </tr>
 <tr>
 <td>order_items</td>
@@ -1660,24 +1699,31 @@ curl <span class="s2">"api_endpoint_here"</span>
   </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"orders"</span><span class="p">,</span><span class="w">
     </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"session_identifier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"any-key-you-want"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"time_slot_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016090823451"</span><span class="w">
-    </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"session_identifier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"any-unique-key"</span><span class="p">,</span><span class="w">
+    </span><span class="err">}</span><span class="p">,</span><span class="w">
     </span><span class="nt">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
       </span><span class="nt">"attribute_values"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="p">{</span><span class="w">
             </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attribute_values"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-              </span><span class="nt">"attr_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12n83qa"</span><span class="p">,</span><span class="w">
               </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6shen2as"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"attribute"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attributes"</span><span class="p">,</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12n83qa"</span><span class="w"> </span><span class="p">}</span><span class="w">
+              </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="p">{</span><span class="w">
             </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attribute_values"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-              </span><span class="nt">"attr_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"82has32"</span><span class="p">,</span><span class="w">
               </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Text value"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"attribute"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attributes"</span><span class="p">,</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"82has32"</span><span class="w"> </span><span class="p">}</span><span class="w">
+              </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">]</span><span class="w">
@@ -1699,20 +1745,45 @@ curl <span class="s2">"api_endpoint_here"</span>
       </span><span class="nt">"product"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"products"</span><span class="p">,</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"bteyn26"</span><span class="w"> </span><span class="p">}</span><span class="w">
       </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"time_slots"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"time_slots"</span><span class="p">,</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7hwq5de"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"time_slots"</span><span class="p">,</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"97eh2sa"</span><span class="w"> </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
       </span><span class="nt">"transactions"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
         </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
           </span><span class="p">{</span><span class="w">
             </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transactions"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
               </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5.0"</span><span class="p">,</span><span class="w">
-              </span><span class="nt">"payment_method_token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"H7gJ8GtEfCdLi88uRD6FhfrtOPTizjt"</span><span class="w">
+            </span><span class="err">}</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"payment_method"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"credit_cards"</span><span class="p">,</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"H7gJ8GtEfCdLi88uRD6FhfrtOPTizjt"</span><span class="w"> </span><span class="p">}</span><span class="w">
+              </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
           </span><span class="p">},</span><span class="w">
           </span><span class="p">{</span><span class="w">
             </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transactions"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
               </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5.0"</span><span class="p">,</span><span class="w">
-              </span><span class="nt">"gift_card_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"CODE1X"</span><span class="w">
+            </span><span class="err">}</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"payment_method"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gift_cards"</span><span class="p">,</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"D3HJ8GtEfCdLixGh3D6FhfrtOPTh6w5e"</span><span class="w"> </span><span class="p">}</span><span class="w">
+              </span><span class="p">}</span><span class="w">
+            </span><span class="p">}</span><span class="w">
+          </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"transactions"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"5.0"</span><span class="p">,</span><span class="w">
+            </span><span class="err">}</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"payment_method"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"paypals"</span><span class="p">,</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3D6FhfrtOPTh6w5eH7gJ8GtEfCdL"</span><span class="w"> </span><span class="p">}</span><span class="w">
+              </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">]</span><span class="w">
@@ -1740,7 +1811,7 @@ curl <span class="s2">"api_endpoint_here"</span>
       </span><span class="nt">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
       </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"This is the title of the product ordered."</span><span class="p">,</span><span class="w">
       </span><span class="nt">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.0"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"session_identifier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"any-key-you-want"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"session_identifier"</span><span class="p">:</span><span class="w"> </span><span class="s2">"any-unique-key"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"customer_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Jane Smith"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"customer_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"jane@example.com"</span><span class="p">,</span><span class="w">
       </span><span class="nt">"customer_zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"00000"</span><span class="p">,</span><span class="w">
@@ -1771,18 +1842,13 @@ curl <span class="s2">"api_endpoint_here"</span>
 <td>false</td>
 </tr>
 <tr>
-<td>time_slot_id</td>
-<td>The ID of the time_slot being booked</td>
-<td>false</td>
-</tr>
-<tr>
 <td>attribute_values</td>
 <td>Values for each attribute of the product being ordered</td>
 <td>false</td>
 </tr>
 <tr>
-<td>&#x203a;attr_id</td>
-<td>The id of the attribute this attribute_value is for</td>
+<td>&#x203a;attribute</td>
+<td>The attribute this attribute_value is for</td>
 <td>true</td>
 </tr>
 <tr>
@@ -1826,8 +1892,13 @@ curl <span class="s2">"api_endpoint_here"</span>
 <td>true</td>
 </tr>
 <tr>
+<td>time_slots</td>
+<td>The time slots being ordered</td>
+<td>true</td>
+</tr>
+<tr>
 <td>transactions</td>
-<td>The transactions (credit card, gift card) that pay for the order. The total amount paid for across transactions must equal the order price.</td>
+<td>The transactions (credit card, paypal, gift card) that pay for the order. The total amount paid for across transactions must equal the order price.</td>
 <td>If order has price</td>
 </tr>
 <tr>
@@ -1836,14 +1907,9 @@ curl <span class="s2">"api_endpoint_here"</span>
 <td>true</td>
 </tr>
 <tr>
-<td>&#x203a;gift_card_code</td>
-<td>The code of the gift card being used to pay for this transaction.</td>
-<td>false</td>
-</tr>
-<tr>
-<td>&#x203a;payment_method_token</td>
-<td>The payment method token (from Spreedly), representing a payment method to pay for this transaction</td>
-<td>false</td>
+<td>&#x203a;payment_method</td>
+<td>The payment method used to purchase the transaction.<br><br><em>Possible types:</em><br><strong>credit_cards</strong><br><strong>gift_cards</strong><br><strong>paypals</strong></td>
+<td>true</td>
 </tr>
 </tbody></table>
 
@@ -1911,7 +1977,7 @@ curl <span class="s2">"api_endpoint_here"</span>
 <tr>
 <td>session_identifier</td>
 <td>false</td>
-<td>An identifier used to associate this order with a session of an order form (conversion tracking, etc.)</td>
+<td>A unique identifier used to associate this order with a session of an order form (conversion tracking, etc.)</td>
 </tr>
 <tr>
 <td>customer_name</td>
@@ -2006,8 +2072,12 @@ curl <span class="s2">"api_endpoint_here"</span>
           </span><span class="p">{</span><span class="w">
             </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attribute_values"</span><span class="p">,</span><span class="w">
             </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-              </span><span class="nt">"attr_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12n83qa"</span><span class="p">,</span><span class="w">
               </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="s2">"6shen2as"</span><span class="w">
+            </span><span class="p">},</span><span class="w">
+            </span><span class="nt">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+              </span><span class="nt">"attribute"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+                </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attributes"</span><span class="p">,</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"12n83qa"</span><span class="w"> </span><span class="p">}</span><span class="w">
+              </span><span class="p">}</span><span class="w">
             </span><span class="p">}</span><span class="w">
           </span><span class="p">}</span><span class="w">
         </span><span class="p">]</span><span class="w">
@@ -2056,6 +2126,16 @@ curl <span class="s2">"api_endpoint_here"</span>
 <td>attribute_values</td>
 <td>Values for the attributes that affect the price of the order</td>
 <td>false</td>
+</tr>
+<tr>
+<td>&#x203a;attribute</td>
+<td>The attribute this attribute_value is for</td>
+<td>true</td>
+</tr>
+<tr>
+<td>&#x203a;value</td>
+<td>The value or &ldquo;answer&rdquo; for the attribute. If the attribute has attribute_options, this value will be the ID of the selected attribute option. Otherwise, it is just a value.</td>
+<td>true</td>
 </tr>
 <tr>
 <td>coupon</td>
