@@ -29,7 +29,7 @@ HTTPS/1.1 200 OK
             "url": "https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg"
           }
         },
-        "is_session": true,
+        "sells_sessions": true,
         "order_button_text": "Finalize order",
         "post_transactional_message": "Thank you for ordering.",
         "show_occurrence_availability": true,
@@ -67,7 +67,7 @@ description | true | The description for the product, explaining things in detai
 email_subject | false | The subject of the email that is sent after an order for this product is completed.
 from_name | false | The from name of the email that is sent after an order for this product is completed.
 image | true | URLs for the full image and thumbnail to display with a product.
-is_session | true | If true, the product is a session with attendees.
+sells_sessions | true | `true` if this product sells sessions, which means it only allows for all time slots to be purchased at once
 order_button_text | true | The text to display in the submit button on an order widget for this product.
 post_transactional_message | true | The message to display after an order for this product has been completed.
 show_occurrence_availability | true | If `true`, show how many open seats there are for a time slot on an order widget for this product.
