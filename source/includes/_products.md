@@ -3,7 +3,7 @@
 ## Get All Products
 
 ```shell
-curl "http://app.getoccasion.com/api/v1/products"
+curl "https://app.getoccasion.com/api/v1/products"
   -u "59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"
 ```
 
@@ -95,7 +95,7 @@ venue | The venue that the product belongs to
 ## Get a Specific Product
 
 ```shell
-curl "http://app.getoccasion.com/api/v1/products/38asnd2"
+curl "https://app.getoccasion.com/api/v1/products/38asnd2"
   -u "59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"
 ```
 
@@ -191,7 +191,7 @@ venue | The venue that the product belongs to
 ## Get a Specific Product So You Can Order It
 
 ```shell
-curl "http://app.getoccasion.com/api/v1/products?include=attrs.attribute_options,attrs.field_type"
+curl "https://app.getoccasion.com/api/v1/products?include=attrs.attribute_options,attrs.field_type"
   -u "59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"
 ```
 

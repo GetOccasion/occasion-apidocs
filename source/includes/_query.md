@@ -3,7 +3,7 @@
 ## Filtering
 
 ```shell
-curl "http://app.getoccasion.com/api/v1/products?filter[price]=5"
+curl "https://app.getoccasion.com/api/v1/products?filter[price]=5"
   -u "59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"
 ```
 
@@ -20,14 +20,14 @@ filter[field_name]<br>*optional* | none | The field to filter records by
 ## Sorting
 
 ```shell
-curl "http://app.getoccasion.com/api/v1/products?sort=updated_at"
+curl "https://app.getoccasion.com/api/v1/products?sort=updated_at"
   -u "59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"
 ```
 
 > Products will be sorted in ascending updated_at order.
 
 ```shell
-curl "http://app.getoccasion.com/api/v1/products?sort=-updated_at,title"
+curl "https://app.getoccasion.com/api/v1/products?sort=-updated_at,title"
   -u "59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"
 ```
 
@@ -44,7 +44,7 @@ sort<br>*optional* | -created_at | The fields to sort by
 ## Pagination
 
 ```shell
-curl "http://app.getoccasion.com/api/v1/products?page[size]=5&page[number]=1"
+curl "https://app.getoccasion.com/api/v1/products?page[size]=5&page[number]=1"
   -u "59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"
 ```
 
@@ -62,7 +62,7 @@ page[number]<br>*optional* | 1 | Which page of records to respond with
 ## Fields
 
 ```shell
-curl "http://app.getoccasion.com/api/v1/products?fields[products]=title,description"
+curl "https://app.getoccasion.com/api/v1/products?fields[products]=title,description"
   -u "59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"
 ```
 
@@ -79,7 +79,7 @@ fields<br>*optional* | all fields (public or private) | The fields to render in 
 ## Include
 
 ```shell
-curl "http://app.getoccasion.com/api/v1/products?include=merchant,venue"
+curl "https://app.getoccasion.com/api/v1/products?include=merchant,venue"
   -u "59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"
 ```
 
@@ -143,4 +143,4 @@ include<br>*optional* | none | The associations to include in the response
 
 ## More Details on Modifying Query
 
-To best understand the full power of the JSON API query interface, [read the docs for it](http://jsonapi.org/format/#fetching).
+To best understand the full power of the JSON API query interface, [read the docs for it](https://jsonapi.org/format/#fetching).

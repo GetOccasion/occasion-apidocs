@@ -1,7 +1,7 @@
 # Merchants
 
 ```shell
-curl "http://app.getoccasion.com/api/v1/merchants"
+curl "https://app.getoccasion.com/api/v1/merchants"
   -u "59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"
 ```
 
@@ -48,7 +48,7 @@ tax_percentage | true | The sales tax percentage that the merchant applies to ea
 facebook_page | true | The Facebook page URL for the merchant's business
 
 ```shell
-curl "http://app.getoccasion.com/api/v1/merchants?include=business_type,currency"
+curl "https://app.getoccasion.com/api/v1/merchants?include=business_type,currency"
   -u "59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"
 ```
 

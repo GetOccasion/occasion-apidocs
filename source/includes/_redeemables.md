@@ -3,7 +3,7 @@
 ## Check A Possible Redeemable Code For A Product
 
 ```shell
-curl "http://app.getoccasion.com/api/v1/products/:id/redeemables?filter[code]=COUPON-CODE"
+curl "https://app.getoccasion.com/api/v1/products/:id/redeemables?filter[code]=COUPON-CODE"
   -u "59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"
 ```
 
@@ -27,7 +27,7 @@ HTTPS/1.1 200 OK
 ```
 
 ```shell
-curl "http://app.getoccasion.com/api/v1/products/:id/redeemables?filter[code]=GIFT-CARD-CODE"
+curl "https://app.getoccasion.com/api/v1/products/:id/redeemables?filter[code]=GIFT-CARD-CODE"
   -u "59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"
 ```
 
@@ -55,7 +55,7 @@ orders that are purchased using coupons and gift cards.
 
 ### HTTP Request
 
-`GET http://app.getoccasion.com/api/v1/products/:id/redeemables?filter[code]=COUPON-OR-GIFT-CARD-CODE`
+`GET https://app.getoccasion.com/api/v1/products/:id/redeemables?filter[code]=COUPON-OR-GIFT-CARD-CODE`
 
 ### URL Parameters
 

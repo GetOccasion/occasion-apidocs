@@ -3,7 +3,7 @@
 ## Get All Orders
 
 ```shell
-curl "http://app.getoccasion.com/api/v1/orders"
+curl "https://app.getoccasion.com/api/v1/orders"
   -u "59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"
 ```
 
@@ -90,7 +90,7 @@ transactions | Transactions to pay for the order
 ## Get a Specific Order
 
 ```shell
-curl "http://app.getoccasion.com/api/v1/orders/38asnd2"
+curl "https://app.getoccasion.com/api/v1/orders/38asnd2"
   -u "59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"
 ```
 
