@@ -3,7 +3,7 @@
 ## Get All Venues
 
 ```shell
-curl "http://app.getoccasion.com/api/v1/venues"
+curl "https://app.getoccasion.com/api/v1/venues"
   -u "59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"
 ```
 
@@ -71,7 +71,7 @@ products | All the products offered at the venue
 ## Get a Specific Venue
 
 ```shell
-curl "http://app.getoccasion.com/api/v1/venues/n2hs7dh"
+curl "https://app.getoccasion.com/api/v1/venues/n2hs7dh"
   -u "59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"
 ```
 
@@ -143,7 +143,7 @@ products | All the products offered at the venue
 ## Get a Specific Venue with Country and State
 
 ```shell
-curl "http://app.getoccasion.com/api/v1/venues/n2hs7dh?include=country,state"
+curl "https://app.getoccasion.com/api/v1/venues/n2hs7dh?include=country,state"
   -u "59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"
 ```
 

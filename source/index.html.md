@@ -12,8 +12,10 @@ includes:
   - query
   - scoping
   - merchants
-  - products
   - orders
+  - products
+  - redeemables
+  - time_slots
   - venues
   - errors
 
@@ -26,7 +28,7 @@ Welcome to the Occasion API! You can use our API to access Occasion API endpoint
 
 We have planned language bindings in Shell, Ruby, and Javascript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
 
-**Right now, query can only be made via Shell (cURL, etc.), but we plan on releasing a Javascript library followed by Ruby.**
+Query can only be made via Shell (cURL, etc.). For a Javascript library that can be imported into your codebase, please contract the administrator.
 
 # Format
 
