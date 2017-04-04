@@ -123,7 +123,7 @@
 
 <p>We have planned language bindings in Shell, Ruby, and Javascript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
 
-<p><strong>Right now, query can only be made via Shell (cURL, etc.), but we plan on releasing a Javascript library followed by Ruby.</strong></p>
+<p>Query can only be made via Shell (cURL, etc.). For a Javascript library that can be imported into your codebase, please contract the administrator.</p>
 
 <h1 id="format">Format</h1>
 
@@ -154,7 +154,7 @@ curl <span class="s2">"api_endpoint_here"</span>
           <h1 id="query-interface">Query Interface</h1>
 
 <h2 id="filtering">Filtering</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"http://app.getoccasion.com/api/v1/products?filter[price]=5"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/products?filter[price]=5"</span>
   -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
 </code></pre>
 
@@ -181,14 +181,14 @@ curl <span class="s2">"api_endpoint_here"</span>
 </tbody></table>
 
 <h2 id="sorting">Sorting</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"http://app.getoccasion.com/api/v1/products?sort=updated_at"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/products?sort=updated_at"</span>
   -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
 </code></pre>
 
 <blockquote>
 <p>Products will be sorted in ascending updated_at order.</p>
 </blockquote>
-<pre class="highlight shell"><code>curl <span class="s2">"http://app.getoccasion.com/api/v1/products?sort=-updated_at,title"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/products?sort=-updated_at,title"</span>
   -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
 </code></pre>
 
@@ -215,7 +215,7 @@ curl <span class="s2">"api_endpoint_here"</span>
 </tbody></table>
 
 <h2 id="pagination">Pagination</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"http://app.getoccasion.com/api/v1/products?page[size]=5&amp;page[number]=1"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/products?page[size]=5&amp;page[number]=1"</span>
   -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
 </code></pre>
 
@@ -247,7 +247,7 @@ curl <span class="s2">"api_endpoint_here"</span>
 </tbody></table>
 
 <h2 id="fields">Fields</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"http://app.getoccasion.com/api/v1/products?fields[products]=title,description"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/products?fields[products]=title,description"</span>
   -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
 </code></pre>
 
@@ -274,7 +274,7 @@ curl <span class="s2">"api_endpoint_here"</span>
 </tbody></table>
 
 <h2 id="include">Include</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"http://app.getoccasion.com/api/v1/products?include=merchant,venue"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/products?include=merchant,venue"</span>
   -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
 </code></pre>
 
@@ -347,42 +347,42 @@ curl <span class="s2">"api_endpoint_here"</span>
 
 <h2 id="more-details-on-modifying-query">More Details on Modifying Query</h2>
 
-<p>To best understand the full power of the JSON API query interface, <a href="http://jsonapi.org/format/#fetching">read the docs for it</a>.</p>
+<p>To best understand the full power of the JSON API query interface, <a href="https://jsonapi.org/format/#fetching">read the docs for it</a>.</p>
 
           <h1 id="merchant-scoping">Merchant Scoping</h1>
 
 <p>If you are using the Occasion API to access your own merchant&rsquo;s resources, you can skip this section. If you are an Occasion partner using the Occasion API to access other merchants&rsquo; resources, this section is relevant to you.</p>
 
 <p>Occasion partners are issued credentials that require them to specify a merchant scope when making requests to resource indexes. What we mean by a merchant scope is: You can access all merchants, but if you want to access all products, it can only be for one merchant at a time. A few examples should clarify what we mean:</p>
-<pre class="highlight shell"><code>curl <span class="s2">"http://app.getoccasion.com/api/v1/merchants"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/merchants"</span>
   -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
 </code></pre>
 
 <blockquote>
 <p>All merchants will be returned, because you have access to all of them</p>
 </blockquote>
-<pre class="highlight shell"><code>curl <span class="s2">"http://app.getoccasion.com/api/v1/products?merchant_id=jsh8e0a"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/products?merchant_id=jsh8e0a"</span>
   -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
 </code></pre>
 
 <blockquote>
 <p>All products belonging to merchant with id=&lsquo;jsh8e0a&rsquo; will be returned</p>
 </blockquote>
-<pre class="highlight shell"><code>curl <span class="s2">"http://app.getoccasion.com/api/v1/products"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/products"</span>
   -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
 </code></pre>
 
 <blockquote>
 <p>400 Bad Request will be returned because you must provide a merchant_id to scope with, you cannot access all products of all merchants at once</p>
 </blockquote>
-<pre class="highlight shell"><code>curl <span class="s2">"http://app.getoccasion.com/api/v1/products/37shd72"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/products/37shd72"</span>
   -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
 </code></pre>
 
 <blockquote>
 <p>Product with id=&#39;37shd72&rsquo; will be returned. No merchant scope is required because this is a request to a specific product for a specific merchant.</p>
 </blockquote>
-<pre class="highlight shell"><code>curl <span class="s2">"http://app.getoccasion.com/api/v1/products?merchant_id=jsh8e0a"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/products?merchant_id=jsh8e0a"</span>
   -X POST
   -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
 </code></pre>
@@ -390,7 +390,7 @@ curl <span class="s2">"api_endpoint_here"</span>
 <blockquote>
 <p>Created product belonging to merchant with id=&#39;jsh8e0a&rsquo; will be returned.</p>
 </blockquote>
-<pre class="highlight shell"><code>curl <span class="s2">"http://app.getoccasion.com/api/v1/products"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/products"</span>
   -X POST
   -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
 </code></pre>
@@ -400,7 +400,7 @@ curl <span class="s2">"api_endpoint_here"</span>
 </blockquote>
 
           <h1 id="merchants">Merchants</h1>
-<pre class="highlight shell"><code>curl <span class="s2">"http://app.getoccasion.com/api/v1/merchants"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/merchants"</span>
   -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
 </code></pre>
 <pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
@@ -467,7 +467,7 @@ curl <span class="s2">"api_endpoint_here"</span>
 <td>The Facebook page URL for the merchant&rsquo;s business</td>
 </tr>
 </tbody></table>
-<pre class="highlight shell"><code>curl <span class="s2">"http://app.getoccasion.com/api/v1/merchants?include=business_type,currency"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/merchants?include=business_type,currency"</span>
   -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
 </code></pre>
 <pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
@@ -542,773 +542,10 @@ curl <span class="s2">"api_endpoint_here"</span>
 </tr>
 </tbody></table>
 
-          <h1 id="products">Products</h1>
-
-<h2 id="get-all-products">Get All Products</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"http://app.getoccasion.com/api/v1/products"</span>
-  -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
-</code></pre>
-<pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-</code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"products"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"38asnd2"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"closing_time_relative"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sign up to paint a teapot."</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"email_subject"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your order has been completed!"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"from_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Teapot Cafe"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg"</span><span class="p">,</span><span class="w">
-          </span><span class="nt">"thumb"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg"</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"sells_sessions"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"order_button_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Finalize order"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"post_transactional_message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Thank you for ordering."</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"show_occurrence_availability"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"show_time_slot_duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"tax_percentage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.75"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"time_slots_closed_before"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2000-01-01T00:00:00.000Z"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Art Class"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"widget_attributes_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Additional Questions"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"widget_contact_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Customer Information"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"widget_occurrences_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Select which day you would like to reserve"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"widget_payment_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payment Information"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"widget_total_due_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Total Due Today"</span><span class="p">,</span><span class="w">
-      </span><span class="err">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<p>This endpoint retrieves all products.</p>
-
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">GET https://app.getoccasion.com/api/v1/products</code></p>
-
-<h3 id="response-body">Response Body</h3>
-
-<p>Notable response fields include:</p>
-
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Public</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>closing_time_relative</td>
-<td>true</td>
-<td>Whether or not <code class="prettyprint">time_slots_closed_before</code> below indicates time relative to the time_slot start datetime, or indicates an absolute time.</td>
-</tr>
-<tr>
-<td>description</td>
-<td>true</td>
-<td>The description for the product, explaining things in detail.</td>
-</tr>
-<tr>
-<td>email_subject</td>
-<td>false</td>
-<td>The subject of the email that is sent after an order for this product is completed.</td>
-</tr>
-<tr>
-<td>from_name</td>
-<td>false</td>
-<td>The from name of the email that is sent after an order for this product is completed.</td>
-</tr>
-<tr>
-<td>image</td>
-<td>true</td>
-<td>URLs for the full image and thumbnail to display with a product.</td>
-</tr>
-<tr>
-<td>sells_sessions</td>
-<td>true</td>
-<td><code class="prettyprint">true</code> if this product sells sessions, which means it only allows for all time slots to be purchased at once</td>
-</tr>
-<tr>
-<td>order_button_text</td>
-<td>true</td>
-<td>The text to display in the submit button on an order widget for this product.</td>
-</tr>
-<tr>
-<td>post_transactional_message</td>
-<td>true</td>
-<td>The message to display after an order for this product has been completed.</td>
-</tr>
-<tr>
-<td>show_occurrence_availability</td>
-<td>true</td>
-<td>If <code class="prettyprint">true</code>, show how many open seats there are for a time slot on an order widget for this product.</td>
-</tr>
-<tr>
-<td>show_time_slot_duration</td>
-<td>true</td>
-<td>If <code class="prettyprint">true</code>, display the duration of time slots on an order widget for this product.</td>
-</tr>
-<tr>
-<td>status</td>
-<td>true</td>
-<td>The status that will determine if the product is active for ordering.<br><br><em>Possible values:</em><br><strong>active:</strong> Ready to accept orders<br><strong>inactive:</strong> Not accepting orders<br><strong>expired:</strong> Product has time slots, but none of them are open.<br><strong>sold_out:</strong> Either product or all open time slots are fully booked</td>
-</tr>
-<tr>
-<td>tax_percentage</td>
-<td>true</td>
-<td>The sales tax percentage that is applied to an order for this product.</td>
-</tr>
-<tr>
-<td>time_slots_closed_before</td>
-<td>true</td>
-<td>The point in time after which time slots are closed for sales. Any time slot occurring between this time and the actual occurrence of that time slot (when the class takes place) cannot be sold.</td>
-</tr>
-<tr>
-<td>title</td>
-<td>true</td>
-<td>The title of the product, such as &ldquo;BYOB &amp; Paint A Forest&rdquo;.</td>
-</tr>
-<tr>
-<td>widget_attributes_title</td>
-<td>true</td>
-<td>The title to display above a section asking additional questions based off custom attributes.</td>
-</tr>
-<tr>
-<td>widget_contact_title</td>
-<td>true</td>
-<td>The title to display above a section regarding customer contact information (email, first_name, last_name, zip).</td>
-</tr>
-<tr>
-<td>widget_occurrences_title</td>
-<td>true</td>
-<td>The title to display above a section regarding choosing a time slot.</td>
-</tr>
-<tr>
-<td>widget_payment_title</td>
-<td>true</td>
-<td>The title to display above a section asking for payment information like credit card details.</td>
-</tr>
-<tr>
-<td>widget_total_due_title</td>
-<td>true</td>
-<td>The title to display above a section indicating the total price of the order.</td>
-</tr>
-</tbody></table>
-
-<h3 id="associations">Associations</h3>
-
-<p>Possible associations to include are:</p>
-
-<table><thead>
-<tr>
-<th>Association</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>attributes</td>
-<td>The attributes of the product (questions to answer for an order)</td>
-</tr>
-<tr>
-<td>merchant</td>
-<td>The merchant that the product belongs to</td>
-</tr>
-<tr>
-<td>venue</td>
-<td>The venue that the product belongs to</td>
-</tr>
-</tbody></table>
-
-<h2 id="get-a-specific-product">Get a Specific Product</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"http://app.getoccasion.com/api/v1/products/38asnd2"</span>
-  -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
-</code></pre>
-<pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-</code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"products"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"38asnd2"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"closing_time_relative"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sign up to paint a teapot."</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"email_subject"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your order has been completed!"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"from_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Teapot Cafe"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"thumb"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"is_session"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"order_button_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Finalize order"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"post_transactional_message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Thank you for ordering."</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"show_occurrence_availability"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"show_time_slot_duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"tax_percentage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.75"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"time_slots_closed_before"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2000-01-01T00:00:00.000Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Art Class"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"widget_attributes_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Additional Questions"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"widget_contact_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Customer Information"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"widget_occurrences_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Select which day you would like to reserve"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"widget_payment_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payment Information"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"widget_total_due_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Total Due Today"</span><span class="p">,</span><span class="w">
-    </span><span class="err">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<p>This endpoint retrieves a specific product.</p>
-
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">GET https://app.getoccasion.com/api/v1/products/:id</code></p>
-
-<h3 id="url-parameters">URL Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>The ID of the product to retrieve</td>
-</tr>
-</tbody></table>
-
-<h3 id="response-body">Response Body</h3>
-
-<p>Notable response fields include:</p>
-
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Public</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>closing_time_relative</td>
-<td>true</td>
-<td>Whether or not <code class="prettyprint">time_slots_closed_before</code> below indicates time relative to the time_slot start datetime, or indicates an absolute time.</td>
-</tr>
-<tr>
-<td>description</td>
-<td>true</td>
-<td>The description for the product, explaining things in detail.</td>
-</tr>
-<tr>
-<td>email_subject</td>
-<td>false</td>
-<td>The subject of the email that is sent after an order for this product is completed.</td>
-</tr>
-<tr>
-<td>from_name</td>
-<td>false</td>
-<td>The from name of the email that is sent after an order for this product is completed.</td>
-</tr>
-<tr>
-<td>image</td>
-<td>true</td>
-<td>URLs for the full image and thumbnail to display with a product.</td>
-</tr>
-<tr>
-<td>is_session</td>
-<td>true</td>
-<td>If true, the product is a session with attendees.</td>
-</tr>
-<tr>
-<td>order_button_text</td>
-<td>true</td>
-<td>The text to display in the submit button on an order widget for this product.</td>
-</tr>
-<tr>
-<td>post_transactional_message</td>
-<td>true</td>
-<td>The message to display after an order for this product has been completed.</td>
-</tr>
-<tr>
-<td>show_occurrence_availability</td>
-<td>true</td>
-<td>If <code class="prettyprint">true</code>, show how many open seats there are for a time slot on an order widget for this product.</td>
-</tr>
-<tr>
-<td>show_time_slot_duration</td>
-<td>true</td>
-<td>If <code class="prettyprint">true</code>, display the duration of time slots on an order widget for this product.</td>
-</tr>
-<tr>
-<td>status</td>
-<td>true</td>
-<td>The status that will determine if the product is active for ordering.<br><br><em>Possible values:</em><br><strong>active:</strong> Ready to accept orders<br><strong>inactive:</strong> Not accepting orders<br><strong>expired:</strong> Product has time slots, but none of them are open.<br><strong>sold_out:</strong> Either product or all open time slots are fully booked</td>
-</tr>
-<tr>
-<td>tax_percentage</td>
-<td>true</td>
-<td>The sales tax percentage that is applied to an order for this product.</td>
-</tr>
-<tr>
-<td>time_slots_closed_before</td>
-<td>true</td>
-<td>The point in time after which time slots are closed for sales. Any time slot occurring between this time and the actual occurrence of that time slot (when the class takes place) cannot be sold.</td>
-</tr>
-<tr>
-<td>title</td>
-<td>true</td>
-<td>The title of the product, such as &ldquo;BYOB &amp; Paint A Forest&rdquo;.</td>
-</tr>
-<tr>
-<td>widget_attributes_title</td>
-<td>true</td>
-<td>The title to display above a section asking additional questions based off custom attributes.</td>
-</tr>
-<tr>
-<td>widget_contact_title</td>
-<td>true</td>
-<td>The title to display above a section regarding customer contact information (email, first_name, last_name, zip).</td>
-</tr>
-<tr>
-<td>widget_occurrences_title</td>
-<td>true</td>
-<td>The title to display above a section regarding choosing a time slot.</td>
-</tr>
-<tr>
-<td>widget_payment_title</td>
-<td>true</td>
-<td>The title to display above a section asking for payment information like credit card details.</td>
-</tr>
-<tr>
-<td>widget_total_due_title</td>
-<td>true</td>
-<td>The title to display above a section indicating the total price of the order.</td>
-</tr>
-</tbody></table>
-
-<h3 id="associations">Associations</h3>
-
-<p>Possible associations to include are:</p>
-
-<table><thead>
-<tr>
-<th>Association</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>attributes</td>
-<td>The attributes of the product (questions to answer for an order)</td>
-</tr>
-<tr>
-<td>merchant</td>
-<td>The merchant that the product belongs to</td>
-</tr>
-<tr>
-<td>venue</td>
-<td>The venue that the product belongs to</td>
-</tr>
-</tbody></table>
-
-<h2 id="get-a-specific-product-so-you-can-order-it">Get a Specific Product So You Can Order It</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"http://app.getoccasion.com/api/v1/products?include=attrs.attribute_options,attrs.field_type"</span>
-  -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
-</code></pre>
-<pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
-</code></pre>
-<pre class="highlight json"><code><span class="p">{</span><span class="w">
-  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"products"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"38asnd2"</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"closing_time_relative"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sign up to paint a teapot."</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"email_subject"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your order has been completed!"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"from_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Teapot Cafe"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"thumb"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg"</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"is_session"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"order_button_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Finalize order"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"post_transactional_message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Thank you for ordering."</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"show_occurrence_availability"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"show_time_slot_duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"tax_percentage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.75"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"time_slots_closed_before"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2000-01-01T00:00:00.000Z"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Art Class"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"widget_attributes_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Additional Questions"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"widget_contact_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Customer Information"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"widget_occurrences_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Select which day you would like to reserve"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"widget_payment_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payment Information"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"widget_total_due_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Total Due Today"</span><span class="p">,</span><span class="w">
-    </span><span class="err">}</span><span class="p">,</span><span class="w">
-    </span><span class="nt">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-          </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attributes"</span><span class="p">,</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h6sbeekj"</span><span class="w"> </span><span class="p">},</span><span class="w">
-          </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attributes"</span><span class="p">,</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"72yas0iu"</span><span class="w"> </span><span class="p">}</span><span class="w">
-        </span><span class="p">]</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="nt">"included"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attributes"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h6sbeekj"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Which option to this question do you prefer?"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"attribute_options"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
-            </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attribute_options"</span><span class="p">,</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"j36ehac"</span><span class="w"> </span><span class="p">},</span><span class="w">
-            </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attribute_options"</span><span class="p">,</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8asbdye"</span><span class="w"> </span><span class="p">}</span><span class="w">
-          </span><span class="p">]</span><span class="w">
-        </span><span class="p">},</span><span class="w">
-        </span><span class="nt">"field_type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"field_types"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17hejas"</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attributes"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"72yas0iu"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"What input do you have?"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">},</span><span class="w">
-      </span><span class="nt">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"field_type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"field_types"</span><span class="p">,</span><span class="w">
-            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mn2l6eh"</span><span class="w">
-          </span><span class="p">}</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attribute_options"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"j36ehac"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Option 1 ($50)"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">50.0</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attribute_options"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8asbdye"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Option 2 ($100)"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-          </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="w">
-        </span><span class="p">}</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"field_types"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17hejas"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"price"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"form_control"</span><span class="p">:</span><span class="w"> </span><span class="s2">"drop_down"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"operation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"adding"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"reflective"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">},</span><span class="w">
-    </span><span class="p">{</span><span class="w">
-      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"field_types"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mn2l6eh"</span><span class="p">,</span><span class="w">
-      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"info"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"form_control"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text_input"</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"operation"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
-        </span><span class="nt">"reflective"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
-      </span><span class="p">}</span><span class="w">
-    </span><span class="p">}</span><span class="w">
-  </span><span class="p">]</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-
-<p>This request retrieves a specific product with its attributes, which are needed to order the product.</p>
-
-<h3 id="http-request">HTTP Request</h3>
-
-<p><code class="prettyprint">GET https://app.getoccasion.com/api/v1/products/:id?include=attributes.attribute_options,attributes.field_types</code></p>
-
-<h3 id="url-parameters">URL Parameters</h3>
-
-<table><thead>
-<tr>
-<th>Parameter</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>id</td>
-<td>The ID of the product to retrieve</td>
-</tr>
-</tbody></table>
-
-<h3 id="response-body">Response Body</h3>
-
-<p>Notable response fields include:</p>
-
-<table><thead>
-<tr>
-<th>Field</th>
-<th>Public</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>closing_time_relative</td>
-<td>true</td>
-<td>Whether or not <code class="prettyprint">time_slots_closed_before</code> below indicates time relative to the time_slot start datetime, or indicates an absolute time.</td>
-</tr>
-<tr>
-<td>description</td>
-<td>true</td>
-<td>The description for the product, explaining things in detail.</td>
-</tr>
-<tr>
-<td>email_subject</td>
-<td>false</td>
-<td>The subject of the email that is sent after an order for this product is completed.</td>
-</tr>
-<tr>
-<td>from_name</td>
-<td>false</td>
-<td>The from name of the email that is sent after an order for this product is completed.</td>
-</tr>
-<tr>
-<td>image</td>
-<td>true</td>
-<td>URLs for the full image and thumbnail to display with a product.</td>
-</tr>
-<tr>
-<td>is_session</td>
-<td>true</td>
-<td>If true, the product is a session with attendees.</td>
-</tr>
-<tr>
-<td>order_button_text</td>
-<td>true</td>
-<td>The text to display in the submit button on an order widget for this product.</td>
-</tr>
-<tr>
-<td>post_transactional_message</td>
-<td>true</td>
-<td>The message to display after an order for this product has been completed.</td>
-</tr>
-<tr>
-<td>show_occurrence_availability</td>
-<td>true</td>
-<td>If <code class="prettyprint">true</code>, show how many open seats there are for a time slot on an order widget for this product.</td>
-</tr>
-<tr>
-<td>show_time_slot_duration</td>
-<td>true</td>
-<td>If <code class="prettyprint">true</code>, display the duration of time slots on an order widget for this product.</td>
-</tr>
-<tr>
-<td>status</td>
-<td>true</td>
-<td>The status that will determine if the product is active for ordering.<br><br><em>Possible values:</em><br><strong>active:</strong> Ready to accept orders<br><strong>inactive:</strong> Not accepting orders<br><strong>expired:</strong> Product has time slots, but none of them are open.<br><strong>sold_out:</strong> Either product or all open time slots are fully booked</td>
-</tr>
-<tr>
-<td>tax_percentage</td>
-<td>true</td>
-<td>The sales tax percentage that is applied to an order for this product.</td>
-</tr>
-<tr>
-<td>time_slots_closed_before</td>
-<td>true</td>
-<td>The point in time after which time slots are closed for sales. Any time slot occurring between this time and the actual occurrence of that time slot (when the class takes place) cannot be sold.</td>
-</tr>
-<tr>
-<td>title</td>
-<td>true</td>
-<td>The title of the product, such as &ldquo;BYOB &amp; Paint A Forest&rdquo;.</td>
-</tr>
-<tr>
-<td>widget_attributes_title</td>
-<td>true</td>
-<td>The title to display above a section asking additional questions based off custom attributes.</td>
-</tr>
-<tr>
-<td>widget_contact_title</td>
-<td>true</td>
-<td>The title to display above a section regarding customer contact information (email, first_name, last_name, zip).</td>
-</tr>
-<tr>
-<td>widget_occurrences_title</td>
-<td>true</td>
-<td>The title to display above a section regarding choosing a time slot.</td>
-</tr>
-<tr>
-<td>widget_payment_title</td>
-<td>true</td>
-<td>The title to display above a section asking for payment information like credit card details.</td>
-</tr>
-<tr>
-<td>widget_total_due_title</td>
-<td>true</td>
-<td>The title to display above a section indicating the total price of the order.</td>
-</tr>
-<tr>
-<td>attributes</td>
-<td>true</td>
-<td>The attributes of the product. Each has a value in an order for this product.</td>
-</tr>
-<tr>
-<td>&#x203a; title</td>
-<td>true</td>
-<td>The title of the attribute - the question to be answered.</td>
-</tr>
-<tr>
-<td>&#x203a; position</td>
-<td>true</td>
-<td>The position of this question in the order form</td>
-</tr>
-<tr>
-<td>&#x203a; parameters</td>
-<td>true</td>
-<td>Object containing optional parameters for the attribute</td>
-</tr>
-<tr>
-<td>&#x203a; attribute_options</td>
-<td>true</td>
-<td>Options for the attribute, if it is a drop down or other option based form control</td>
-</tr>
-<tr>
-<td>&#x203a;&#x203a; title</td>
-<td>true</td>
-<td>The title of the attribute option</td>
-</tr>
-<tr>
-<td>&#x203a;&#x203a; position</td>
-<td>true</td>
-<td>The position of the attribute option amongst its siblings</td>
-</tr>
-<tr>
-<td>&#x203a;&#x203a; default</td>
-<td>true</td>
-<td>Whether or not this attribute option should be selected by default</td>
-</tr>
-<tr>
-<td>&#x203a;&#x203a; parameters</td>
-<td>true</td>
-<td>Object containing optional parameters for the attribute option</td>
-</tr>
-<tr>
-<td>&#x203a;&#x203a;&#x203a; price</td>
-<td>true</td>
-<td>The price of the attribute option</td>
-</tr>
-<tr>
-<td>&#x203a; field_type</td>
-<td>true</td>
-<td>The field type / form control of the attribute</td>
-</tr>
-<tr>
-<td>&#x203a;&#x203a; category</td>
-<td>true</td>
-<td>What type of attribute is this: <code class="prettyprint">&#39;info&#39;</code>, <code class="prettyprint">&#39;price&#39;</code>, <code class="prettyprint">&#39;permutable&#39;</code>, <code class="prettyprint">&#39;discount&#39;</code>, <code class="prettyprint">&#39;static&#39;</code></td>
-</tr>
-<tr>
-<td>&#x203a;&#x203a; form_control</td>
-<td>true</td>
-<td>The form_control type for the attribute: <code class="prettyprint">&#39;text_input&#39;</code>,<code class="prettyprint">&#39;drop_down&#39;</code>,<code class="prettyprint">&#39;checkbox&#39;</code>,<code class="prettyprint">&#39;option_list&#39;</code>,<code class="prettyprint">&#39;spin_button&#39;</code>,<code class="prettyprint">&#39;text_area&#39;</code>,<code class="prettyprint">&#39;separator&#39;</code>,<code class="prettyprint">&#39;text_output&#39;</code></td>
-</tr>
-<tr>
-<td>&#x203a;&#x203a; operation</td>
-<td>true</td>
-<td>The type of mathematical operation the attribute does to the price of the order: <code class="prettyprint">&#39;adding&#39;</code>,<code class="prettyprint">&#39;multiplying&#39;</code>,<code class="prettyprint">&#39;subtracting&#39;</code>,<code class="prettyprint">&#39;dividing&#39;</code></td>
-</tr>
-<tr>
-<td>&#x203a;&#x203a; reflective</td>
-<td>true</td>
-<td>Whether or not this field type is one that will reflect on the value of another attribute in the product when choosing how to affect the order price.</td>
-</tr>
-</tbody></table>
-
-<h3 id="associations">Associations</h3>
-
-<p>Possible associations to include are:</p>
-
-<table><thead>
-<tr>
-<th>Association</th>
-<th>Description</th>
-</tr>
-</thead><tbody>
-<tr>
-<td>attributes</td>
-<td>The attributes of the product (questions to answer for an order)</td>
-</tr>
-<tr>
-<td>attributes.attribute_options</td>
-<td>The options of each attribute of the product</td>
-</tr>
-<tr>
-<td>attributes.field_type</td>
-<td>The field type for each attribute of the product</td>
-</tr>
-<tr>
-<td>merchant</td>
-<td>The merchant that the product belongs to</td>
-</tr>
-<tr>
-<td>venue</td>
-<td>The venue that the product belongs to</td>
-</tr>
-</tbody></table>
-
           <h1 id="orders">Orders</h1>
 
 <h2 id="get-all-orders">Get All Orders</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"http://app.getoccasion.com/api/v1/orders"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/orders"</span>
   -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
 </code></pre>
 <pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
@@ -1493,7 +730,7 @@ curl <span class="s2">"api_endpoint_here"</span>
 </tbody></table>
 
 <h2 id="get-a-specific-order">Get a Specific Order</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"http://app.getoccasion.com/api/v1/orders/38asnd2"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/orders/38asnd2"</span>
   -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
 </code></pre>
 <pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
@@ -2177,10 +1414,1015 @@ curl <span class="s2">"api_endpoint_here"</span>
 </tr>
 </tbody></table>
 
+          <h1 id="products">Products</h1>
+
+<h2 id="get-all-products">Get All Products</h2>
+<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/products"</span>
+  -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
+</code></pre>
+<pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"products"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"38asnd2"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"closing_time_relative"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sign up to paint a teapot."</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"email_subject"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your order has been completed!"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"from_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Teapot Cafe"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg"</span><span class="p">,</span><span class="w">
+          </span><span class="nt">"thumb"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"is_session"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"order_button_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Finalize order"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"post_transactional_message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Thank you for ordering."</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"show_occurrence_availability"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"show_time_slot_duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"tax_percentage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.75"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"time_slots_closed_before"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2000-01-01T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Art Class"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"widget_attributes_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Additional Questions"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"widget_contact_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Customer Information"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"widget_occurrences_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Select which day you would like to reserve"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"widget_payment_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payment Information"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"widget_total_due_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Total Due Today"</span><span class="p">,</span><span class="w">
+      </span><span class="err">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint retrieves all products.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://app.getoccasion.com/api/v1/products</code></p>
+
+<h3 id="response-body">Response Body</h3>
+
+<p>Notable response fields include:</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Public</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>closing_time_relative</td>
+<td>true</td>
+<td>Whether or not <code class="prettyprint">time_slots_closed_before</code> below indicates time relative to the time_slot start datetime, or indicates an absolute time.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>true</td>
+<td>The description for the product, explaining things in detail.</td>
+</tr>
+<tr>
+<td>email_subject</td>
+<td>false</td>
+<td>The subject of the email that is sent after an order for this product is completed.</td>
+</tr>
+<tr>
+<td>from_name</td>
+<td>false</td>
+<td>The from name of the email that is sent after an order for this product is completed.</td>
+</tr>
+<tr>
+<td>image</td>
+<td>true</td>
+<td>URLs for the full image and thumbnail to display with a product.</td>
+</tr>
+<tr>
+<td>is_session</td>
+<td>true</td>
+<td>If true, the product is a session with attendees.</td>
+</tr>
+<tr>
+<td>order_button_text</td>
+<td>true</td>
+<td>The text to display in the submit button on an order widget for this product.</td>
+</tr>
+<tr>
+<td>post_transactional_message</td>
+<td>true</td>
+<td>The message to display after an order for this product has been completed.</td>
+</tr>
+<tr>
+<td>show_occurrence_availability</td>
+<td>true</td>
+<td>If <code class="prettyprint">true</code>, show how many open seats there are for a time slot on an order widget for this product.</td>
+</tr>
+<tr>
+<td>show_time_slot_duration</td>
+<td>true</td>
+<td>If <code class="prettyprint">true</code>, display the duration of time slots on an order widget for this product.</td>
+</tr>
+<tr>
+<td>status</td>
+<td>true</td>
+<td>The status that will determine if the product is active for ordering.<br><br><em>Possible values:</em><br><strong>active:</strong> Ready to accept orders<br><strong>inactive:</strong> Not accepting orders<br><strong>expired:</strong> Product has time slots, but none of them are open.<br><strong>sold_out:</strong> Either product or all open time slots are fully booked</td>
+</tr>
+<tr>
+<td>tax_percentage</td>
+<td>true</td>
+<td>The sales tax percentage that is applied to an order for this product.</td>
+</tr>
+<tr>
+<td>time_slots_closed_before</td>
+<td>true</td>
+<td>The point in time after which time slots are closed for sales. Any time slot occurring between this time and the actual occurrence of that time slot (when the class takes place) cannot be sold.</td>
+</tr>
+<tr>
+<td>title</td>
+<td>true</td>
+<td>The title of the product, such as &ldquo;BYOB &amp; Paint A Forest&rdquo;.</td>
+</tr>
+<tr>
+<td>widget_attributes_title</td>
+<td>true</td>
+<td>The title to display above a section asking additional questions based off custom attributes.</td>
+</tr>
+<tr>
+<td>widget_contact_title</td>
+<td>true</td>
+<td>The title to display above a section regarding customer contact information (email, first_name, last_name, zip).</td>
+</tr>
+<tr>
+<td>widget_occurrences_title</td>
+<td>true</td>
+<td>The title to display above a section regarding choosing a time slot.</td>
+</tr>
+<tr>
+<td>widget_payment_title</td>
+<td>true</td>
+<td>The title to display above a section asking for payment information like credit card details.</td>
+</tr>
+<tr>
+<td>widget_total_due_title</td>
+<td>true</td>
+<td>The title to display above a section indicating the total price of the order.</td>
+</tr>
+</tbody></table>
+
+<h3 id="associations">Associations</h3>
+
+<p>Possible associations to include are:</p>
+
+<table><thead>
+<tr>
+<th>Association</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>attributes</td>
+<td>The attributes of the product (questions to answer for an order)</td>
+</tr>
+<tr>
+<td>merchant</td>
+<td>The merchant that the product belongs to</td>
+</tr>
+<tr>
+<td>venue</td>
+<td>The venue that the product belongs to</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-a-specific-product">Get a Specific Product</h2>
+<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/products/38asnd2"</span>
+  -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
+</code></pre>
+<pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"products"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"38asnd2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"closing_time_relative"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sign up to paint a teapot."</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"email_subject"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your order has been completed!"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"from_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Teapot Cafe"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"thumb"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"is_session"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"order_button_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Finalize order"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"post_transactional_message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Thank you for ordering."</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"show_occurrence_availability"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"show_time_slot_duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"tax_percentage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.75"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"time_slots_closed_before"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2000-01-01T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Art Class"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"widget_attributes_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Additional Questions"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"widget_contact_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Customer Information"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"widget_occurrences_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Select which day you would like to reserve"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"widget_payment_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payment Information"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"widget_total_due_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Total Due Today"</span><span class="p">,</span><span class="w">
+    </span><span class="err">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint retrieves a specific product.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://app.getoccasion.com/api/v1/products/:id</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>The ID of the product to retrieve</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-body">Response Body</h3>
+
+<p>Notable response fields include:</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Public</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>closing_time_relative</td>
+<td>true</td>
+<td>Whether or not <code class="prettyprint">time_slots_closed_before</code> below indicates time relative to the time_slot start datetime, or indicates an absolute time.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>true</td>
+<td>The description for the product, explaining things in detail.</td>
+</tr>
+<tr>
+<td>email_subject</td>
+<td>false</td>
+<td>The subject of the email that is sent after an order for this product is completed.</td>
+</tr>
+<tr>
+<td>from_name</td>
+<td>false</td>
+<td>The from name of the email that is sent after an order for this product is completed.</td>
+</tr>
+<tr>
+<td>image</td>
+<td>true</td>
+<td>URLs for the full image and thumbnail to display with a product.</td>
+</tr>
+<tr>
+<td>is_session</td>
+<td>true</td>
+<td>If true, the product is a session with attendees.</td>
+</tr>
+<tr>
+<td>order_button_text</td>
+<td>true</td>
+<td>The text to display in the submit button on an order widget for this product.</td>
+</tr>
+<tr>
+<td>post_transactional_message</td>
+<td>true</td>
+<td>The message to display after an order for this product has been completed.</td>
+</tr>
+<tr>
+<td>show_occurrence_availability</td>
+<td>true</td>
+<td>If <code class="prettyprint">true</code>, show how many open seats there are for a time slot on an order widget for this product.</td>
+</tr>
+<tr>
+<td>show_time_slot_duration</td>
+<td>true</td>
+<td>If <code class="prettyprint">true</code>, display the duration of time slots on an order widget for this product.</td>
+</tr>
+<tr>
+<td>status</td>
+<td>true</td>
+<td>The status that will determine if the product is active for ordering.<br><br><em>Possible values:</em><br><strong>active:</strong> Ready to accept orders<br><strong>inactive:</strong> Not accepting orders<br><strong>expired:</strong> Product has time slots, but none of them are open.<br><strong>sold_out:</strong> Either product or all open time slots are fully booked</td>
+</tr>
+<tr>
+<td>tax_percentage</td>
+<td>true</td>
+<td>The sales tax percentage that is applied to an order for this product.</td>
+</tr>
+<tr>
+<td>time_slots_closed_before</td>
+<td>true</td>
+<td>The point in time after which time slots are closed for sales. Any time slot occurring between this time and the actual occurrence of that time slot (when the class takes place) cannot be sold.</td>
+</tr>
+<tr>
+<td>title</td>
+<td>true</td>
+<td>The title of the product, such as &ldquo;BYOB &amp; Paint A Forest&rdquo;.</td>
+</tr>
+<tr>
+<td>widget_attributes_title</td>
+<td>true</td>
+<td>The title to display above a section asking additional questions based off custom attributes.</td>
+</tr>
+<tr>
+<td>widget_contact_title</td>
+<td>true</td>
+<td>The title to display above a section regarding customer contact information (email, first_name, last_name, zip).</td>
+</tr>
+<tr>
+<td>widget_occurrences_title</td>
+<td>true</td>
+<td>The title to display above a section regarding choosing a time slot.</td>
+</tr>
+<tr>
+<td>widget_payment_title</td>
+<td>true</td>
+<td>The title to display above a section asking for payment information like credit card details.</td>
+</tr>
+<tr>
+<td>widget_total_due_title</td>
+<td>true</td>
+<td>The title to display above a section indicating the total price of the order.</td>
+</tr>
+</tbody></table>
+
+<h3 id="associations">Associations</h3>
+
+<p>Possible associations to include are:</p>
+
+<table><thead>
+<tr>
+<th>Association</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>attributes</td>
+<td>The attributes of the product (questions to answer for an order)</td>
+</tr>
+<tr>
+<td>merchant</td>
+<td>The merchant that the product belongs to</td>
+</tr>
+<tr>
+<td>venue</td>
+<td>The venue that the product belongs to</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-a-specific-product-so-you-can-order-it">Get a Specific Product So You Can Order It</h2>
+<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/products?include=attrs.attribute_options,attrs.field_type"</span>
+  -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
+</code></pre>
+<pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"products"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"38asnd2"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"closing_time_relative"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sign up to paint a teapot."</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"email_subject"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Your order has been completed!"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"from_email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Teapot Cafe"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"image"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"thumb"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"is_session"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"order_button_text"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Finalize order"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"post_transactional_message"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Thank you for ordering."</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"show_occurrence_availability"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"show_time_slot_duration"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"active"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"tax_percentage"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3.75"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"time_slots_closed_before"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2000-01-01T00:00:00.000Z"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"My Art Class"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"widget_attributes_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Additional Questions"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"widget_contact_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Customer Information"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"widget_occurrences_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Select which day you would like to reserve"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"widget_payment_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Payment Information"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"widget_total_due_title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Total Due Today"</span><span class="p">,</span><span class="w">
+    </span><span class="err">}</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attributes"</span><span class="p">,</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h6sbeekj"</span><span class="w"> </span><span class="p">},</span><span class="w">
+          </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attributes"</span><span class="p">,</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"72yas0iu"</span><span class="w"> </span><span class="p">}</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nt">"included"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attributes"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h6sbeekj"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Which option to this question do you prefer?"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"attribute_options"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+            </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attribute_options"</span><span class="p">,</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"j36ehac"</span><span class="w"> </span><span class="p">},</span><span class="w">
+            </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attribute_options"</span><span class="p">,</span><span class="w"> </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8asbdye"</span><span class="w"> </span><span class="p">}</span><span class="w">
+          </span><span class="p">]</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="nt">"field_type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"field_types"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17hejas"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attributes"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"72yas0iu"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"What input do you have?"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="nt">"relationships"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"field_type"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"field_types"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mn2l6eh"</span><span class="w">
+          </span><span class="p">}</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attribute_options"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"j36ehac"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Option 1 ($50)"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">50.0</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"attribute_options"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8asbdye"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Option 2 ($100)"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"position"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"default"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"parameters"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">100.0</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"field_types"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"17hejas"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"price"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"form_control"</span><span class="p">:</span><span class="w"> </span><span class="s2">"drop_down"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"operation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"adding"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"reflective"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"field_types"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"mn2l6eh"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"updated_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"category"</span><span class="p">:</span><span class="w"> </span><span class="s2">"info"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"form_control"</span><span class="p">:</span><span class="w"> </span><span class="s2">"text_input"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"operation"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"reflective"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This request retrieves a specific product with its attributes, which are needed to order the product.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://app.getoccasion.com/api/v1/products/:id?include=attributes.attribute_options,attributes.field_types</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>The ID of the product to retrieve</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-body">Response Body</h3>
+
+<p>Notable response fields include:</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Public</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>closing_time_relative</td>
+<td>true</td>
+<td>Whether or not <code class="prettyprint">time_slots_closed_before</code> below indicates time relative to the time_slot start datetime, or indicates an absolute time.</td>
+</tr>
+<tr>
+<td>description</td>
+<td>true</td>
+<td>The description for the product, explaining things in detail.</td>
+</tr>
+<tr>
+<td>email_subject</td>
+<td>false</td>
+<td>The subject of the email that is sent after an order for this product is completed.</td>
+</tr>
+<tr>
+<td>from_name</td>
+<td>false</td>
+<td>The from name of the email that is sent after an order for this product is completed.</td>
+</tr>
+<tr>
+<td>image</td>
+<td>true</td>
+<td>URLs for the full image and thumbnail to display with a product.</td>
+</tr>
+<tr>
+<td>is_session</td>
+<td>true</td>
+<td>If true, the product is a session with attendees.</td>
+</tr>
+<tr>
+<td>order_button_text</td>
+<td>true</td>
+<td>The text to display in the submit button on an order widget for this product.</td>
+</tr>
+<tr>
+<td>post_transactional_message</td>
+<td>true</td>
+<td>The message to display after an order for this product has been completed.</td>
+</tr>
+<tr>
+<td>show_occurrence_availability</td>
+<td>true</td>
+<td>If <code class="prettyprint">true</code>, show how many open seats there are for a time slot on an order widget for this product.</td>
+</tr>
+<tr>
+<td>show_time_slot_duration</td>
+<td>true</td>
+<td>If <code class="prettyprint">true</code>, display the duration of time slots on an order widget for this product.</td>
+</tr>
+<tr>
+<td>status</td>
+<td>true</td>
+<td>The status that will determine if the product is active for ordering.<br><br><em>Possible values:</em><br><strong>active:</strong> Ready to accept orders<br><strong>inactive:</strong> Not accepting orders<br><strong>expired:</strong> Product has time slots, but none of them are open.<br><strong>sold_out:</strong> Either product or all open time slots are fully booked</td>
+</tr>
+<tr>
+<td>tax_percentage</td>
+<td>true</td>
+<td>The sales tax percentage that is applied to an order for this product.</td>
+</tr>
+<tr>
+<td>time_slots_closed_before</td>
+<td>true</td>
+<td>The point in time after which time slots are closed for sales. Any time slot occurring between this time and the actual occurrence of that time slot (when the class takes place) cannot be sold.</td>
+</tr>
+<tr>
+<td>title</td>
+<td>true</td>
+<td>The title of the product, such as &ldquo;BYOB &amp; Paint A Forest&rdquo;.</td>
+</tr>
+<tr>
+<td>widget_attributes_title</td>
+<td>true</td>
+<td>The title to display above a section asking additional questions based off custom attributes.</td>
+</tr>
+<tr>
+<td>widget_contact_title</td>
+<td>true</td>
+<td>The title to display above a section regarding customer contact information (email, first_name, last_name, zip).</td>
+</tr>
+<tr>
+<td>widget_occurrences_title</td>
+<td>true</td>
+<td>The title to display above a section regarding choosing a time slot.</td>
+</tr>
+<tr>
+<td>widget_payment_title</td>
+<td>true</td>
+<td>The title to display above a section asking for payment information like credit card details.</td>
+</tr>
+<tr>
+<td>widget_total_due_title</td>
+<td>true</td>
+<td>The title to display above a section indicating the total price of the order.</td>
+</tr>
+<tr>
+<td>attributes</td>
+<td>true</td>
+<td>The attributes of the product. Each has a value in an order for this product.</td>
+</tr>
+<tr>
+<td>&#x203a; title</td>
+<td>true</td>
+<td>The title of the attribute - the question to be answered.</td>
+</tr>
+<tr>
+<td>&#x203a; position</td>
+<td>true</td>
+<td>The position of this question in the order form</td>
+</tr>
+<tr>
+<td>&#x203a; parameters</td>
+<td>true</td>
+<td>Object containing optional parameters for the attribute</td>
+</tr>
+<tr>
+<td>&#x203a; attribute_options</td>
+<td>true</td>
+<td>Options for the attribute, if it is a drop down or other option based form control</td>
+</tr>
+<tr>
+<td>&#x203a;&#x203a; title</td>
+<td>true</td>
+<td>The title of the attribute option</td>
+</tr>
+<tr>
+<td>&#x203a;&#x203a; position</td>
+<td>true</td>
+<td>The position of the attribute option amongst its siblings</td>
+</tr>
+<tr>
+<td>&#x203a;&#x203a; default</td>
+<td>true</td>
+<td>Whether or not this attribute option should be selected by default</td>
+</tr>
+<tr>
+<td>&#x203a;&#x203a; parameters</td>
+<td>true</td>
+<td>Object containing optional parameters for the attribute option</td>
+</tr>
+<tr>
+<td>&#x203a;&#x203a;&#x203a; price</td>
+<td>true</td>
+<td>The price of the attribute option</td>
+</tr>
+<tr>
+<td>&#x203a; field_type</td>
+<td>true</td>
+<td>The field type / form control of the attribute</td>
+</tr>
+<tr>
+<td>&#x203a;&#x203a; category</td>
+<td>true</td>
+<td>What type of attribute is this: <code class="prettyprint">&#39;info&#39;</code>, <code class="prettyprint">&#39;price&#39;</code>, <code class="prettyprint">&#39;permutable&#39;</code>, <code class="prettyprint">&#39;discount&#39;</code>, <code class="prettyprint">&#39;static&#39;</code></td>
+</tr>
+<tr>
+<td>&#x203a;&#x203a; form_control</td>
+<td>true</td>
+<td>The form_control type for the attribute: <code class="prettyprint">&#39;text_input&#39;</code>,<code class="prettyprint">&#39;drop_down&#39;</code>,<code class="prettyprint">&#39;checkbox&#39;</code>,<code class="prettyprint">&#39;option_list&#39;</code>,<code class="prettyprint">&#39;spin_button&#39;</code>,<code class="prettyprint">&#39;text_area&#39;</code>,<code class="prettyprint">&#39;separator&#39;</code>,<code class="prettyprint">&#39;text_output&#39;</code></td>
+</tr>
+<tr>
+<td>&#x203a;&#x203a; operation</td>
+<td>true</td>
+<td>The type of mathematical operation the attribute does to the price of the order: <code class="prettyprint">&#39;adding&#39;</code>,<code class="prettyprint">&#39;multiplying&#39;</code>,<code class="prettyprint">&#39;subtracting&#39;</code>,<code class="prettyprint">&#39;dividing&#39;</code></td>
+</tr>
+<tr>
+<td>&#x203a;&#x203a; reflective</td>
+<td>true</td>
+<td>Whether or not this field type is one that will reflect on the value of another attribute in the product when choosing how to affect the order price.</td>
+</tr>
+</tbody></table>
+
+<h3 id="associations">Associations</h3>
+
+<p>Possible associations to include are:</p>
+
+<table><thead>
+<tr>
+<th>Association</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>attributes</td>
+<td>The attributes of the product (questions to answer for an order)</td>
+</tr>
+<tr>
+<td>attributes.attribute_options</td>
+<td>The options of each attribute of the product</td>
+</tr>
+<tr>
+<td>attributes.field_type</td>
+<td>The field type for each attribute of the product</td>
+</tr>
+<tr>
+<td>merchant</td>
+<td>The merchant that the product belongs to</td>
+</tr>
+<tr>
+<td>venue</td>
+<td>The venue that the product belongs to</td>
+</tr>
+</tbody></table>
+
+          <h1 id="redeemables-coupons-gift-cards">Redeemables (Coupons, Gift Cards)</h1>
+
+<h2 id="check-a-possible-redeemable-code-for-a-product">Check A Possible Redeemable Code For A Product</h2>
+<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/products/:id/redeemables?filter[code]=COUPON-CODE"</span>
+  -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
+</code></pre>
+<pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"coupons"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h17sle7"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Holiday Coupon"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"COUPON-CODE"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"discount_fixed"</span><span class="p">:</span><span class="w"> </span><span class="mf">2.0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"discount_percentage"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/products/:id/redeemables?filter[code]=GIFT-CARD-CODE"</span>
+  -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
+</code></pre>
+<pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"gift_cards"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"h17sle7"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"GIFT-CARD-CODE"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"initial_value"</span><span class="p">:</span><span class="w"> </span><span class="mf">50.0</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"value"</span><span class="p">:</span><span class="w"> </span><span class="mf">5.0</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint requires a <code class="prettyprint">filter[code]</code> that is either the code for a coupon that is available for the product, or a gift card that may
+be able to be used to purchase the product. Use this to check that a code is valid, and retrieve the necessary <code class="prettyprint">id</code> that is required to create
+orders that are purchased using coupons and gift cards.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://app.getoccasion.com/api/v1/products/:id/redeemables?filter[code]=COUPON-OR-GIFT-CARD-CODE</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>The ID of the product to retrieve redeemables for.</td>
+<td>true</td>
+</tr>
+<tr>
+<td>filter</td>
+<td>The filter params to apply to collection of redeemables for the product.</td>
+<td>true</td>
+</tr>
+<tr>
+<td>&#x203a; code</td>
+<td>The code of the coupon or gift card that may possibly be used to purchase this product.</td>
+<td>false</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-body">Response Body</h3>
+
+<p>Notable response fields for <code class="prettyprint">coupons</code> include:</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Public</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>true</td>
+<td>The name of the coupon.</td>
+</tr>
+<tr>
+<td>code</td>
+<td>true</td>
+<td>The coupon code.</td>
+</tr>
+<tr>
+<td>discount_fixed</td>
+<td>true</td>
+<td>The fixed cash discount for the coupon. If <code class="prettyprint">null</code>, then coupon is percentage discount.</td>
+</tr>
+<tr>
+<td>discount_percentage</td>
+<td>true</td>
+<td>The percentage discount for the coupon. If <code class="prettyprint">null</code>, then coupon is fixed discount.</td>
+</tr>
+</tbody></table>
+
+<p>Notable response fields for <code class="prettyprint">gift_cards</code> include:</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Public</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>code</td>
+<td>true</td>
+<td>The gift card code.</td>
+</tr>
+<tr>
+<td>initial_value</td>
+<td>true</td>
+<td>The initial value that was loaded onto the gift card.</td>
+</tr>
+<tr>
+<td>value</td>
+<td>true</td>
+<td>The remaining value on the gift card.</td>
+</tr>
+</tbody></table>
+
+          <h1 id="time-slots">Time Slots</h1>
+
+<h2 id="get-bookable-time-slots-for-a-product">Get Bookable Time Slots For A Product</h2>
+<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/products/:id/time_slots?filter[status]=bookable&amp;filter[last]=k182hea&amp;page[size]=2"</span>
+  -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
+</code></pre>
+<pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
+</code></pre>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+  </span><span class="nt">"data"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"time_slots"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"38asnd2"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"starts_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-23T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3200"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"spots_available"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"time_slots"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"j1267fas"</span><span class="p">,</span><span class="w">
+      </span><span class="nt">"attributes"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"starts_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2015-10-24T11:00:44.539-05:00"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"duration"</span><span class="p">:</span><span class="w"> </span><span class="s2">"7200"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"spots_available"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="w">
+      </span><span class="p">}</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">],</span><span class="w">
+  </span><span class="nt">"links"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://app.getoccasion.com/api/v1/products/:id/time_slots?filter[status]=bookable&amp;filter[last]=j1267fas&amp;page[size]=2"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint retrieves time slots for a product.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET https://app.getoccasion.com/api/v1/products/:id/time_slots?filter[status]=bookable&amp;filter[last]=k182hea&amp;page[size]=2</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+<th>Required</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>id</td>
+<td>The ID of the product to retrieve time slots for.</td>
+<td>true</td>
+</tr>
+<tr>
+<td>filter</td>
+<td>The filter params to apply to collection of time slots for the product.</td>
+<td>true</td>
+</tr>
+<tr>
+<td>&#x203a; last</td>
+<td>The token of the last time slot that was in your previous time slot query. If left blank, will respond with first bookable time slots.</td>
+<td>false</td>
+</tr>
+<tr>
+<td>&#x203a; status</td>
+<td>The status type of time slot to respond with. <code class="prettyprint">bookable</code> required for now.</td>
+<td>true</td>
+</tr>
+<tr>
+<td>page</td>
+<td>The pagination params to apply to collection of time slots for the product.</td>
+<td>false</td>
+</tr>
+<tr>
+<td>&#x203a; size</td>
+<td>The number of time slots to respond with. Defaults to 10, max 100.</td>
+<td>false</td>
+</tr>
+</tbody></table>
+
+<h3 id="response-body">Response Body</h3>
+
+<p>Notable response fields include:</p>
+
+<table><thead>
+<tr>
+<th>Field</th>
+<th>Public</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>starts_at</td>
+<td>true</td>
+<td>The time that the time slot starts at.</td>
+</tr>
+<tr>
+<td>duration</td>
+<td>true</td>
+<td>The duration of the time slot, in seconds.</td>
+</tr>
+<tr>
+<td>spots_available</td>
+<td>true</td>
+<td>The number of spots available for purchase for this time slot. If <code class="prettyprint">null</code>, unlimited spots available.</td>
+</tr>
+</tbody></table>
+
           <h1 id="venues">Venues</h1>
 
 <h2 id="get-all-venues">Get All Venues</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"http://app.getoccasion.com/api/v1/venues"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/venues"</span>
   -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
 </code></pre>
 <pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
@@ -2305,7 +2547,7 @@ curl <span class="s2">"api_endpoint_here"</span>
 </tbody></table>
 
 <h2 id="get-a-specific-venue">Get a Specific Venue</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"http://app.getoccasion.com/api/v1/venues/n2hs7dh"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/venues/n2hs7dh"</span>
   -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
 </code></pre>
 <pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
@@ -2442,7 +2684,7 @@ curl <span class="s2">"api_endpoint_here"</span>
 </tbody></table>
 
 <h2 id="get-a-specific-venue-with-country-and-state">Get a Specific Venue with Country and State</h2>
-<pre class="highlight shell"><code>curl <span class="s2">"http://app.getoccasion.com/api/v1/venues/n2hs7dh?include=country,state"</span>
+<pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/venues/n2hs7dh?include=country,state"</span>
   -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
 </code></pre>
 <pre class="highlight http"><code><span class="k">HTTPS</span><span class="o">/</span><span class="m">1.1</span> <span class="m">200</span> <span class="ne">OK</span>
