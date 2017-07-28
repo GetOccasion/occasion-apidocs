@@ -1,0 +1,1673 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Occasion Javascript SDK Getting Started Guide</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #f8f8f2;
+  background-color: #272822;
+}
+.highlight .err {
+  color: #151515;
+  background-color: #ac4142;
+}
+.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+  color: #505050;
+}
+.highlight .cp {
+  color: #f4bf75;
+}
+.highlight .nt {
+  color: #f4bf75;
+}
+.highlight .o, .highlight .ow {
+  color: #d0d0d0;
+}
+.highlight .p, .highlight .pi {
+  color: #d0d0d0;
+}
+.highlight .gi {
+  color: #90a959;
+}
+.highlight .gd {
+  color: #ac4142;
+}
+.highlight .gh {
+  color: #6a9fb5;
+  background-color: #151515;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #aa759f;
+}
+.highlight .kc {
+  color: #d28445;
+}
+.highlight .kt {
+  color: #d28445;
+}
+.highlight .kd {
+  color: #d28445;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #90a959;
+}
+.highlight .sr {
+  color: #75b5aa;
+}
+.highlight .si {
+  color: #8f5536;
+}
+.highlight .se {
+  color: #8f5536;
+}
+.highlight .nn {
+  color: #f4bf75;
+}
+.highlight .nc {
+  color: #f4bf75;
+}
+.highlight .no {
+  color: #f4bf75;
+}
+.highlight .na {
+  color: #6a9fb5;
+}
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+  color: #90a959;
+}
+.highlight .ss {
+  color: #90a959;
+}
+    </style>
+    <link href="../stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="../stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="../javascripts/all.js"></script>
+  </head>
+
+  <body class="sdk sdk_index" data-languages="[&quot;javascript&quot;,&quot;json&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="../images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <img src="../images/logo.png" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="javascript">javascript</a>
+              <a href="#" data-language-name="json">json</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+        <ul class="toc-footer">
+            <li><a href='https://app.getoccasion.com/users/sign_up'>Sign Up for an Account</a></li>
+            <li><a href='https://github.com/tripit/slate'>Documentation Powered by Slate</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id="0-introduction">0. Introduction</h1>
+
+<h2 id="occasion-javascript-sdk-getting-start-guide">Occasion Javascript SDK Getting Start Guide</h2>
+
+<p>The Occasion Javascript SDK enables you to sell bookings simply and securely through your web application, providing services to help you make use of many of the resources of Occasion. Such resources include merchants, products, venues, customers, orders, coupons, gift cards, payment methods, and calendars.</p>
+
+<p>This guide will show you how to easily create a fully functioning order widget for booking products in your application. Every merchant in Occasion operates venues, and each venue has many products that it sells. Customers can buy these products through the order widget you will build today.</p>
+
+<p>The process lets your customer browse products, select one for purchase, enter their personal information (or sign in to load their saved information), select one or more time slots,
+answer any number of questions relevant to the product, include a coupon or any number of gift cards, as well as enter credit card information through our PCI compliant interface.</p>
+
+<p>There is also an advanced section at the end that demonstrates how to make full use of the SDK&rsquo;s underlying technology to customize your application.</p>
+
+<h1 id="1-installation">1. Installation</h1>
+<pre class="highlight javascript"><code><span class="nx">npm</span> <span class="nx">i</span> <span class="nx">occasion</span><span class="o">-</span><span class="nx">sdk</span> <span class="o">--</span><span class="nx">save</span>
+</code></pre>
+
+<p>We use NPM to distribute our SDK. Use the command at right to download and save it to your <code class="prettyprint">package.json</code></p>
+
+<p>You can also use the CDN address <a href="https://unpkg.com/occasion-sdk">https://unpkg.com/occasion-sdk</a> to add it to your AMD loader or into your page:</p>
+
+<p><code class="prettyprint">&lt;script type=&#39;text/javascript&#39; src=&#39;https://unpkg.com/occasion-sdk&#39;&gt;&lt;/script&gt;</code></p>
+
+          <h1 id="2-initialization">2. Initialization</h1>
+<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">OccasionClient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Occasion</span><span class="p">.</span><span class="nx">Client</span><span class="p">(</span><span class="s1">'[API_TOKEN]'</span><span class="p">);</span>
+</code></pre>
+
+<p>Once you&rsquo;ve added the <code class="prettyprint">occasion-sdk</code> module to your application, initialize it with your public API token, which can be found in your account settings on Occasion.</p>
+
+          <h1 id="3-browsing-merchants-and-products">3. Browsing Merchants and Products</h1>
+
+<p>This chapter will set the foundation for building an order widget by demonstrating how to query merchants and their products, perhaps to provide customers with the ability to view all of a merchant&rsquo;s products before selecting one to book.</p>
+
+<p><em>It will also highlight the DSL for the SDK&rsquo;s query interface, so it is useful for you to read this chapter completely.</em></p>
+
+<h2 id="getting-all-merchants">Getting All Merchants</h2>
+<pre class="highlight javascript"><code><span class="nx">occsnClient</span><span class="p">.</span><span class="nx">Merchant</span><span class="p">.</span><span class="nx">all</span><span class="p">()</span>
+   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">merchants</span><span class="p">)</span> <span class="p">{</span>
+     <span class="nx">merchants</span><span class="p">.</span><span class="nx">each</span><span class="p">((</span><span class="nx">merchant</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">...)</span> <span class="c1">// do something with each merchant</span>
+   <span class="p">});</span>
+
+</code></pre>
+
+<p>If your API token permits you to access all of Occasion&rsquo;s merchants, you can use <code class="prettyprint">Merchant.all()</code> to receive a promise for a <code class="prettyprint">Collection</code> of all merchants, and then process each one individually when you receive them.</p>
+
+<h2 id="getting-a-specific-merchant">Getting a Specific Merchant</h2>
+<pre class="highlight javascript"><code>
+<span class="nx">occsnClient</span><span class="p">.</span><span class="nx">Merchant</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">'712h3as'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">merchant</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// do something with Merchant(id: '712h3as')</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">errors</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">errors</span><span class="p">)</span>
+    <span class="c1">// =&gt;</span>
+    <span class="c1">//  [</span>
+    <span class="c1">//    {</span>
+    <span class="c1">//      parameter: 'id',</span>
+    <span class="c1">//      code: 'notFound',</span>
+    <span class="c1">//      detail: 'Could not find merchant with id: "712h3as"'</span>
+    <span class="c1">//    } </span>
+    <span class="c1">//  ]</span>
+  <span class="p">});</span>
+</code></pre>
+
+<p>You can use <code class="prettyprint">Merchant.find(id)</code> to load a specific merchant by ID. The promise returned will yield either a resource of class <code class="prettyprint">Merchant</code> or errors.</p>
+
+<h2 id="getting-your-individual-merchant-account">Getting Your Individual Merchant Account</h2>
+<pre class="highlight javascript"><code><span class="nx">occsnClient</span><span class="p">.</span><span class="nx">Merchant</span><span class="p">.</span><span class="nx">first</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">merchant</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// do something with your individual merchant</span>
+  <span class="p">});</span>
+</code></pre>
+
+<p>If your API token is for a single merchant using Occasion, rather than an Occasion API partner, and you want to retrieve your merchant account&rsquo;s information, you can use <code class="prettyprint">Merchant.first()</code>.</p>
+
+<h2 id="getting-a-merchant-39-s-venues-and-products">Getting A Merchant&rsquo;s Venues and Products</h2>
+<pre class="highlight javascript"><code><span class="nx">occsnClient</span><span class="p">.</span><span class="nx">Merchant</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">'712h3as'</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">merchant</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// do something with merchant</span>
+
+    <span class="c1">// Retrieves merchant's venues from the server</span>
+    <span class="nx">merchant</span><span class="p">.</span><span class="nx">venues</span><span class="p">().</span><span class="nx">all</span><span class="p">()</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">venues</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">venues</span><span class="p">.</span><span class="nx">each</span><span class="p">((</span><span class="nx">venue</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">...)</span> <span class="c1">// do something with each venue</span>
+      <span class="p">});</span>
+
+    <span class="c1">// Retrieves merchant's products from the server</span>
+    <span class="nx">merchant</span><span class="p">.</span><span class="nx">products</span><span class="p">().</span><span class="nx">all</span><span class="p">()</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">products</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">products</span><span class="p">.</span><span class="nx">each</span><span class="p">((</span><span class="nx">product</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">...)</span> <span class="c1">// do something with each product</span>
+      <span class="p">});</span>
+
+    <span class="c1">// Loads merchant's venues from the server and saves them to</span>
+    <span class="c1">// merchant.venues().target()</span>
+    <span class="nx">merchant</span><span class="p">.</span><span class="nx">venues</span><span class="p">().</span><span class="nx">load</span><span class="p">()</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">venues</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">venues</span><span class="p">.</span><span class="nx">each</span><span class="p">((</span><span class="nx">venue</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">...)</span> <span class="c1">// do something with each venue</span>
+      <span class="p">});</span>
+
+    <span class="c1">// Retrieves merchant's product ID 'n2as78' from the server</span>
+    <span class="nx">merchant</span><span class="p">.</span><span class="nx">products</span><span class="p">().</span><span class="nx">find</span><span class="p">(</span><span class="s1">'n2as78'</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">product</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// do something with Product(id: 'n2as78')</span>
+      <span class="p">})</span>
+      <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">errors</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">errors</span><span class="p">)</span>
+        <span class="c1">// =&gt;</span>
+        <span class="c1">//  [</span>
+        <span class="c1">//    {</span>
+        <span class="c1">//      parameter: 'id',</span>
+        <span class="c1">//      code: 'notFound',</span>
+        <span class="c1">//      detail: 'Could not find product with id: "n2as78"'</span>
+        <span class="c1">//    } </span>
+        <span class="c1">//  ]</span>
+      <span class="p">});</span>
+
+    <span class="c1">// Retrieves merchant's first product from the server</span>
+    <span class="nx">merchant</span><span class="p">.</span><span class="nx">products</span><span class="p">().</span><span class="nx">first</span><span class="p">()</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">product</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// do something with merchant's first product</span>
+      <span class="p">});</span>
+
+    <span class="c1">// Retrieves merchant's last 3 products from the server</span>
+    <span class="nx">merchant</span><span class="p">.</span><span class="nx">products</span><span class="p">().</span><span class="nx">last</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">products</span><span class="p">)</span> <span class="p">{</span>
+        <span class="nx">products</span><span class="p">.</span><span class="nx">each</span><span class="p">((</span><span class="nx">product</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">...)</span> <span class="c1">// do something with each product</span>
+      <span class="p">});</span>
+  <span class="p">})</span>
+</code></pre>
+
+<p>The Occasion SDK allows you to easily navigate any resource and any relationship of any resource with the exact same relational format. In the way that we retrieve all merchants or find a specific merchant by ID,
+we can also retrieve all of a specific merchant&rsquo;s venues and products, as well as find a specific venue or product by ID amongst the merchant&rsquo;s.</p>
+
+<p><em>Note the difference between using <code class="prettyprint">merchant.venues().all()</code> and <code class="prettyprint">merchant.venues().load()</code>. The former retrieves the venues from the server and responds with them, the latter does the same but also stores them to <code class="prettyprint">merchant.venues().target()</code>.</em></p>
+
+<p>You can also call <code class="prettyprint">.first(n)</code> and <code class="prettyprint">.last(n)</code> on any resource or relationship, as well as include any relationship </p>
+
+<h2 id="eager-loading-venues-and-products">Eager Loading Venues and Products</h2>
+<pre class="highlight javascript"><code><span class="nx">occsnClient</span><span class="p">.</span><span class="nx">Merchant</span><span class="p">.</span><span class="nx">includes</span><span class="p">({</span> <span class="na">venues</span><span class="p">:</span> <span class="s1">'products'</span> <span class="p">}).</span><span class="nx">first</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">merchant</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// show merchant, with pages for venues and each of</span>
+    <span class="c1">// the venues' products (all already loaded)</span>
+
+    <span class="c1">// get array of venues loaded to target()</span>
+    <span class="kd">let</span> <span class="nx">venues</span> <span class="o">=</span> <span class="nx">merchant</span><span class="p">.</span><span class="nx">venues</span><span class="p">().</span><span class="nx">target</span><span class="p">.</span><span class="nx">all</span><span class="p">();</span>
+
+    <span class="c1">// gets the first venue loaded to target()</span>
+    <span class="kd">let</span> <span class="nx">venue</span> <span class="o">=</span> <span class="nx">merchant</span><span class="p">.</span><span class="nx">venues</span><span class="p">().</span><span class="nx">target</span><span class="p">().</span><span class="nx">first</span><span class="p">();</span>
+
+    <span class="c1">// get the first venue's last product</span>
+    <span class="kd">let</span> <span class="nx">product</span> <span class="o">=</span> <span class="nx">venue</span><span class="p">.</span><span class="nx">products</span><span class="p">().</span><span class="nx">target</span><span class="p">().</span><span class="nx">last</span><span class="p">();</span>
+
+    <span class="c1">// true, because relationships are constructed between resources</span>
+    <span class="nx">venue</span> <span class="o">===</span> <span class="nx">product</span><span class="p">.</span><span class="nx">venue</span><span class="p">();</span>
+  <span class="p">});</span>
+</code></pre>
+
+<p>You can also make use of eager loading relationships by using <code class="prettyprint">includes</code>. This will load any relationships along with the primary resource(s) you are retrieving, and allow you to explore local copies of all of these resources linked together seamlessly all in one query.</p>
+
+<p><strong>It is not recommended you make this query on larger merchants because it could be slow responding with large numbers of venues and products. Instead, think consciously about where it makes sense to eager load vs. other methods.</strong></p>
+
+<h2 id="conclusion">Conclusion</h2>
+
+<p>This chapter demonstrates some of the DSL used to query resources in the Occasion SDK. To explore the entire interface for querying resources, see the Advanced Section under Querying and Relations.</p>
+
+          <h1 id="4-laying-out-the-widget-for-a-product">4. Laying Out The Widget For a Product</h1>
+
+<p>Once your customer has selected a product to be purchased, you should show them a widget / form to create an order for that product. The remaining chapters will demonstrate how to create such a form, with this section dedicated to outlining the basic structure and components of a widget.</p>
+
+<p><strong>A great widget will provide the customer with a booking experience similar to a conversation. All of the chapters that come after this one will be structured like such a conversation, with the merchant speaking to the customer and the customer responding with user interaction.</strong></p>
+
+<h2 id="but-first-load-the-product-with-relevant-data">But first, load the product with relevant data</h2>
+
+<blockquote>
+<p>This example shows the basic gist of the structure of an order widget, where each comment represents a section of the HTML form. The product can customize the title that comes before each section. The remaining chapters of this guide assume you display these titles as you see fit, and will show you how to implement the <code class="prettyprint">@todo</code> of each section.</p>
+</blockquote>
+<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">productId</span> <span class="o">=</span> <span class="s1">'ashw762j'</span><span class="p">;</span>
+
+<span class="nx">occsnClient</span><span class="p">.</span><span class="nx">Product</span><span class="p">.</span><span class="nx">includes</span><span class="p">(</span><span class="s1">'merchant'</span><span class="p">,</span> <span class="s1">'venue'</span><span class="p">).</span><span class="nx">find</span><span class="p">(</span><span class="nx">productId</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">product</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// do something with the product, with its merchant and venue loaded</span>
+
+    <span class="nb">window</span><span class="p">.</span><span class="nx">product</span> <span class="o">=</span> <span class="nx">product</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">product</span><span class="p">.</span><span class="nx">title</span><span class="p">);</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">product</span><span class="p">.</span><span class="nx">venue</span><span class="p">().</span><span class="nx">attributes</span><span class="p">());</span>
+
+    <span class="c1">//</span>
+    <span class="c1">// Header</span>
+    <span class="c1">//</span>
+
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">product</span><span class="p">.</span><span class="nx">title</span><span class="p">);</span>
+    <span class="c1">// --------------------------</span>
+    <span class="c1">// @todo Implement Chapter 5</span>
+    <span class="c1">// --------------------------</span>
+
+    <span class="c1">//</span>
+    <span class="c1">// Order Form</span>
+    <span class="c1">//</span>
+
+    <span class="c1">// --------------------------</span>
+    <span class="c1">// @todo Implement Chapter 6</span>
+    <span class="c1">// --------------------------</span>
+
+      <span class="c1">//</span>
+      <span class="c1">// Contact Information</span>
+      <span class="c1">//</span>
+
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">product</span><span class="p">.</span><span class="nx">widgetContactsTitle</span><span class="p">);</span>
+      <span class="c1">// --------------------------</span>
+      <span class="c1">// @todo Implement Chapter 7</span>
+      <span class="c1">// --------------------------</span>
+
+      <span class="c1">//</span>
+      <span class="c1">// Time Slot Information</span>
+      <span class="c1">//</span>
+
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">product</span><span class="p">.</span><span class="nx">widgetTimeSlotsTitle</span><span class="p">);</span>
+      <span class="c1">// --------------------------</span>
+      <span class="c1">// @todo Implement Chapter 8</span>
+      <span class="c1">// --------------------------</span>
+
+      <span class="c1">//</span>
+      <span class="c1">// Additional Questions</span>
+      <span class="c1">//</span>
+
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">product</span><span class="p">.</span><span class="nx">widgetQuestionsTitle</span><span class="p">);</span>
+      <span class="c1">// --------------------------</span>
+      <span class="c1">// @todo Implement Chapter 9</span>
+      <span class="c1">// --------------------------</span>
+
+      <span class="c1">//</span>
+      <span class="c1">// Coupon and Gift Card Redemption</span>
+      <span class="c1">//</span>
+
+      <span class="c1">// --------------------------</span>
+      <span class="c1">// @todo Implement Chapter 10</span>
+      <span class="c1">// --------------------------</span>
+
+      <span class="c1">//</span>
+      <span class="c1">// Payment Information</span>
+      <span class="c1">//</span>
+
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">product</span><span class="p">.</span><span class="nx">widgetsPaymentTitle</span><span class="p">);</span>
+      <span class="c1">// --------------------------</span>
+      <span class="c1">// @todo Implement Chapter 11</span>
+      <span class="c1">// --------------------------</span>
+
+      <span class="c1">//</span>
+      <span class="c1">// Price Information</span>
+      <span class="c1">//</span>
+
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">product</span><span class="p">.</span><span class="nx">widgetsTotalDueTitle</span><span class="p">);</span>
+      <span class="c1">// --------------------------</span>
+      <span class="c1">// @todo Implement Chapter 12</span>
+      <span class="c1">// --------------------------</span>
+
+      <span class="c1">//</span>
+      <span class="c1">// Submit Order Button</span>
+      <span class="c1">//</span>
+
+      <span class="c1">// --------------------------</span>
+      <span class="c1">// @todo Implement Chapter 13</span>
+      <span class="c1">// --------------------------</span>
+
+      <span class="c1">//</span>
+      <span class="c1">// After Submit (Success, Errors)</span>
+      <span class="c1">//</span>
+
+      <span class="c1">// --------------------------</span>
+      <span class="c1">// @todo Implement Chapter 14</span>
+      <span class="c1">// --------------------------</span>
+  <span class="p">});</span>
+</code></pre>
+
+<p>Assuming you only know the ID of the product you want to load, you can use <code class="prettyprint">Product.find(id)</code> to retrieve the product you want to sell,
+including its <code class="prettyprint">merchant</code> and <code class="prettyprint">venue</code> so you can display their information too.</p>
+
+<p>You can then access any attribute of any resource as if it were a normal property of a Javascript object. <strong>Relationships are always defined as functions, rather than properties.</strong></p>
+
+<p>Using the function <code class="prettyprint">attributes()</code>, you can quickly get an <code class="prettyprint">Object</code> of useful information for each resource. We&rsquo;ve limited the output in each example to relevant attributes only.</p>
+
+<blockquote>
+<p>The remainder of this guide will assume that you&rsquo;ve set <code class="prettyprint">window.product</code> equal to the loaded product that you are selling.</p>
+</blockquote>
+
+<h2 id="always-make-sure-you-are-selling-an-active-product">Always make sure you are selling an active product</h2>
+<pre class="highlight javascript"><code><span class="k">switch</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">product</span><span class="p">.</span><span class="nx">status</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">case</span> <span class="s1">'active'</span><span class="err">:</span>
+    <span class="c1">// display order widget</span>
+  <span class="k">case</span> <span class="s1">'inactive'</span><span class="err">:</span>
+    <span class="c1">// not accepting orders</span>
+  <span class="k">case</span> <span class="s1">'expired'</span><span class="err">:</span>
+    <span class="c1">// has time slots, but all have passed</span>
+  <span class="k">case</span> <span class="s1">'sold_out'</span><span class="err">:</span>
+    <span class="c1">// fully booked</span>
+<span class="p">}</span>
+</code></pre>
+
+<p>A product can have four statuses. Customers can only book <code class="prettyprint">active</code> products, so you should always check that a product is <code class="prettyprint">active</code> before allowing someone to book it.</p>
+
+<p><em>You could also limit the products you display for browsing to those you know a customer can book. See this in the Advanced Section, under Querying and Relations.</em></p>
+
+<p><br/><br/>
+<strong>With that, let&rsquo;s start the conversation&hellip;</strong></p>
+
+          <h1 id="5-hi-let-me-tell-you-about-who-we-are-what-this-product-offers-you-and-where-we-39-re-located">5. Hi! Let me tell you about who we are, what this product offers you, and where we&rsquo;re located</h1>
+<pre class="highlight javascript"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">product</span><span class="p">.</span><span class="nx">merchant</span><span class="p">().</span><span class="nx">name</span><span class="p">);</span> <span class="c1">// Chicago's Art Studio</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">product</span><span class="p">.</span><span class="nx">merchant</span><span class="p">().</span><span class="nx">attributes</span><span class="p">());</span> <span class="c1">// =&gt;</span>
+<span class="c1">// {</span>
+<span class="c1">//   name: 'Chicago\'s Art Studio',</span>
+<span class="c1">//   profilePicture: 'https://s3.amazonaws.com/development.assets.playoccasion/uploads/profile.jpg',</span>
+<span class="c1">//   timeZone: 'America/Chicago',</span>
+<span class="c1">//   facebookPage: 'https://www.facebook.com/xxxxxxx'</span>
+<span class="c1">// }</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">product</span><span class="p">.</span><span class="nx">attributes</span><span class="p">());</span> <span class="c1">// =&gt;</span>
+<span class="c1">// {</span>
+<span class="c1">//   title: 'Paint Party',</span>
+<span class="c1">//   description: 'You are here to paint, and you are here to party',</span>
+<span class="c1">//   image: {</span>
+<span class="c1">//     url: 'https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg',</span>
+<span class="c1">//     thumb: {</span>
+<span class="c1">//       url: 'https://s3.amazonaws.com/development.assets.playoccasion/uploads/product/image/xxxxx/xxxxx.jpg'</span>
+<span class="c1">//     }</span>
+<span class="c1">//   },</span>
+<span class="c1">//   status: 'active',</span>
+<span class="c1">//   taxPercentage: '3.5'</span>
+<span class="c1">// }</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">product</span><span class="p">.</span><span class="nx">venue</span><span class="p">().</span><span class="nx">attributes</span><span class="p">());</span> <span class="c1">// =&gt;</span>
+<span class="c1">// {</span>
+<span class="c1">//   name: 'Lakeview Campus',</span>
+<span class="c1">//   address: '123 Main Street',</span>
+<span class="c1">//   city: 'Chicago',</span>
+<span class="c1">//   website: 'www.example.com',</span>
+<span class="c1">//   email: 'admin@example.com',</span>
+<span class="c1">//   phone: '(999) 999-9999',</span>
+<span class="c1">//   timeZone: 'America/Chicago'</span>
+<span class="c1">// }</span>
+</code></pre>
+
+<p>The header of the widget is about introducing the customer to the merchant and the product they&rsquo;re selling.</p>
+
+<p>Use any of the snippets or properties in this example to display relevant product, venue, and merchant information in the order widget.</p>
+
+          <h1 id="6-complete-this-form-to-book-this-product">6. Complete this form to book this product</h1>
+<pre class="highlight javascript"><code><span class="nx">occsnClient</span><span class="p">.</span><span class="nx">Order</span><span class="p">.</span><span class="nx">construct</span><span class="p">({</span> <span class="na">product</span><span class="p">:</span> <span class="nb">window</span><span class="p">.</span><span class="nx">product</span> <span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">order</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nb">window</span><span class="p">.</span><span class="nx">order</span> <span class="o">=</span> <span class="nx">order</span><span class="p">;</span>
+<span class="p">});</span>
+</code></pre>
+
+<p>Time to create the order form. How do we display an order form with all of its requirements, when those requirements may change depending on what product you are selling?</p>
+
+<p>To answer this, the SDK provides
+the function <code class="prettyprint">Order.construct</code> shown in this example to initialize an order with the specifics required of the product it is selling. The exact functionality of the <code class="prettyprint">construct</code> method will be covered in each of the remaining sections where it is relevant.</p>
+
+<blockquote>
+<p>The remainder of this guide will assume that you&rsquo;ve set <code class="prettyprint">window.order</code> equal to the constructed order for <code class="prettyprint">window.product</code>.</p>
+</blockquote>
+
+          <h1 id="7-what-is-your-contact-information">7. What is your contact information?</h1>
+
+<h2 id="guest-checkout">Guest Checkout</h2>
+<pre class="highlight javascript"><code><span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">customer</span><span class="p">().</span><span class="nx">attributes</span><span class="p">()</span> <span class="c1">// =&gt;</span>
+<span class="c1">// {</span>
+<span class="c1">//   email: null,</span>
+<span class="c1">//   firstName: null,</span>
+<span class="c1">//   lastName: null,</span>
+<span class="c1">//   zip: null</span>
+<span class="c1">// }</span>
+</code></pre>
+
+<p>The first part of the order form is to ask the customer for their email, first name, last name, and zip code. <code class="prettyprint">Order.construct</code> will build a blank customer for you. Bind each of the customer&rsquo;s attributes to form inputs using your frontend library of choice.</p>
+
+<p>This is called &ldquo;Guest Checkout,&rdquo; because it enables a customer to book any product without signing into any account, enabling faster purchase.</p>
+
+<h2 id="account-sign-in">Account Sign In</h2>
+<pre class="highlight javascript"><code><span class="nx">occsnClient</span><span class="p">.</span><span class="nx">Customer</span><span class="p">.</span><span class="nx">signIn</span><span class="p">({</span>
+  <span class="na">email</span><span class="p">:</span> <span class="s1">'customer@example.com'</span><span class="p">,</span>
+  <span class="na">password</span><span class="p">:</span> <span class="s1">'********'</span>
+<span class="p">})</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">existingCustomer</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="c1">// Replace the guest customer with the existing customer</span>
+    <span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">assignCustomer</span><span class="p">(</span><span class="nx">existingCustomer</span><span class="p">);</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">errors</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">errors</span><span class="p">)</span> <span class="c1">// =&gt;</span>
+    <span class="c1">//  [</span>
+    <span class="c1">//    {</span>
+    <span class="c1">//      parameter: 'email',</span>
+    <span class="c1">//      code: 'notFound',</span>
+    <span class="c1">//      detail: 'Could not find customer with email: "customer@example.com"'</span>
+    <span class="c1">//    },</span>
+    <span class="c1">//    {</span>
+    <span class="c1">//      parameter: 'email',</span>
+    <span class="c1">//      code: 'unconfirmed',</span>
+    <span class="c1">//      detail: 'We need to verify your email address first. Please check your inbox and verify your email address.'</span>
+    <span class="c1">//    },</span>
+    <span class="c1">//    {</span>
+    <span class="c1">//      parameter: 'password',</span>
+    <span class="c1">//      code: 'invalid',</span>
+    <span class="c1">//      detail: 'Incorrect password'</span>
+    <span class="c1">//    },</span>
+    <span class="c1">//  ]</span>
+  <span class="p">});</span>
+</code></pre>
+
+<blockquote>
+<p>All possible errors of this method are displayed in the example.</p>
+</blockquote>
+
+<p>You can also allow customers to sign into accounts that are persisted in Occasion&rsquo;s database, all they have to do is enter their email and password. Display a sign in form somewhere on your page and when the form is submitted, call <code class="prettyprint">Customer.signIn</code>.</p>
+
+<p><em>A customer can choose to save their account information on completion of purchase, which we will cover in the next section.</em></p>
+
+<h2 id="account-creation">Account Creation</h2>
+
+<p>Coming soon&hellip;</p>
+
+          <h1 id="8-what-time-slot-s-do-you-want-to-book">8. What time slot(s) do you want to book?</h1>
+
+<h2 id="displaying-pages-of-bookable-time-slots">Displaying pages of bookable time slots</h2>
+<pre class="highlight javascript"><code><span class="nb">window</span><span class="p">.</span><span class="nx">product</span><span class="p">.</span><span class="nx">timeSlots</span><span class="p">().</span><span class="nx">where</span><span class="p">({</span> <span class="na">status</span><span class="p">:</span> <span class="s1">'bookable'</span> <span class="p">}).</span><span class="nx">first</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">timeSlotsPage</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="c1">// do something with mapped version of time slots page</span>
+    <span class="nx">timeSlotsPage</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">timeSlot</span><span class="p">)</span> <span class="p">{</span>
+      <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">timeSlot</span><span class="p">.</span><span class="nx">attributes</span><span class="p">())</span> <span class="c1">// =&gt;</span>
+      <span class="c1">// {</span>
+      <span class="c1">//   duration: 7200, // seconds</span>
+      <span class="c1">//   spotsAvailable: 5,</span>
+      <span class="c1">//   startsAt: '2015-10-24T11:00:44.539-05:00'</span>
+      <span class="c1">// }</span>
+    <span class="p">});</span>
+
+    <span class="k">if</span><span class="p">(</span><span class="nx">timeSlotsPage</span><span class="p">.</span><span class="nx">hasNextPage</span><span class="p">())</span> <span class="p">{</span>
+      <span class="nx">timeSlotsPage</span><span class="p">.</span><span class="nx">nextPage</span><span class="p">()</span>
+      <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">nextTimeSlotsPage</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// do something with next page of 10 time slots</span>
+      <span class="p">});</span>
+    <span class="p">}</span>
+  <span class="p">})</span>
+</code></pre>
+
+<p>The standard product in Occasion enables a customer to select a single time slot to book an order for. To allow a customer to book one, you should show them lists of time slots to choose from.</p>
+
+<p>Product time slots are loaded in pages, and you can specify the page size when you load the first page using <code class="prettyprint">product.timeSlots().first(n)</code>. Every page thereafter can be loaded using <code class="prettyprint">nextPage()</code>.</p>
+
+<h2 id="products-choose-how-to-display-individual-time-slots">Products choose how to display individual time slots</h2>
+<pre class="highlight javascript"><code><span class="nx">timeSlotsPage</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">timeSlot</span><span class="p">)</span> <span class="p">{</span>
+  <span class="c1">// Always display startsAt</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">timeSlot</span><span class="p">.</span><span class="nx">startsAt</span><span class="p">);</span>
+
+  <span class="c1">// Only display spotsAvailable if product.showOccurrenceAvailability</span>
+  <span class="k">if</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">product</span><span class="p">.</span><span class="nx">showOccurrenceAvailability</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">timeSlot</span><span class="p">.</span><span class="nx">spotsAvailable</span><span class="p">);</span>
+  <span class="p">}</span>
+
+  <span class="c1">// Only display duration if product.showTimeSlotDuration</span>
+  <span class="k">if</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">product</span><span class="p">.</span><span class="nx">showTimeSlotDuration</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">timeSlot</span><span class="p">.</span><span class="nx">duration</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre>
+
+<p>Each product has a specific way of displaying individual time slots, based on two properties: <code class="prettyprint">showOccurrenceAvailability</code> and <code class="prettyprint">showTimeSlotDuration</code>.
+The example demonstrates how these two properties affect output.</p>
+
+<blockquote>
+<p>Note that <code class="prettyprint">timeSlot.duration</code> is in seconds, and should be converted to a more meaningful time metric for the customer before display.</p>
+</blockquote>
+
+<h2 id="managing-selected-time-slots">Managing selected time slots</h2>
+<pre class="highlight javascript"><code><span class="c1">// Add selected time slot</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">timeSlots</span><span class="p">().</span><span class="nx">target</span><span class="p">().</span><span class="nx">push</span><span class="p">(</span><span class="nx">selectedTimeSlot</span><span class="p">);</span>
+
+<span class="c1">// Remove selected time slot</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">timeSlots</span><span class="p">().</span><span class="nx">target</span><span class="p">().</span><span class="k">delete</span><span class="p">(</span><span class="nx">selectedTimeSlot</span><span class="p">);</span>
+
+<span class="c1">// Clear selected time slots</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">timeSlots</span><span class="p">().</span><span class="nx">target</span><span class="p">().</span><span class="nx">clear</span><span class="p">();</span>
+</code></pre>
+
+<p><code class="prettyprint">order.timeSlots()</code> is a collection relationship, but for now, orders require that only a single time slot be selected. <em>Future releases will allow the ability to select multiple timeSlots.</em></p>
+
+<p>The example shows some basic ways to manipulate selected time slots.</p>
+
+<h2 id="sessions">Sessions</h2>
+
+<p>Coming soon&hellip;</p>
+
+          <h1 id="9-please-answer-some-additional-questions-to-customize-your-experience">9. Please answer some additional questions to customize your experience</h1>
+
+<p>One of the richest features of Occasion is that it enables merchants to add additional questions to each product they sell,
+selecting from a wide range of:</p>
+
+<h3 id="categories">Categories</h3>
+
+<ul>
+<li>Informational</li>
+<li>Price Changing
+
+<ul>
+<li>Add fixed value to price (<code class="prettyprint">add</code>)</li>
+<li>Add percentage to price (<code class="prettyprint">multiply</code>)</li>
+<li>Discount fixed value from price (<code class="prettyprint">subtract</code>)</li>
+<li>Discount percentage from price (<code class="prettyprint">divide</code>)</li>
+<li>Determine price based on permutation of multiple inputs (<code class="prettyprint">permute</code>)</li>
+</ul></li>
+<li>View Components</li>
+<li>Special Fields</li>
+</ul>
+
+<h3 id="form-control-types">Form Control Types</h3>
+
+<ul>
+<li>Text input</li>
+<li>Text area</li>
+<li>Checkbox</li>
+<li>Drop down</li>
+<li>Radio buttons (known as Option List)</li>
+<li>Number input (known as Spin Button)</li>
+<li>Separator</li>
+<li>Text Output</li>
+<li>Waiver</li>
+</ul>
+
+<p>The first two sections of this chapter will show how <code class="prettyprint">Order.construct</code> assists in creating this section of the order form,
+as well as some SDK helpers to provide your customer with instant price updates any time a <code class="prettyprint">priceCalculating</code> question changes.</p>
+
+<p>Each section thereafter will be dedicated to showing you how to display a specific form control type, for every possible category that
+form control type can be (informational, price changing, view component, special). By learning how to display each form control type,
+you will be able to successfully build the additional
+questions section of the order widget.</p>
+
+<h2 id="create-blank-answer-inputs-for-all-the-questions">Create blank answer inputs for all the questions</h2>
+<pre class="highlight javascript"><code><span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">answers</span><span class="p">().</span><span class="nx">target</span><span class="p">().</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">answer</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">answer</span><span class="p">.</span><span class="nx">attributes</span><span class="p">());</span> <span class="c1">// =&gt;</span>
+  <span class="c1">// {</span>
+  <span class="c1">//   id: 'bg35ajhe',</span>
+  <span class="c1">//   value: null</span>
+  <span class="c1">// }</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">answer</span><span class="p">.</span><span class="nx">question</span><span class="p">().</span><span class="nx">attributes</span><span class="p">());</span> <span class="c1">// =&gt;</span>
+  <span class="c1">// {</span>
+  <span class="c1">//   id: 'k127s2y',</span>
+  <span class="c1">//   required: false,</span>
+  <span class="c1">//   title: 'The first optional question',</span>
+  <span class="c1">//   formControl: 'drop_down',</span>
+  <span class="c1">//   priceCalculating: false,</span>
+  <span class="c1">//   operation: null</span>
+  <span class="c1">// }</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">answer</span><span class="p">.</span><span class="nx">question</span><span class="p">().</span><span class="nx">options</span><span class="p">());</span> <span class="c1">// =&gt;</span>
+  <span class="c1">// @see Drop Downs and Option Lists</span>
+<span class="p">});</span>
+</code></pre>
+
+<p><code class="prettyprint">Order.construct</code> called in Chapter 4 initializes the order with blank <code class="prettyprint">answers()</code> for each question in <code class="prettyprint">window.product.questions()</code>.
+You can iterate over every one of <code class="prettyprint">order.answers()</code> and use each of their <code class="prettyprint">question()</code>&rsquo;s properties to display the answer input for the question on the order widget.</p>
+
+<p>We&rsquo;ve listed these properties in the example using <code class="prettyprint">attributes()</code>.</p>
+
+<p>The configuration of these properties will affect how you display each input and how you respond when the input changes.</p>
+
+<h3 id="answer-question-formcontrol"><code class="prettyprint">answer.question().formControl</code></h3>
+
+<p>The <code class="prettyprint">formControl</code> attribute of each question will determine the type of input needed to be displayed in order to answer it.
+Possible values are:</p>
+
+<ul>
+<li><code class="prettyprint">text_input</code></li>
+<li><code class="prettyprint">text_area</code></li>
+<li><code class="prettyprint">checkbox</code></li>
+<li><code class="prettyprint">drop_down</code></li>
+<li><code class="prettyprint">option_list</code></li>
+<li><code class="prettyprint">spin_button</code></li>
+<li><code class="prettyprint">separator</code></li>
+<li><code class="prettyprint">text_output</code></li>
+<li><code class="prettyprint">waiver</code></li>
+<li><code class="prettyprint">attendee</code></li>
+</ul>
+
+<p>Individual sections of this chapter will show you how to map these values to HTML form inputs.</p>
+
+<h3 id="answer-question-title"><code class="prettyprint">answer.question().title</code></h3>
+
+<p>The <code class="prettyprint">title</code> of each question should be used as a <code class="prettyprint">&lt;label&gt;&lt;/label&gt;</code> for each answer input.</p>
+
+<p>Depending on the form control, the question may have additional attributes that are useful or necessary when displaying a label and input. We&rsquo;ll cover these in each of the individual form control sections.</p>
+
+<h3 id="answer-question-required"><code class="prettyprint">answer.question().required</code></h3>
+
+<p>Answers with <code class="prettyprint">question().required</code> equal to true must have a <code class="prettyprint">value</code> or an <code class="prettyprint">option()</code> specified.
+Make sure to set the <code class="prettyprint">required</code> attribute of the HTML input to this value for easier validation.</p>
+
+<h3 id="answer-question-pricecalculating"><code class="prettyprint">answer.question().priceCalculating</code></h3>
+
+<p>If <code class="prettyprint">priceCalculating</code> equals <code class="prettyprint">true</code>, you should add a callback so that any time the input changes, the price of the order displayed to the customer updates. The next section
+will cover this functionality.</p>
+
+<h3 id="answer-question-operation"><code class="prettyprint">answer.question().operation</code></h3>
+
+<p>Additionally, if the question is <code class="prettyprint">priceCalculating</code>, it will also have an <code class="prettyprint">operation</code> equal to one of the following:
+<code class="prettyprint">add</code>, <code class="prettyprint">subtract</code>, <code class="prettyprint">multiply</code>, <code class="prettyprint">divide</code>, and <code class="prettyprint">permute</code>. The value of <code class="prettyprint">operation</code> will affect the attributes associated with a question and
+how the customer will understand the question.</p>
+
+<h3 id="answer-question-options"><code class="prettyprint">answer.question().options()</code></h3>
+
+<p>If a question has <code class="prettyprint">formControl</code> equal to <code class="prettyprint">drop_down</code> or <code class="prettyprint">option_list</code>, it will also have <code class="prettyprint">options().target()</code> loaded with options
+for the customer to choose from.</p>
+
+<p>See the section on Drop Downs and Option Lists for more details.</p>
+
+<h3 id="answer-option-or-answer-value"><code class="prettyprint">answer.option()</code> or <code class="prettyprint">answer.value</code></h3>
+
+<p>In general, you will bind <code class="prettyprint">answer.value</code> to the value of the input displayed for each question.
+Drop downs and option lists will set <code class="prettyprint">answer.option()</code> equal to one of their options.</p>
+
+<h2 id="calculating-and-updating-the-order-39-s-price">Calculating and updating the order&rsquo;s price</h2>
+<pre class="highlight javascript"><code><span class="nb">window</span><span class="p">.</span><span class="nx">afterPriceCalculatingItemChange</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// called after the answer on `window.order` has already</span>
+  <span class="c1">// been updated to reflect the new option or value specified</span>
+  <span class="c1">// in the DOM</span>
+
+  <span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">calculatePrice</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">order</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// @todo Implement Chapter 12</span>
+  <span class="p">});</span>
+<span class="p">};</span>
+</code></pre>
+
+<p>Every time the answer to a <code class="prettyprint">priceCalculating</code> question changes, you must update the price displayed on the order widget
+so the customer can see real-time how their choices affect the order&rsquo;s price.</p>
+
+<p>After change event has been processed and the answer itself has been changed on <code class="prettyprint">window.order</code>, you can call <code class="prettyprint">window.order.calculatePrice()</code>, which will automatically
+update <code class="prettyprint">window.order</code> to have various pricing attributes useful to the customer.</p>
+
+<p>The implementation of this method is completed in Chapter 12, we&rsquo;re showing it here so you can hook up this callback
+as you follow along with building views for the different form control types.</p>
+
+<h2 id="text-inputs-and-text-areas">Text Inputs and Text Areas</h2>
+<pre class="highlight javascript"><code><span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">answers</span><span class="p">().</span><span class="nx">target</span><span class="p">().</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">answer</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">answer</span><span class="p">.</span><span class="nx">question</span><span class="p">().</span><span class="nx">attributes</span><span class="p">());</span> <span class="c1">// =&gt;</span>
+  <span class="c1">// {</span>
+  <span class="c1">//   id: 'k127s2y',</span>
+  <span class="c1">//   required: true,</span>
+  <span class="c1">//   title: 'What is your favorite color?',</span>
+  <span class="c1">//   formControl: 'text_input'</span>
+  <span class="c1">// }</span>
+  <span class="c1">//</span>
+  <span class="c1">// *or*</span>
+  <span class="c1">//</span>
+  <span class="c1">// {</span>
+  <span class="c1">//   id: '6gdt3aw',</span>
+  <span class="c1">//   required: true,</span>
+  <span class="c1">//   title: 'What is your favorite color? Elaborate.',</span>
+  <span class="c1">//   formControl: 'text_area'</span>
+  <span class="c1">// }</span>
+<span class="p">});</span>
+</code></pre>
+
+<p>Text inputs and text areas are the simplest form control types.</p>
+
+<p>A <code class="prettyprint">text_input</code> corresponds to an <code class="prettyprint">&lt;input type=&#39;text&#39;&gt;&lt;/input&gt;</code>.</p>
+
+<p>A <code class="prettyprint">text_area</code> corresponds to a <code class="prettyprint">&lt;textarea&gt;&lt;/textarea&gt;</code>.</p>
+<pre class="highlight javascript"><code><span class="c1">// Assign new value on input change</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">onInputChanged</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">answer</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">e</span><span class="p">.</span><span class="nx">target</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+<span class="p">};</span>
+</code></pre>
+
+<p>The second example in this section shows a basic version of an onChange callback for any answer input without <code class="prettyprint">options()</code>. Any time the input changes,
+read the value of the input and assign it to <code class="prettyprint">answer.value</code>.</p>
+
+<blockquote>
+<p>This is the way answers are completed for every form control type except
+those with <code class="prettyprint">options()</code> (drop downs and option lists). This guide assumes you will use this snippet when answering
+such form controls.</p>
+</blockquote>
+
+<h2 id="checkboxes">Checkboxes</h2>
+<pre class="highlight javascript"><code><span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">answers</span><span class="p">().</span><span class="nx">target</span><span class="p">().</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">answer</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">answer</span><span class="p">.</span><span class="nx">question</span><span class="p">().</span><span class="nx">attributes</span><span class="p">());</span> <span class="c1">// =&gt;</span>
+  <span class="c1">// {</span>
+  <span class="c1">//   id: 'mjyw4t5',</span>
+  <span class="c1">//   must_be_checked: false,</span>
+  <span class="c1">//   title: 'Would you like to enable this free feature?',</span>
+  <span class="c1">//   formControl: 'checkbox',</span>
+  <span class="c1">//   priceCalculating: false</span>
+  <span class="c1">// }</span>
+  <span class="c1">//</span>
+  <span class="c1">// *or*</span>
+  <span class="c1">//</span>
+  <span class="c1">// {</span>
+  <span class="c1">//   id: 'mjyw4t5',</span>
+  <span class="c1">//   must_be_checked: false,</span>
+  <span class="c1">//   title: 'Would you like to add this specific item?',</span>
+  <span class="c1">//   formControl: 'checkbox',</span>
+  <span class="c1">//   priceCalculating: true,</span>
+  <span class="c1">//   operation: 'add',</span>
+  <span class="c1">//   price: '5.0'</span>
+  <span class="c1">// }</span>
+  <span class="c1">//</span>
+  <span class="c1">// *or*</span>
+  <span class="c1">//</span>
+  <span class="c1">// {</span>
+  <span class="c1">//   id: 'mjyw4t5',</span>
+  <span class="c1">//   must_be_checked: false,</span>
+  <span class="c1">//   title: 'Would you like to a fixed discount based on this?',</span>
+  <span class="c1">//   formControl: 'checkbox',</span>
+  <span class="c1">//   priceCalculating: true,</span>
+  <span class="c1">//   operation: 'subtract',</span>
+  <span class="c1">//   price: '5.0'</span>
+  <span class="c1">// }</span>
+  <span class="c1">//</span>
+  <span class="c1">// *or*</span>
+  <span class="c1">//</span>
+  <span class="c1">// {</span>
+  <span class="c1">//   id: 'mjyw4t5',</span>
+  <span class="c1">//   must_be_checked: false,</span>
+  <span class="c1">//   title: 'Want a premium upgrade?',</span>
+  <span class="c1">//   formControl: 'checkbox',</span>
+  <span class="c1">//   priceCalculating: true,</span>
+  <span class="c1">//   operation: 'multiply',</span>
+  <span class="c1">//   percentage: '25.0'</span>
+  <span class="c1">// }</span>
+  <span class="c1">//</span>
+  <span class="c1">// *or*</span>
+  <span class="c1">//</span>
+  <span class="c1">// {</span>
+  <span class="c1">//   id: 'mjyw4t5',</span>
+  <span class="c1">//   must_be_checked: false,</span>
+  <span class="c1">//   title: 'Are you a student?',</span>
+  <span class="c1">//   formControl: 'checkbox',</span>
+  <span class="c1">//   priceCalculating: true,</span>
+  <span class="c1">//   operation: 'divide',</span>
+  <span class="c1">//   percentage: '10.0'</span>
+  <span class="c1">// }</span>
+  <span class="c1">//</span>
+  <span class="c1">// *or*</span>
+  <span class="c1">//</span>
+  <span class="c1">// {</span>
+  <span class="c1">//   id: 'mjyw4t5',</span>
+  <span class="c1">//   must_be_checked: false,</span>
+  <span class="c1">//   title: 'Combine this with other package deals',</span>
+  <span class="c1">//   formControl: 'checkbox',</span>
+  <span class="c1">//   priceCalculating: true,</span>
+  <span class="c1">//   operation: 'permute',</span>
+  <span class="c1">//   price: null</span>
+  <span class="c1">// }</span>
+<span class="p">});</span>
+</code></pre>
+
+<p>Checkboxes can collect information or change the price of the order. The example shows the types of checkbox questions
+you can expect to see on a product.</p>
+
+<p>If the checkbox is checked, set <code class="prettyprint">answer.value</code> equal to <code class="prettyprint">true</code>. Otherwise, set it equal to <code class="prettyprint">false</code>.</p>
+
+<p>First, note that all of them use <code class="prettyprint">must_be_checked</code> rather <code class="prettyprint">required</code> to indicate if they must be checked.
+This goes along with HTML5, which allows all inputs except <code class="prettyprint">[type=checkbox]</code> to use the <code class="prettyprint">required</code> attribute to validate
+presence of a value. Use <code class="prettyprint">answer.value</code> to validate on your own that any checkbox that <code class="prettyprint">must_be_checked</code> is in fact so.</p>
+
+<p>The first object in the example is an informational checkbox question, <code class="prettyprint">priceCalculating</code> is false.</p>
+
+<p>The rest of them are price changing questions, and each of them has a price <code class="prettyprint">operation</code> as well as an extra property regarding
+its impact on price.</p>
+
+<table><thead>
+<tr>
+<th>Operation</th>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong><code class="prettyprint">add</code></strong></td>
+<td><strong><code class="prettyprint">price</code></strong></td>
+<td>The checkbox will add a fixed value <code class="prettyprint">price</code> to the order total if checked.</td>
+</tr>
+<tr>
+<td><strong><code class="prettyprint">subtract</code></strong></td>
+<td><strong><code class="prettyprint">price</code></strong></td>
+<td>The checkbox will <em>subtract</em> a fixed value <code class="prettyprint">price</code> from the order total if checked.</td>
+</tr>
+<tr>
+<td><strong><code class="prettyprint">multiply</code></strong></td>
+<td><strong><code class="prettyprint">percentage</code></strong></td>
+<td>The checkbox will add a <code class="prettyprint">percentage</code> markup to the order total if checked.</td>
+</tr>
+<tr>
+<td><strong><code class="prettyprint">divide</code></strong></td>
+<td><strong><code class="prettyprint">percentage</code></strong></td>
+<td>The checkbox will <em>subtract</em> a <code class="prettyprint">percentage</code> discount from the order total if checked.</td>
+</tr>
+<tr>
+<td><strong><code class="prettyprint">permute</code></strong></td>
+<td>N/A</td>
+<td>The specific value of this checkbox combined with the specific value of other questions will determine the price change, based on what is set by the merchant. As such, these will not have a <code class="prettyprint">price</code> or <code class="prettyprint">percentage</code> attribute. <em>This calculation is done for you in the SDK, so think of these as price changing questions with no price or percentage needed for display.</em></td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Remember to bind the change event for <code class="prettyprint">priceCalculating</code> checkbox inputs to update the order price using <code class="prettyprint">afterPriceCalculatingItemChange</code>.
+See section 2 of this chapter. </p>
+</blockquote>
+
+<p>Merchants usually do not put the <code class="prettyprint">price</code> or <code class="prettyprint">percentage</code> that applies to any individual question in its <code class="prettyprint">title</code>, so you should use <code class="prettyprint">operation</code> and
+these attributes to modify the label of the question accordingly.</p>
+
+<p>For example, if the question had <code class="prettyprint">operation == &#39;divide&#39;</code>, an appropriate modification might be: <code class="prettyprint">&lt;label&gt;[TITLE] ([PERCENTAGE]% off)&lt;/label&gt;</code></p>
+
+<h2 id="drop-downs-and-option-lists">Drop Downs and Option Lists</h2>
+<pre class="highlight javascript"><code><span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">answers</span><span class="p">().</span><span class="nx">target</span><span class="p">().</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">answer</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">answer</span><span class="p">.</span><span class="nx">question</span><span class="p">().</span><span class="nx">attributes</span><span class="p">());</span> <span class="c1">// =&gt;</span>
+  <span class="c1">// {</span>
+  <span class="c1">//   id: 'j1ng3s4',</span>
+  <span class="c1">//   required: true,</span>
+  <span class="c1">//   title: 'Which of these items is your favorite?',</span>
+  <span class="c1">//   formControl: 'drop_down',</span>
+  <span class="c1">//   priceCalculating: false,</span>
+  <span class="c1">//   operation: null</span>
+  <span class="c1">// }</span>
+  <span class="c1">//</span>
+  <span class="c1">// *or*</span>
+  <span class="c1">//</span>
+  <span class="c1">// {</span>
+  <span class="c1">//   id: 'bsg36hy',</span>
+  <span class="c1">//   required: true,</span>
+  <span class="c1">//   title: 'Pick one of the following items',</span>
+  <span class="c1">//   formControl: 'option_list',</span>
+  <span class="c1">//   priceCalculating: true,</span>
+  <span class="c1">//   operation: 'add'</span>
+  <span class="c1">// }</span>
+  <span class="c1">//</span>
+  <span class="c1">// *or*</span>
+  <span class="c1">//</span>
+  <span class="c1">// {</span>
+  <span class="c1">//   id: 'j1ng3s4',</span>
+  <span class="c1">//   required: true,</span>
+  <span class="c1">//   title: 'Pick one of the following items',</span>
+  <span class="c1">//   formControl: 'drop_down',</span>
+  <span class="c1">//   priceCalculating: true,</span>
+  <span class="c1">//   operation: 'permute'</span>
+  <span class="c1">// }</span>
+
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">answer</span><span class="p">.</span><span class="nx">question</span><span class="p">().</span><span class="nx">options</span><span class="p">().</span><span class="nx">target</span><span class="p">().</span><span class="nx">toArray</span><span class="p">());</span> <span class="c1">// =&gt;</span>
+  <span class="c1">// [</span>
+  <span class="c1">//   {</span>
+  <span class="c1">//     id: 'j47ash',</span>
+  <span class="c1">//     title: 'The first option.',</span>
+  <span class="c1">//     position: 0,</span>
+  <span class="c1">//     default: false,</span>
+  <span class="c1">//     price: null</span>
+  <span class="c1">//   }, {</span>
+  <span class="c1">//     id: 'bt5a9yt',</span>
+  <span class="c1">//     title: 'The second option.',</span>
+  <span class="c1">//     position: 1,</span>
+  <span class="c1">//     default: true,</span>
+  <span class="c1">//     price: null</span>
+  <span class="c1">//   }</span>
+  <span class="c1">// ]</span>
+  <span class="c1">//</span>
+  <span class="c1">// *or*</span>
+  <span class="c1">//</span>
+  <span class="c1">// [</span>
+  <span class="c1">//   {</span>
+  <span class="c1">//     id: 'j47ash',</span>
+  <span class="c1">//     title: 'The first option.',</span>
+  <span class="c1">//     position: 0,</span>
+  <span class="c1">//     default: false,</span>
+  <span class="c1">//     price: '5.0'</span>
+  <span class="c1">//   }, {</span>
+  <span class="c1">//     id: 'bt5a9yt',</span>
+  <span class="c1">//     title: 'The second option.',</span>
+  <span class="c1">//     position: 1,</span>
+  <span class="c1">//     default: true,</span>
+  <span class="c1">//     price: '20.0'</span>
+  <span class="c1">//   }</span>
+  <span class="c1">// ]</span>
+<span class="p">});</span>
+</code></pre>
+
+<p>Drop downs and option lists are the two types of questions that have <code class="prettyprint">options()</code>. </p>
+
+<p>A drop down corresponds to a <code class="prettyprint">&lt;select&gt;&lt;/select&gt;</code> tag with an <code class="prettyprint">&lt;option&gt;&lt;/option&gt;</code> for each option in <code class="prettyprint">question().options()</code>.</p>
+
+<p>An option list corresponds to a group of <code class="prettyprint">&lt;input type=&#39;radio&#39;&gt;&lt;/input&gt;</code>s for each option in <code class="prettyprint">question().options()</code>.</p>
+
+<p>For each option:</p>
+
+<ul>
+<li><code class="prettyprint">title</code> is the label that would displayed for any option.</li>
+<li><code class="prettyprint">position</code> determines the order the <code class="prettyprint">options()</code> are displayed in</li>
+<li><code class="prettyprint">default</code> <em>may</em> be true for <em>one</em> of the <code class="prettyprint">options()</code> - that option should be selected by default.</li>
+</ul>
+
+<p>If the question is <code class="prettyprint">priceCalculating</code>, then the drop down or option list will perform one of two operations:</p>
+
+<table><thead>
+<tr>
+<th>Operation</th>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong><code class="prettyprint">add</code></strong></td>
+<td><strong><code class="prettyprint">price</code></strong></td>
+<td>Each option will add a fixed value <code class="prettyprint">option.price</code> to the order total if checked.</td>
+</tr>
+<tr>
+<td><strong><code class="prettyprint">permute</code></strong></td>
+<td>N/A</td>
+<td>The specific value of each option combined with the specific value of other questions will determine the price change, based on what is set by the merchant. As such, no options will have a <code class="prettyprint">price</code> attribute.</td>
+</tr>
+</tbody></table>
+
+<p>Merchants usually do not put the <code class="prettyprint">price</code> that applies to any individual option in its <code class="prettyprint">title</code>, so you should add this to each option&rsquo;s label so
+customers know the price of each option.</p>
+<pre class="highlight javascript"><code><span class="c1">// Directly assign answer.option</span>
+<span class="nx">answer</span><span class="p">.</span><span class="nx">assignOption</span><span class="p">(</span><span class="nx">answer</span><span class="p">.</span><span class="nx">question</span><span class="p">().</span><span class="nx">options</span><span class="p">().</span><span class="nx">target</span><span class="p">().</span><span class="nx">first</span><span class="p">());</span>
+</code></pre>
+<pre class="highlight javascript"><code><span class="c1">// Find option by ID then assign answer.option</span>
+<span class="kd">let</span> <span class="nx">selectedOptionId</span> <span class="o">=</span> <span class="s1">'yt5mfkg'</span><span class="p">;</span>
+
+<span class="kd">let</span> <span class="nx">selectedOption</span> <span class="o">=</span> <span class="nx">answer</span><span class="p">.</span><span class="nx">questions</span><span class="p">.</span><span class="nx">options</span><span class="p">()</span>
+                     <span class="p">.</span><span class="nx">target</span><span class="p">().</span><span class="nx">detect</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">o</span><span class="p">)</span> <span class="p">{</span>
+                       <span class="k">return</span> <span class="nx">o</span><span class="p">.</span><span class="nx">id</span> <span class="o">==</span> <span class="nx">selectedOptionId</span><span class="p">;</span>
+                     <span class="p">});</span>
+
+<span class="nx">answer</span><span class="p">.</span><span class="nx">assignOption</span><span class="p">(</span><span class="nx">selectedOption</span><span class="p">);</span>
+</code></pre>
+
+<p><br/>
+The second and third examples in this section show:</p>
+
+<p>Once an option has been selected, you can set the <code class="prettyprint">answer.option()</code> to the selected option using <code class="prettyprint">assignOption(option)</code>.</p>
+
+<p>If you only know the ID of the option the customer selected, you can find the option itself amongst <code class="prettyprint">answer.question().options()</code>
+using <code class="prettyprint">detect(predicate)</code>, which takes in a function that iterates over every option and returns the first option
+where the function returns true.</p>
+
+<p>In this case, we check to see if the option&rsquo;s ID is equal to the <code class="prettyprint">selectedOptionId</code>.</p>
+
+<blockquote>
+<p>Remember to bind the change event for <code class="prettyprint">priceCalculating</code> drop down and option list inputs to update the order price using <code class="prettyprint">afterPriceCalculatingItemChange</code>.
+See section 2 of this chapter.</p>
+</blockquote>
+
+<h2 id="spin-buttons">Spin Buttons</h2>
+<pre class="highlight javascript"><code><span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">answers</span><span class="p">().</span><span class="nx">target</span><span class="p">().</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">answer</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">answer</span><span class="p">.</span><span class="nx">question</span><span class="p">().</span><span class="nx">attributes</span><span class="p">());</span> <span class="c1">// =&gt;</span>
+  <span class="c1">// {</span>
+  <span class="c1">//   id: 'j1ng3s4',</span>
+  <span class="c1">//   required: true,</span>
+  <span class="c1">//   title: 'How many free items do you want?',</span>
+  <span class="c1">//   formControl: 'spin_button',</span>
+  <span class="c1">//   priceCalculating: false,</span>
+  <span class="c1">//   operation: null,</span>
+  <span class="c1">//   max: 10,</span>
+  <span class="c1">//   exclude_zero: false</span>
+  <span class="c1">// }</span>
+  <span class="c1">//</span>
+  <span class="c1">// *or*</span>
+  <span class="c1">//</span>
+  <span class="c1">// {</span>
+  <span class="c1">//   id: 'bsg36hy',</span>
+  <span class="c1">//   required: true,</span>
+  <span class="c1">//   title: 'How many priced items do you want?',</span>
+  <span class="c1">//   formControl: 'spin_button',</span>
+  <span class="c1">//   priceCalculating: true,</span>
+  <span class="c1">//   operation: 'add',</span>
+  <span class="c1">//   max: 5,</span>
+  <span class="c1">//   exclude_zero: false,</span>
+  <span class="c1">//   price: '10.0'</span>
+  <span class="c1">// }</span>
+  <span class="c1">//</span>
+  <span class="c1">// *or*</span>
+  <span class="c1">//</span>
+  <span class="c1">// {</span>
+  <span class="c1">//   id: 'bsg36hy',</span>
+  <span class="c1">//   required: true,</span>
+  <span class="c1">//   title: 'Do you want more than one of this order?',</span>
+  <span class="c1">//   formControl: 'spin_button',</span>
+  <span class="c1">//   priceCalculating: true,</span>
+  <span class="c1">//   operation: 'multiply',</span>
+  <span class="c1">//   max: 5,</span>
+  <span class="c1">//   exclude_zero: false</span>
+  <span class="c1">// }</span>
+<span class="p">});</span>
+</code></pre>
+
+<p>Spin buttons count incrementally up or down.</p>
+
+<p>A spin button corresponds to an <code class="prettyprint">&lt;input type=&#39;number&#39;&gt;&lt;/input&gt;</code> tag.</p>
+
+<p>Attributes specific to this form control type:</p>
+
+<ul>
+<li><code class="prettyprint">max</code> indicates the max value for the spin button, and can be set on the HTML as the <code class="prettyprint">max</code> attribute too.</li>
+<li><code class="prettyprint">exclude_zero</code> indicates whether the spin button&rsquo;s HTML <code class="prettyprint">min</code> attribute is <code class="prettyprint">0</code> or <code class="prettyprint">1</code>.</li>
+</ul>
+
+<p>If the question is <code class="prettyprint">priceCalculating</code>, then the spin button will perform one of two operations:</p>
+
+<table><thead>
+<tr>
+<th>Operation</th>
+<th>Property</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong><code class="prettyprint">add</code></strong></td>
+<td><strong><code class="prettyprint">price</code></strong></td>
+<td>Each time the spin button is incremented, the fixed value <code class="prettyprint">price</code> will be added to the order total.</td>
+</tr>
+<tr>
+<td><strong><code class="prettyprint">multiply</code></strong></td>
+<td>N/A</td>
+<td>The order total is multiplied by the value of the spin button.</td>
+</tr>
+</tbody></table>
+
+<p>Merchants usually do not put the <code class="prettyprint">price</code> that applies to any individual increment of the spin button, so you should add this to the
+label so customers know the price of each increment.</p>
+
+<blockquote>
+<p>Remember to bind the change event for <code class="prettyprint">priceCalculating</code> spin button inputs to update the order price using <code class="prettyprint">afterPriceCalculatingItemChange</code>.
+See section 2 of this chapter.</p>
+</blockquote>
+
+<h2 id="view-components">View Components</h2>
+<pre class="highlight javascript"><code><span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">answers</span><span class="p">().</span><span class="nx">target</span><span class="p">().</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">answer</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">answer</span><span class="p">.</span><span class="nx">question</span><span class="p">().</span><span class="nx">attributes</span><span class="p">());</span> <span class="c1">// =&gt;</span>
+  <span class="c1">// {</span>
+  <span class="c1">//   id: 'j1ng3s4',</span>
+  <span class="c1">//   title: '',</span>
+  <span class="c1">//   formControl: 'separator',</span>
+  <span class="c1">//   priceCalculating: false</span>
+  <span class="c1">// }</span>
+  <span class="c1">//</span>
+  <span class="c1">// *or*</span>
+  <span class="c1">//</span>
+  <span class="c1">// {</span>
+  <span class="c1">//   id: 'j1ng3s4',</span>
+  <span class="c1">//   title: 'This is some text to display for the customer.',</span>
+  <span class="c1">//   formControl: 'text_output',</span>
+  <span class="c1">//   displayAsTitle: true,</span>
+  <span class="c1">//   priceCalculating: false</span>
+  <span class="c1">// }</span>
+<span class="p">});</span>
+</code></pre>
+
+<p>Some questions in Occasion are not questions at all
+<img src='https://assets-cdn.github.com/images/icons/emoji/unicode/1f61b.png?v5' width='25px' style='margin-bottom: -5px;' /></p>
+
+<p>Instead, some are just helpful view components like separators and titles that make the widget more helpful and aesthetic.</p>
+
+<p>There are two view component form control types right now: <code class="prettyprint">separator</code>, and <code class="prettyprint">text_output</code>.</p>
+
+<p><code class="prettyprint">separator</code> corresponds to an <code class="prettyprint">&lt;hr/&gt;</code> tag. That&rsquo;s about it.</p>
+
+<p><code class="prettyprint">text_output</code> corresponds to a <code class="prettyprint">&lt;p&gt;&lt;/p&gt;</code> tag with <code class="prettyprint">title</code> as the content. However, if <code class="prettyprint">question().displayAsTitle</code> is true,
+switch to a <code class="prettyprint">&lt;h3&gt;&lt;/h3&gt;</code> or similar.</p>
+
+<h2 id="special-fields">Special Fields</h2>
+<pre class="highlight javascript"><code><span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">answers</span><span class="p">().</span><span class="nx">target</span><span class="p">().</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">answer</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">answer</span><span class="p">.</span><span class="nx">question</span><span class="p">().</span><span class="nx">attributes</span><span class="p">());</span> <span class="c1">// =&gt;</span>
+  <span class="c1">// {</span>
+  <span class="c1">//   id: 'j1ng3s4',</span>
+  <span class="c1">//   title: 'Do you accept the terms and conditions?',</span>
+  <span class="c1">//   formControl: 'waiver',</span>
+  <span class="c1">//   priceCalculating: false,</span>
+  <span class="c1">//   waiverText: 'By agreeing to these terms, you accept that ...'</span>
+  <span class="c1">// }</span>
+<span class="p">});</span>
+</code></pre>
+
+<h3 id="waiver-fields">Waiver Fields</h3>
+
+<p>The first special field form control type is the Waiver Field, which is an upgraded checkbox that allows for an additional <code class="prettyprint">waiverText</code>
+attribute on top of the standard <code class="prettyprint">title</code>. These fields will not have a <code class="prettyprint">must_be_checked</code> attribute, <strong>but waiver fields must always be checked for successful purchase.</strong></p>
+
+<h3 id="attendees-fields">Attendees Fields</h3>
+
+<p>Coming soon&hellip;</p>
+
+          <h1 id="10-do-you-have-a-coupon-or-any-gift-cards-you-39-d-like-to-use">10. Do you have a coupon or any gift cards you&rsquo;d like to use?</h1>
+
+<p>You can provide customers with the ability to add a coupon or any number of gift cards to their order. This could be
+implemented as a single text input that takes in a code, checks that it&rsquo;s valid, and then displays the coupon or gift
+card information on the order widget, indicating that it has been added to the order while updating the order price.</p>
+
+<h2 id="finding-coupons-and-gift-cards-by-code">Finding coupons and gift cards by code</h2>
+<pre class="highlight javascript"><code><span class="nb">window</span><span class="p">.</span><span class="nx">product</span><span class="p">.</span><span class="nx">redeemables</span><span class="p">().</span><span class="nx">findBy</span><span class="p">({</span> <span class="na">code</span><span class="p">:</span> <span class="s1">'HOLIDAYS45'</span> <span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">redeemable</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">redeemable</span><span class="p">.</span><span class="nx">isA</span><span class="p">(</span><span class="nx">occsnClient</span><span class="p">.</span><span class="nx">Coupon</span><span class="p">))</span> <span class="p">{</span>
+
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">redeemable</span><span class="p">.</span><span class="nx">attributes</span><span class="p">())</span> <span class="c1">// =&gt;</span>
+    <span class="c1">// {</span>
+    <span class="c1">//   id: 'bh7ag0zn',</span>
+    <span class="c1">//   code: 'HOLIDAYS45',</span>
+    <span class="c1">//   name: 'Holiday Coupon',</span>
+    <span class="c1">//   discount_fixed: '5.0',</span>
+    <span class="c1">//   discount_percentage: null</span>
+    <span class="c1">// }</span>
+    <span class="c1">//</span>
+    <span class="c1">// *or*</span>
+    <span class="c1">//</span>
+    <span class="c1">// {</span>
+    <span class="c1">//   id: 'bh7ag0zn',</span>
+    <span class="c1">//   code: 'HOLIDAYS45',</span>
+    <span class="c1">//   name: 'Holiday Coupon',</span>
+    <span class="c1">//   discount_fixed: null,</span>
+    <span class="c1">//   discount_percentage: '10.0'</span>
+    <span class="c1">// }</span>
+
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">redeemable</span><span class="p">.</span><span class="nx">isA</span><span class="p">(</span><span class="nx">occsnClient</span><span class="p">.</span><span class="nx">GiftCard</span><span class="p">))</span> <span class="p">{</span>
+
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">redeemable</span><span class="p">.</span><span class="nx">attributes</span><span class="p">())</span> <span class="c1">// =&gt;</span>
+    <span class="c1">// {</span>
+    <span class="c1">//   id: '56bvcf4e',</span>
+    <span class="c1">//   code: 'HOLIDAYS45',</span>
+    <span class="c1">//   initial_value: '50.0',</span>
+    <span class="c1">//   value: '10.0'</span>
+    <span class="c1">// }</span>
+  <span class="p">}</span>
+
+<span class="p">})</span>
+<span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">errors</span><span class="p">,</span> <span class="nx">status</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">errors</span><span class="p">)</span> <span class="c1">// =&gt;</span>
+  <span class="c1">// status == 404 Not Found</span>
+  <span class="c1">// {</span>
+  <span class="c1">//   parameter: 'filter/code',</span>
+  <span class="c1">//   code: 'notFound',</span>
+  <span class="c1">//   detail: 'Could not find redeemable with code: "HOLIDAYS45"'</span>
+  <span class="c1">// }</span>
+  <span class="c1">//</span>
+  <span class="c1">// *or*</span>
+  <span class="c1">//</span>
+  <span class="c1">// status == 409 Conflict</span>
+  <span class="c1">// {</span>
+  <span class="c1">//   parameter: 'filter/code',</span>
+  <span class="c1">//   code: 'unavailable',</span>
+  <span class="c1">//   detail: 'A coupon or gift card was found, but is no longer available for use.'</span>
+  <span class="c1">// }</span>
+<span class="p">})</span>
+</code></pre>
+
+<blockquote>
+<p>All possible error responses are displayed in the example</p>
+</blockquote>
+
+<p>The relationship <code class="prettyprint">product.redeemables()</code> enables you to search for any redeemables (coupon or gift card) that can be redeemed
+for the product being ordered, using <code class="prettyprint">findBy()</code> to find the distinct redeemable for the code the customer entered.</p>
+
+<p>Every resource returned from a promise in the SDK has a function <code class="prettyprint">isA(class)</code>, which will return true if the resource is an
+instance of the <code class="prettyprint">class</code> provided.</p>
+
+<p>Once we&rsquo;ve found a redeemable, we can use <code class="prettyprint">isA</code> to see if it is an <code class="prettyprint">occsnClient.Coupon</code>, or an <code class="prettyprint">occsnClient.GiftCard</code>.</p>
+
+<p>Coupons and gift cards will have different <code class="prettyprint">attributes()</code>, as displayed in the example. These attributes are:</p>
+
+<h3 id="coupons">Coupons</h3>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">code</code></td>
+<td>The coupon code</td>
+</tr>
+<tr>
+<td><code class="prettyprint">name</code></td>
+<td>The name of the coupon</td>
+</tr>
+<tr>
+<td><code class="prettyprint">discount_fixed</code></td>
+<td>The fixed monetary discount provided by the coupon. Will be <code class="prettyprint">null</code> if <code class="prettyprint">discount_percentage</code> exists.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">discount_percentage</code></td>
+<td>The percentage discount provided by the coupon. Will be <code class="prettyprint">null</code> if <code class="prettyprint">discount_fixed</code> exists.</td>
+</tr>
+</tbody></table>
+
+<h3 id="gift-cards">Gift Cards</h3>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">code</code></td>
+<td>The gift card code</td>
+</tr>
+<tr>
+<td><code class="prettyprint">initial_value</code></td>
+<td>The initial value that was loaded onto the gift card.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">value</code></td>
+<td>The remaining value on the gift card that can be applied to the order.</td>
+</tr>
+</tbody></table>
+
+<h2 id="adding-the-redeemable-to-the-order">Adding the redeemable to the order</h2>
+<pre class="highlight javascript"><code><span class="nb">window</span><span class="p">.</span><span class="nx">product</span><span class="p">.</span><span class="nx">redeemables</span><span class="p">().</span><span class="nx">findBy</span><span class="p">({</span> <span class="na">code</span><span class="p">:</span> <span class="s1">'HOLIDAYS45'</span> <span class="p">})</span>
+<span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">redeemable</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="nx">redeemable</span><span class="p">.</span><span class="nx">isA</span><span class="p">(</span><span class="nx">occsnClient</span><span class="p">.</span><span class="nx">Coupon</span><span class="p">))</span> <span class="p">{</span>
+    <span class="c1">// Assign the coupon to the order if the redeemable is a coupon</span>
+    <span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">assignCoupon</span><span class="p">(</span><span class="nx">redeemable</span><span class="p">);</span>
+
+  <span class="p">}</span> <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nx">redeemable</span><span class="p">.</span><span class="nx">isA</span><span class="p">(</span><span class="nx">occsnClient</span><span class="p">.</span><span class="nx">GiftCard</span><span class="p">))</span> <span class="p">{</span>
+    <span class="c1">// Charge gift card for its entire value if the redeemable is a gift card</span>
+    <span class="c1">// @see Chapter 11 for more information on `charge`</span>
+    <span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">charge</span><span class="p">(</span><span class="nx">redeemable</span><span class="p">,</span> <span class="nx">redeemable</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">})</span>
+</code></pre>
+
+<p>Once we&rsquo;ve found a redeemable, we check to see if it is an <code class="prettyprint">occsnClient.Coupon</code>, and if it is, we <code class="prettyprint">window.order.assignCoupon(coupon)</code>.</p>
+
+<p>If it is a <code class="prettyprint">occsnClient.GiftCard</code>, use <code class="prettyprint">order.charge</code> to charge the gift card for the value specified in the second argument, in this case its entire <code class="prettyprint">value</code>.</p>
+
+<h2 id="removing-redeemables-from-the-order">Removing redeemables from the order</h2>
+<pre class="highlight javascript"><code><span class="c1">// Remove coupon by setting order.coupon equal to null</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">assignCoupon</span><span class="p">(</span><span class="kc">null</span><span class="p">);</span>
+
+<span class="c1">// Remove gift card using order.removeCharge</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">removeCharge</span><span class="p">(</span><span class="nx">giftCardToRemove</span><span class="p">);</span>
+</code></pre>
+
+<p>You can easily remove redeemables using the functions displayed in this example.</p>
+
+<h2 id="updating-order-price">Updating order price</h2>
+
+<p>If we add a coupon or a gift card to the order, the price is going to change (unless it is already free, of course).</p>
+
+<p>To reflect any discount provided by a redeemable, you should call the <code class="prettyprint">window.afterPriceCalculatingItemChange</code> callback
+created in Chapter 9 Section 2 after adding the redeemable to the order.</p>
+
+<blockquote>
+<p>Remember to bind the event for successfully finding a redeemable to update the order price using <code class="prettyprint">afterPriceCalculatingItemChange</code>.
+See Chapter 9 Section 2.</p>
+</blockquote>
+
+          <h1 id="11-enter-your-payment-information">11. Enter your payment information</h1>
+
+<p>After the customer has selected any coupons or gift cards, it is time for them to enter their payment information. Right now only credit
+cards are supported, but Paypal and other platforms may be featured in future releases.</p>
+
+<h2 id="build-and-charge-a-credit-card-using-a-payment-processor-payment-method-token">Build and charge a credit card using a payment processor payment method token</h2>
+<pre class="highlight javascript"><code><span class="nb">window</span><span class="p">.</span><span class="nx">onOrderFormSubmit</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">THIRD_PARTY_FUNCTION_TO_CREATE_PAYMENT_METHOD_TOKEN</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">token</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">creditCard</span> <span class="o">=</span> <span class="nx">occsnClient</span><span class="p">.</span><span class="nx">CreditCard</span><span class="p">.</span><span class="nx">build</span><span class="p">({</span> <span class="na">id</span><span class="p">:</span> <span class="nx">token</span> <span class="p">});</span>
+
+    <span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">charge</span><span class="p">(</span><span class="nx">creditCard</span><span class="p">,</span> <span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">balance</span><span class="p">);</span>
+
+    <span class="c1">// @todo Implement Chapter 13</span>
+  <span class="p">})</span>
+  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">thirdPartyErrors</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// do something with thirdPartyErrors on your own</span>
+  <span class="p">});</span>
+<span class="p">};</span>
+</code></pre>
+
+<p>Occasion does not interpret or store payment information in our application, we outsource PCI compliance to our
+payment processor services <a href="https://docs.spreedly.com/guides/adding-payment-methods/javascript/">Spreedly</a>
+and Payline Data.</p>
+
+<p>You submit the credit card data to them alone and they&rsquo;ll tell you if it&rsquo;s valid. Then they&rsquo;ll give you a secure token for Occasion to process payment with on our server.</p>
+
+<p>The steps involved in checking the validity of a credit card and safely charging it are as follows:</p>
+
+<ol>
+<li>Use Spreedly or Payline&rsquo;s JS libraries to create a credit card form in the order widget. <strong>The fields of these inputs will not be bound to any attribute or relationship of
+<code class="prettyprint">window.order</code>, because we do not want to submit this sensitive information to Occasion, only to the payment processor.</strong></li>
+<li>Add a callback to the submit event of the overall <code class="prettyprint">window.order</code> widget form <em>(not the credit card form)</em>.</li>
+<li>When the submit callback is executed, send the credit card data to the payment processor. The payment processor will provide a function or endpoint that allows you to send credit card data to their server and receive in return
+a payment method token corresponding to the cached payment method on their server.</li>
+<li>Use this payment method token to build a <code class="prettyprint">CreditCard</code> and charge it for the remaining balance of the order. Chapter 12 will explain <code class="prettyprint">order.balance</code> in more detail.</li>
+<li>Carry through with the original submit event that was fired, and save the order to the server. See Chapter 13 for implementation.</li>
+</ol>
+
+<p><strong>TODO: INFORMATION ON USING OCCASION&rsquo;S ENV KEYS</strong></p>
+
+<h2 id="edit-or-remove-a-credit-card-charge">Edit or remove a credit card charge</h2>
+<pre class="highlight javascript"><code><span class="c1">// Update the amount charged to the specified credit card to 9.0</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">editCharge</span><span class="p">(</span><span class="nx">chargedCreditCard</span><span class="p">,</span> <span class="mf">9.0</span><span class="p">);</span>
+
+<span class="c1">// Remove the charged credit card from the order</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">removeCharge</span><span class="p">(</span><span class="nx">invalidCreditCard</span><span class="p">);</span>
+</code></pre>
+
+<p>If your order fails to save because the customer&rsquo;s credit card information was wrong, they&rsquo;re going to have to enter new credit card data.</p>
+
+<p>But just because the order doesn&rsquo;t save doesn&rsquo;t mean the credit card is removed from it, the invalid credit card will remain on the order
+even if you call <code class="prettyprint">order.charge()</code> with a new credit card. <strong>An order can only charge one credit card, valid or not valid.</strong></p>
+
+<p>To prevent this scenario, you should remove invalid credit cards if they cause an order not to save, and then go through the process outlined
+in the previous section in order to build a new credit card. </p>
+
+<p>If for any reason you need to edit the amount charged to any item that has already been charged, you can do that too.</p>
+
+          <h1 id="12-your-total-today-is">12. Your total today is&hellip;</h1>
+
+<p>The last section of the order widget takes no input. Instead, it displays the result of a customer&rsquo;s choices: the subtotal, savings, tax, and total of the order.</p>
+
+<h2 id="displaying-useful-price-information">Displaying useful price information</h2>
+<pre class="highlight javascript"><code><span class="nb">window</span><span class="p">.</span><span class="nx">afterPriceCalculatingItemChange</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="c1">// called after the answer on `window.order` has already</span>
+  <span class="c1">// been updated to reflect the new option or value specified</span>
+  <span class="c1">// in the DOM</span>
+
+  <span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">calculatePrice</span><span class="p">()</span>
+  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">order</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">attributes</span><span class="p">())</span> <span class="c1">// =&gt;</span>
+    <span class="c1">// {</span>
+    <span class="c1">//   subtotal: '10.0',</span>
+    <span class="c1">//   couponAmount: '1.0',</span>
+    <span class="c1">//   tax: '2.0',</span>
+    <span class="c1">//   giftCardAmount: '5.0',</span>
+    <span class="c1">//   price: '11.0',</span>
+    <span class="c1">//   balance: '6.0'</span>
+    <span class="c1">// }</span>
+  <span class="p">});</span>
+<span class="p">};</span>
+</code></pre>
+
+<p>Every time:</p>
+
+<ul>
+<li>The answer to a <code class="prettyprint">priceCalculating</code> question changes</li>
+<li>A coupon is added</li>
+<li>Gift cards are added</li>
+</ul>
+
+<p>You must update the price displayed on the order widget
+so the customer can see real-time how their choices affect the order&rsquo;s price. We&rsquo;ve already covered in previous sections how to bind this callback appropriately - now we will explain how to
+implement the remaining functionality.</p>
+
+<p>Each time the <code class="prettyprint">window.afterPriceCalculatingItemChange</code> callback shown is executed, it will call <code class="prettyprint">window.order.calculatePrice()</code>,
+which will automatically update <code class="prettyprint">window.order</code> to have the following attributes:</p>
+
+<table><thead>
+<tr>
+<th>Attribute</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code class="prettyprint">subtotal</code></td>
+<td>The price of the order before coupon discount and tax have been added</td>
+</tr>
+<tr>
+<td><code class="prettyprint">couponAmount</code></td>
+<td>The monetary value of the coupon that may have been applied to the order. If there is no coupon, this will equal <code class="prettyprint">null</code></td>
+</tr>
+<tr>
+<td><code class="prettyprint">tax</code></td>
+<td>The monetary value of <code class="prettyprint">product.tax_percentage</code> applied to <code class="prettyprint">order.subtotal - order.couponAmount</code></td>
+</tr>
+<tr>
+<td><code class="prettyprint">giftCardAmount</code></td>
+<td>The monetary value of all of the gift cards charged to the order. If no gift cards, this will equal <code class="prettyprint">null</code>.</td>
+</tr>
+<tr>
+<td><code class="prettyprint">price</code></td>
+<td>The total price of the order after tax has been applied to the subtotal - discounts</td>
+</tr>
+<tr>
+<td><code class="prettyprint">balance</code></td>
+<td>The remaining balance after <code class="prettyprint">giftCardAmount</code> has been deducted from <code class="prettyprint">price</code>.</td>
+</tr>
+</tbody></table>
+
+<p>You should display these attributes to the customer accordingly, so that they have a full understanding of exactly what charges they are receiving on their
+payment method.</p>
+
+<h2 id="the-numbers-must-add-up">The numbers must add up</h2>
+
+<p>In the previous chapter we made use of <code class="prettyprint">order.balance</code> to charge the credit card provided for the &ldquo;remaining balance&rdquo;
+left on the order.</p>
+
+<p><strong>An order saved to Occasion is only valid if all of the charges add up to <code class="prettyprint">order.price</code>, otherwise your order will fail to save.</strong></p>
+
+<p>This is why it is so useful to wait until the order form has been submitted before processing the credit card data and
+building/charging a <code class="prettyprint">CreditCard</code>. You will know the final <code class="prettyprint">order.balance</code> after the customer has finished answering questions and
+adding all of their gift cards and coupons, rather than having to continually edit the credit card charge each time <code class="prettyprint">balance</code> changes
+with <code class="prettyprint">price</code>.</p>
+
+<p>The conclusion is simple: just charge credit cards for <code class="prettyprint">order.balance</code> when the order form is submitted.
+Let <code class="prettyprint">updatePrice()</code> do the rest and the numbers will always add up.</p>
+
+          <h1 id="13-submit-your-order">13. Submit your order</h1>
+
+<p>The time has come. We are now ready to add the big &ldquo;Finalize order&rdquo; button at the bottom of the widget.</p>
+
+<h2 id="the-button">The button</h2>
+<pre class="highlight javascript"><code><span class="nb">window</span><span class="p">.</span><span class="nx">product</span><span class="p">.</span><span class="nx">orderButtonText</span>
+</code></pre>
+
+<p>When displaying this big beautiful button in all its glory, make sure to do it the way our merchants want!</p>
+
+<p>The product has <code class="prettyprint">orderButtonText</code> to shine the way.</p>
+
+<h2 id="finallyze">Finallyze</h2>
+<pre class="highlight javascript"><code><span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">save</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">if</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">persisted</span><span class="p">())</span> <span class="p">{</span>
+    <span class="c1">// order was a success, go to the completion page</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="c1">// order failed for some reason, read the errors</span>
+
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">errors</span><span class="p">().</span><span class="nx">toArray</span><span class="p">())</span> <span class="c1">// =&gt;</span>
+    <span class="c1">// @see Chapter 14 Section 2</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre>
+
+<p>You can attempt to persist any resource in the SDK at any time by calling <code class="prettyprint">save(callback)</code> on it.</p>
+
+<p>When <code class="prettyprint">save</code> receives a response, the <code class="prettyprint">callback</code> will execute regardless of whether or not the
+attempt was a success or failure, and you can call the original <code class="prettyprint">window.order</code> from the <code class="prettyprint">callback</code> because <code class="prettyprint">save</code> mutates
+the original object it was called on rather than responding with a new one.</p>
+
+<p><code class="prettyprint">persisted()</code> indicates whether or not any resource in the SDK exists on our server. If an order fails to save, it will
+not be persisted on our server.</p>
+
+<p>Instead, it will have <code class="prettyprint">errors()</code> that you can display for the customer, which will be shown in the next chapter.</p>
+
+          <h1 id="14-thanks-or-there-was-a-problem">14. Thanks&hellip;<em>or</em>&hellip;There was a problem</h1>
+
+<p>After the order form is submitted, your customer will either achieve great success, or experience crushing failure.</p>
+
+<p>To make this experience best, give them a great thank you page, and an effective error display.</p>
+
+<h2 id="success">Success</h2>
+<pre class="highlight javascript"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">product</span><span class="p">.</span><span class="nx">postTransactionalMessage</span><span class="p">);</span> <span class="c1">// =&gt;</span>
+<span class="c1">// Thanks for booking our product!</span>
+
+<span class="c1">// Attributes after the order is saved to the server</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">attributes</span><span class="p">());</span> <span class="c1">// =&gt;</span>
+<span class="c1">// {</span>
+<span class="c1">//   id: '875ahny6',</span>
+<span class="c1">//   verificationCode: 'kASn37a',</span>
+<span class="c1">//   status: 'booked',</span>
+<span class="c1">//   createdAt: '2015-10-23T11:00:44.539-05:00',</span>
+<span class="c1">//   updatedAt: '2015-10-23T11:00:44.539-05:00',</span>
+<span class="c1">//   tax: '0.0',</span>
+<span class="c1">//   taxPercentage: '0.0',</span>
+<span class="c1">//   couponAmount: '1.0',</span>
+<span class="c1">//   couponDescription: '$1.00',</span>
+<span class="c1">//   price: '10.0',</span>
+<span class="c1">//   quantity: 1,</span>
+<span class="c1">//   description: 'The title of the product being ordered.'</span>
+<span class="c1">// }</span>
+</code></pre>
+
+<p>Displaying a success screen to the customer is simple. Do away with the order form, and show them <code class="prettyprint">product.postTransactionalMessage</code>.</p>
+
+<p>You can also choose to show them any of the <code class="prettyprint">attributes()</code> of the saved order, the output of which is shown in this example.</p>
+
+<h2 id="error">Error</h2>
+<pre class="highlight javascript"><code><span class="c1">// Errors after the order fails to save to the server</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">errors</span><span class="p">().</span><span class="nx">forField</span><span class="p">(</span><span class="s1">'customer'</span><span class="p">));</span> <span class="c1">// =&gt;</span>
+<span class="c1">// [</span>
+<span class="c1">//   {</span>
+<span class="c1">//   },</span>
+<span class="c1">// ]</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">errors</span><span class="p">().</span><span class="nx">forField</span><span class="p">(</span><span class="s1">'timeSlots'</span><span class="p">));</span> <span class="c1">// =&gt;</span>
+<span class="c1">// [</span>
+<span class="c1">//   {</span>
+<span class="c1">//   },</span>
+<span class="c1">// ]</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">errors</span><span class="p">().</span><span class="nx">forField</span><span class="p">(</span><span class="s1">'answers'</span><span class="p">));</span> <span class="c1">// =&gt;</span>
+<span class="c1">// [</span>
+<span class="c1">//   {</span>
+<span class="c1">//   },</span>
+<span class="c1">// ]</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">errors</span><span class="p">().</span><span class="nx">forField</span><span class="p">(</span><span class="s1">'coupon'</span><span class="p">));</span> <span class="c1">// =&gt;</span>
+<span class="c1">// [</span>
+<span class="c1">//   {</span>
+<span class="c1">//   },</span>
+<span class="c1">// ]</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">errors</span><span class="p">().</span><span class="nx">forField</span><span class="p">(</span><span class="s1">'transactions'</span><span class="p">));</span> <span class="c1">// =&gt;</span>
+<span class="c1">// [</span>
+<span class="c1">//   {</span>
+<span class="c1">//   },</span>
+<span class="c1">// ]</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">errors</span><span class="p">().</span><span class="nx">forBase</span><span class="p">());</span> <span class="c1">// =&gt;</span>
+<span class="c1">// [</span>
+<span class="c1">//   {</span>
+<span class="c1">//   },</span>
+<span class="c1">// ]</span>
+</code></pre>
+
+<blockquote>
+<p>All possible errors are shown in this example.</p>
+</blockquote>
+
+<p><strong>TODO: Display possible errors for <code class="prettyprint">order.save</code></strong></p>
+
+<p>An efficient error display will let the customer know what mistakes they&rsquo;ve made on the form or what errors have occurred in processing
+the order.</p>
+
+<p>You can get all of the errors for a given attribute or relationship using <code class="prettyprint">errors().forField(name)</code>. This is useful for displaying errors next to the input(s)
+that generated them.</p>
+
+<p>You can get all of the errors that are associated with the base <code class="prettyprint">order</code> (rather than a specific field) using <code class="prettyprint">errors.forBase()</code>. You could
+display those at the bottom of the order widget or wherever works best for you.</p>
+
+          <h1 id="15-conclusion">15. Conclusion</h1>
+
+<p><strong>We made it!</strong> You now have a fully functioning order widget, ready to start booking merchants&rsquo; products on Occasion.</p>
+
+<p>We hope this getting started guide has served you well. If you have any questions that you feel are not answered through this documentation,
+please reach out to <a href="nick@getoccasion.com">nick@getoccasion.com</a>.</p>
+
+<p>Also check out the <em>Advanced Section</em> immediately after this, where you can see lists of many of the useful functions that are
+available for each resource in the Occasion SDK in order to gain a more definitive grasp on our DSL.</p>
+
+<p>Good luck with your future success! Happy booking
+<img src='https://assets-cdn.github.com/images/icons/emoji/metal.png?v5' width='25px' style='margin-bottom: -5px;' /></p>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="javascript">javascript</a>
+                <a href="#" data-language-name="json">json</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
