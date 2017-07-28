@@ -33,6 +33,10 @@ html, body {
   background-color: $main-bg;
   height: 100%;
   -webkit-text-size-adjust: none; /* Never autoresize text */
+
+  & .sdk {
+    @extend %default-font-sdk;
+  }
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -460,6 +464,10 @@ html, body {
     border-radius: 3px;
     @extend %break-words;
     @extend %code-font;
+
+    .sdk & {
+      @extend %no-break-words;
+    }
   }
 
   pre>code {
