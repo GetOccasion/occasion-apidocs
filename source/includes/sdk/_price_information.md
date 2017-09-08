@@ -63,4 +63,4 @@ adding all of their gift cards and coupons, rather than having to continually ed
 with `price`.
 
 The conclusion is simple: just charge credit cards for `order.balance` when the order form is submitted.
-Let `updatePrice()` do the rest and the numbers will always add up.
+Let `calculatePrice()` do the rest and the numbers will always add up.
