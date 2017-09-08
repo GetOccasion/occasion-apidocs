@@ -96,6 +96,10 @@ Depending on the form control, the question may have additional attributes that 
 Answers with `question().required` equal to true must have a `value` or an `option()` specified.
 Make sure to set the `required` attribute of the HTML input to this value for easier validation.
 
+### `answer.question().position`
+
+The order that questions should be displayed in is indicated by their `position`, from `0` to `n`.
+
 ### `answer.question().priceCalculating`
 
 If `priceCalculating` equals `true`, you should add a callback so that any time the input changes, the price of the order displayed to the customer updates. The next section
