@@ -19,7 +19,7 @@ window.afterPriceCalculatingItemChange = function() {
     //   tax: '2.0',
     //   giftCardAmount: '5.0',
     //   price: '11.0',
-    //   balance: '6.0'
+    //   outstandingBalance: '6.0'
     // }
   });
 };
@@ -45,22 +45,22 @@ Attribute | Description
 `tax` | The monetary value of `product.tax_percentage` applied to `order.subtotal - order.couponAmount`
 `giftCardAmount` | The monetary value of all of the gift cards charged to the order. If no gift cards, this will equal `null`.
 `price` | The total price of the order after tax has been applied to the subtotal - discounts
-`balance` | The remaining balance after `giftCardAmount` has been deducted from `price`.
+`outstandingBalance` | The remaining balance after `giftCardAmount` has been deducted from `price`.
 
 You should display these attributes to the customer accordingly, so that they have a full understanding of exactly what charges they are receiving on their
 payment method.
 
 ## The numbers must add up
 
-In the previous chapter we made use of `order.balance` to charge the credit card provided for the "remaining balance"
+In the previous chapter we made use of `order.outstandingBalance` to charge the credit card provided for the remaining balance
 left on the order.
 
 **An order saved to Occasion is only valid if all of the charges add up to `order.price`, otherwise your order will fail to save.**
 
 This is why it is so useful to wait until the order form has been submitted before processing the credit card data and
-building/charging a `CreditCard`. You will know the final `order.balance` after the customer has finished answering questions and
-adding all of their gift cards and coupons, rather than having to continually edit the credit card charge each time `balance` changes
+building/charging a `CreditCard`. You will know the final `order.outstandingBalance` after the customer has finished answering questions and
+adding all of their gift cards and coupons, rather than having to continually edit the credit card charge each time `outstandingBalance` changes
 with `price`.
 
-The conclusion is simple: just charge credit cards for `order.balance` when the order form is submitted.
+The conclusion is simple: just charge credit cards for `order.outstandingBalance` when the order form is submitted.
 Let `calculatePrice()` do the rest and the numbers will always add up.

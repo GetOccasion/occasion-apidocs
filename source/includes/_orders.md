@@ -62,7 +62,7 @@ coupon_amount | true | The amount that the coupon used for this order took off f
 coupon_description | true | A readable version of the coupon amount: if a fixed discount coupon, then `'$X.XX'`, if a percentage discount, then `'X.X%'`
 quantity | true | The quantity of this order that was purchased
 description | true | The title of the product or order items purchased with this order
-balance | false | The total balance left to be paid on this order
+balance | false | The total balance of accepted transactions paid to this order
 session_identifier | false | A unique identifier used to associate this order with a session of an order form (conversion tracking, etc.)
 customer_name | false | The name the customer used to purchase this order
 customer_email | false | The email the customer used to purchase this order
@@ -153,7 +153,7 @@ coupon_amount | true | The amount that the coupon used for this order took off f
 coupon_description | true | A readable version of the coupon amount: if a fixed discount coupon, then `'$X.XX'`, if a percentage discount, then `'X.X%'`
 quantity | true | The quantity of this order that was purchased
 description | true | The title of the product or order items purchased with this order
-balance | false | The total balance left to be paid on this order
+balance | false | The total balance of accepted transactions paid to this order
 session_identifier | false | A unique identifier used to associate this order with a session of an order form (conversion tracking, etc.)
 customer_name | false | The name the customer used to purchase this order
 customer_email | false | The email the customer used to purchase this order
@@ -359,7 +359,7 @@ coupon_amount | true | The amount that the coupon used for this order took off f
 coupon_description | true | A readable version of the coupon amount: if a fixed discount coupon, then `'$X.XX'`, if a percentage discount, then `'X.X%'`
 quantity | true | The quantity of this order that was purchased
 description | true | The title of the product or order items purchased with this order
-balance | false | The total balance left to be paid on this order
+balance | false | The total balance of accepted transactions paid to this order
 session_identifier | false | A unique identifier used to associate this order with a session of an order form (conversion tracking, etc.)
 customer_name | false | The name the customer used to purchase this order
 customer_email | false | The email the customer used to purchase this order

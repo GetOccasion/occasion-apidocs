@@ -11,7 +11,7 @@ window.onOrderFormSubmit = function(e) {
   .then(function(token) {
     var creditCard = occsnClient.CreditCard.build({ id: token });
     
-    window.order.charge(creditCard, window.order.balance);
+    window.order.charge(creditCard, window.order.outstandingBalance);
     
     // @todo Implement Chapter 13
   })
@@ -34,7 +34,7 @@ The steps involved in checking the validity of a credit card and safely charging
 2. Add a callback to the submit event of the overall `window.order` widget form *(not the credit card form)*.
 3. When the submit callback is executed, send the credit card data to the payment processor. The payment processor will provide a function or endpoint that allows you to send credit card data to their server and receive in return
 a payment method token corresponding to the cached payment method on their server.
-4. Use this payment method token to build a `CreditCard` and charge it for the remaining balance of the order. Chapter 12 will explain `order.balance` in more detail.
+4. Use this payment method token to build a `CreditCard` and charge it for the remaining balance of the order. Chapter 12 will explain `order.outstandingBalance` in more detail.
 5. Carry through with the original submit event that was fired, and save the order to the server. See Chapter 13 for implementation.
 
 **TODO: INFORMATION ON USING OCCASION'S ENV KEYS**
