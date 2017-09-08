@@ -98,7 +98,7 @@ Make sure to set the `required` attribute of the HTML input to this value for ea
 
 ### `answer.question().position`
 
-The order that questions should be displayed in is indicated by their `position`, from `0` to `n`.
+The order that questions should be displayed in is indicated by their `position`, from `1` to `n`.
 
 ### `answer.question().priceCalculating`
 
