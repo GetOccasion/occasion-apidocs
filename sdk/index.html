@@ -142,7 +142,7 @@ answer any number of questions relevant to the product, include a coupon or any 
 <p><code class="prettyprint">&lt;script type=&#39;text/javascript&#39; src=&#39;https://unpkg.com/occasion-sdk&#39;&gt;&lt;/script&gt;</code></p>
 
           <h1 id="2-initialization">2. Initialization</h1>
-<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">OccasionClient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Occasion</span><span class="p">.</span><span class="nx">Client</span><span class="p">(</span><span class="s1">'[API_TOKEN]'</span><span class="p">);</span>
+<pre class="highlight javascript"><code><span class="kd">let</span> <span class="nx">occsnClient</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Occasion</span><span class="p">.</span><span class="nx">Client</span><span class="p">(</span><span class="s1">'[API_TOKEN]'</span><span class="p">);</span>
 </code></pre>
 
 <p>Once you&rsquo;ve added the <code class="prettyprint">occasion-sdk</code> module to your application, initialize it with your public API token, which can be found in your account settings on Occasion.</p>
@@ -480,6 +480,15 @@ the function <code class="prettyprint">Order.construct</code> shown in this exam
 <p>The remainder of this guide will assume that you&rsquo;ve set <code class="prettyprint">window.order</code> equal to the constructed order for <code class="prettyprint">window.product</code>.</p>
 </blockquote>
 
+<h2 id="tracking-sessions">Tracking sessions</h2>
+<pre class="highlight javascript"><code><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">sessionIdentifier</span><span class="p">)</span>
+<span class="c1">// =&gt; "jo7xer-1504906476059"</span>
+</code></pre>
+
+<p><code class="prettyprint">construct</code> instantiates each order with a <code class="prettyprint">sessionIdentifier</code> that is unique. This session identifier is used by Occasion for different purposes related to tracking sessions.</p>
+
+<p>You can use <code class="prettyprint">sessionIdentifier</code> for your own application too.</p>
+
           <h1 id="7-what-is-your-contact-information">7. What is your contact information?</h1>
 
 <h2 id="guest-checkout">Guest Checkout</h2>
@@ -716,6 +725,10 @@ Possible values are:</p>
 
 <p>Answers with <code class="prettyprint">question().required</code> equal to true must have a <code class="prettyprint">value</code> or an <code class="prettyprint">option()</code> specified.
 Make sure to set the <code class="prettyprint">required</code> attribute of the HTML input to this value for easier validation.</p>
+
+<h3 id="answer-question-position"><code class="prettyprint">answer.question().position</code></h3>
+
+<p>The order that questions should be displayed in is indicated by their <code class="prettyprint">position</code>, from <code class="prettyprint">1</code> to <code class="prettyprint">n</code>.</p>
 
 <h3 id="answer-question-pricecalculating"><code class="prettyprint">answer.question().priceCalculating</code></h3>
 
@@ -1387,7 +1400,7 @@ cards are supported, but Paypal and other platforms may be featured in future re
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">token</span><span class="p">)</span> <span class="p">{</span>
     <span class="kd">var</span> <span class="nx">creditCard</span> <span class="o">=</span> <span class="nx">occsnClient</span><span class="p">.</span><span class="nx">CreditCard</span><span class="p">.</span><span class="nx">build</span><span class="p">({</span> <span class="na">id</span><span class="p">:</span> <span class="nx">token</span> <span class="p">});</span>
 
-    <span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">charge</span><span class="p">(</span><span class="nx">creditCard</span><span class="p">,</span> <span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">balance</span><span class="p">);</span>
+    <span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">charge</span><span class="p">(</span><span class="nx">creditCard</span><span class="p">,</span> <span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">outstandingBalance</span><span class="p">);</span>
 
     <span class="c1">// @todo Implement Chapter 13</span>
   <span class="p">})</span>
@@ -1411,7 +1424,7 @@ and Payline Data.</p>
 <li>Add a callback to the submit event of the overall <code class="prettyprint">window.order</code> widget form <em>(not the credit card form)</em>.</li>
 <li>When the submit callback is executed, send the credit card data to the payment processor. The payment processor will provide a function or endpoint that allows you to send credit card data to their server and receive in return
 a payment method token corresponding to the cached payment method on their server.</li>
-<li>Use this payment method token to build a <code class="prettyprint">CreditCard</code> and charge it for the remaining balance of the order. Chapter 12 will explain <code class="prettyprint">order.balance</code> in more detail.</li>
+<li>Use this payment method token to build a <code class="prettyprint">CreditCard</code> and charge it for the remaining balance of the order. Chapter 12 will explain <code class="prettyprint">order.outstandingBalance</code> in more detail.</li>
 <li>Carry through with the original submit event that was fired, and save the order to the server. See Chapter 13 for implementation.</li>
 </ol>
 
@@ -1454,7 +1467,7 @@ in the previous section in order to build a new credit card. </p>
     <span class="c1">//   tax: '2.0',</span>
     <span class="c1">//   giftCardAmount: '5.0',</span>
     <span class="c1">//   price: '11.0',</span>
-    <span class="c1">//   balance: '6.0'</span>
+    <span class="c1">//   outstandingBalance: '6.0'</span>
     <span class="c1">// }</span>
   <span class="p">});</span>
 <span class="p">};</span>
@@ -1502,7 +1515,7 @@ which will automatically update <code class="prettyprint">window.order</code> to
 <td>The total price of the order after tax has been applied to the subtotal - discounts</td>
 </tr>
 <tr>
-<td><code class="prettyprint">balance</code></td>
+<td><code class="prettyprint">outstandingBalance</code></td>
 <td>The remaining balance after <code class="prettyprint">giftCardAmount</code> has been deducted from <code class="prettyprint">price</code>.</td>
 </tr>
 </tbody></table>
@@ -1512,18 +1525,18 @@ payment method.</p>
 
 <h2 id="the-numbers-must-add-up">The numbers must add up</h2>
 
-<p>In the previous chapter we made use of <code class="prettyprint">order.balance</code> to charge the credit card provided for the &ldquo;remaining balance&rdquo;
+<p>In the previous chapter we made use of <code class="prettyprint">order.outstandingBalance</code> to charge the credit card provided for the remaining balance
 left on the order.</p>
 
 <p><strong>An order saved to Occasion is only valid if all of the charges add up to <code class="prettyprint">order.price</code>, otherwise your order will fail to save.</strong></p>
 
 <p>This is why it is so useful to wait until the order form has been submitted before processing the credit card data and
-building/charging a <code class="prettyprint">CreditCard</code>. You will know the final <code class="prettyprint">order.balance</code> after the customer has finished answering questions and
-adding all of their gift cards and coupons, rather than having to continually edit the credit card charge each time <code class="prettyprint">balance</code> changes
+building/charging a <code class="prettyprint">CreditCard</code>. You will know the final <code class="prettyprint">order.outstandingBalance</code> after the customer has finished answering questions and
+adding all of their gift cards and coupons, rather than having to continually edit the credit card charge each time <code class="prettyprint">outstandingBalance</code> changes
 with <code class="prettyprint">price</code>.</p>
 
-<p>The conclusion is simple: just charge credit cards for <code class="prettyprint">order.balance</code> when the order form is submitted.
-Let <code class="prettyprint">updatePrice()</code> do the rest and the numbers will always add up.</p>
+<p>The conclusion is simple: just charge credit cards for <code class="prettyprint">order.outstandingBalance</code> when the order form is submitted.
+Let <code class="prettyprint">calculatePrice()</code> do the rest and the numbers will always add up.</p>
 
           <h1 id="13-submit-your-order">13. Submit your order</h1>
 
