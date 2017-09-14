@@ -37,52 +37,104 @@ You can also choose to show them any of the `attributes()` of the saved order, t
 ```javascript
 // Errors after the order fails to save to the server
 
-console.log(window.order.errors().forField('customer')); // =>
+console.log(window.order.errors().forField('customer').toArray()); // =>
 // [
 //   {
+//     field: "customer.firstName"
+//     code: "blank"
+//     detail: "Customer.First Name cannot be blank."
 //   },
+//   
+//   {
+//     field: "customer.lastName"
+//     code: "blank"
+//     detail: "Customer.Last Name cannot be blank."
+//   },
+//   
+//   {
+//     field: "customer.email"
+//     code: "invalid"
+//     detail: "Customer.Email is invalid."
+//   }
 // ]
 
-console.log(window.order.errors().forField('timeSlots')); // =>
+
+console.log(window.order.errors().detailsForField('timeSlots')); // =>
+// {
+//   blank: "Orders for product id: '94hn_pte' require at least one time slot."
+// }
+
+
+console.log(window.order.errors().forField('answers').toArray()); // =>
 // [
 //   {
+//     field: "answers.option"
+//     code: "blank"
+//     detail: "Answer option cannot be blank."
 //   },
+//
+//   {
+//     field: "answers.value"
+//     code: "invalid"
+//     detail: "Answer value is invalid."
+//   }
 // ]
 
-console.log(window.order.errors().forField('answers')); // =>
+
+console.log(window.order.errors().forField('coupon').toArray()); // =>
 // [
 //   {
+//     field: "coupon"
+//     code: "invalid"
+//     detail: "Coupon is invalid."
 //   },
+//
+//   {
+//     field: "coupon"
+//     code: "inactive"
+//     detail: "Coupon is inactive at this time."
+//   },
+//
+//   {
+//     field: "coupon"
+//     code: "depleted"
+//     detail: "Coupon is no longer available."
+//   }
 // ]
 
-console.log(window.order.errors().forField('coupon')); // =>
+
+console.log(window.order.errors().forField('transactions').toArray()); // =>
 // [
 //   {
+//     field: "transactions.amount"
+//     code: "invalid"
+//     detail: "Transactions.Amount is invalid."
 //   },
+//   
+//   {
+//     field: "transactions.paymentMethod"
+//     code: "blank"
+//     detail: "Transactions.Payment Method cannot be blank."
+//   },
+//   
+//   {
+//     field: "transactions.paymentMethod"
+//     code: "declined"
+//     detail: "Transactions.Payment Method declined."
+//   }
 // ]
 
-console.log(window.order.errors().forField('transactions')); // =>
-// [
-//   {
-//   },
-// ]
-
-console.log(window.order.errors().forBase()); // =>
-// [
-//   {
-//   },
-// ]
+console.log(window.order.errors().forBase().toArray()); // =>
+// []
 ```
 
 > All possible errors are shown in this example.
 
-**TODO: Display possible errors for `order.save`**
-
 An efficient error display will let the customer know what mistakes they've made on the form or what errors have occurred in processing
 the order.
 
-You can get all of the errors for a given attribute or relationship using `errors().forField(name)`. This is useful for displaying errors next to the input(s)
+You can get a collection of all of the errors for a given attribute or relationship using `errors().forField(name)`. You can
+also use `errors().detailsForField(name)` for an object that summarizes the errors. These are useful for displaying errors next to the input(s)
 that generated them.
 
-You can get all of the errors that are associated with the base `order` (rather than a specific field) using `errors.forBase()`. You could
-display those at the bottom of the order widget or wherever works best for you.
+You can get all of the errors that are associated with the base `order` (rather than a specific field) using `errors.forBase()`.
