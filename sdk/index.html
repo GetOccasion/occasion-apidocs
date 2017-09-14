@@ -214,7 +214,11 @@ answer any number of questions relevant to the product, include a coupon or any 
     <span class="c1">// merchant.venues().target()</span>
     <span class="nx">merchant</span><span class="p">.</span><span class="nx">venues</span><span class="p">().</span><span class="nx">load</span><span class="p">()</span>
       <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">venues</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nx">venues</span><span class="p">.</span><span class="nx">each</span><span class="p">((</span><span class="nx">venue</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">...)</span> <span class="c1">// do something with each venue</span>
+
+        <span class="c1">// Load each venue's products separately</span>
+        <span class="nx">venues</span><span class="p">.</span><span class="nx">each</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">venue</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">venue</span><span class="p">.</span><span class="nx">products</span><span class="p">().</span><span class="nx">load</span><span class="p">()</span>
+        <span class="p">});</span>
       <span class="p">});</span>
 
     <span class="c1">// Retrieves merchant's product ID 'n2as78' from the server</span>
@@ -552,7 +556,7 @@ the function <code class="prettyprint">Order.construct</code> shown in this exam
           <h1 id="8-what-time-slot-s-do-you-want-to-book">8. What time slot(s) do you want to book?</h1>
 
 <h2 id="displaying-pages-of-bookable-time-slots">Displaying pages of bookable time slots</h2>
-<pre class="highlight javascript"><code><span class="nb">window</span><span class="p">.</span><span class="nx">product</span><span class="p">.</span><span class="nx">timeSlots</span><span class="p">().</span><span class="nx">where</span><span class="p">({</span> <span class="na">status</span><span class="p">:</span> <span class="s1">'bookable'</span> <span class="p">}).</span><span class="nx">first</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<pre class="highlight javascript"><code><span class="nb">window</span><span class="p">.</span><span class="nx">product</span><span class="p">.</span><span class="nx">timeSlots</span><span class="p">().</span><span class="nx">where</span><span class="p">({</span> <span class="na">status</span><span class="p">:</span> <span class="s1">'bookable'</span> <span class="p">}).</span><span class="nx">perPage</span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nx">all</span><span class="p">()</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">timeSlotsPage</span><span class="p">)</span> <span class="p">{</span>
 
     <span class="c1">// do something with mapped version of time slots page</span>
@@ -1266,9 +1270,11 @@ card information on the order widget, indicating that it has been added to the o
   <span class="p">}</span>
 
 <span class="p">})</span>
-<span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">errors</span><span class="p">,</span> <span class="nx">status</span><span class="p">)</span> <span class="p">{</span>
+<span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">errors</span><span class="p">)</span> <span class="p">{</span>
   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">errors</span><span class="p">)</span> <span class="c1">// =&gt;</span>
-  <span class="c1">// status == 404 Not Found</span>
+  <span class="c1">//</span>
+  <span class="c1">// 404 Not Found</span>
+  <span class="c1">//</span>
   <span class="c1">// {</span>
   <span class="c1">//   parameter: 'filter/code',</span>
   <span class="c1">//   code: 'notFound',</span>
@@ -1277,7 +1283,8 @@ card information on the order widget, indicating that it has been added to the o
   <span class="c1">//</span>
   <span class="c1">// *or*</span>
   <span class="c1">//</span>
-  <span class="c1">// status == 409 Conflict</span>
+  <span class="c1">// 409 Conflict</span>
+  <span class="c1">//</span>
   <span class="c1">// {</span>
   <span class="c1">//   parameter: 'filter/code',</span>
   <span class="c1">//   code: 'unavailable',</span>
@@ -1609,64 +1616,116 @@ not be persisted on our server.</p>
 <h2 id="error">Error</h2>
 <pre class="highlight javascript"><code><span class="c1">// Errors after the order fails to save to the server</span>
 
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">errors</span><span class="p">().</span><span class="nx">forField</span><span class="p">(</span><span class="s1">'customer'</span><span class="p">));</span> <span class="c1">// =&gt;</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">errors</span><span class="p">().</span><span class="nx">forField</span><span class="p">(</span><span class="s1">'customer'</span><span class="p">).</span><span class="nx">toArray</span><span class="p">());</span> <span class="c1">// =&gt;</span>
 <span class="c1">// [</span>
 <span class="c1">//   {</span>
+<span class="c1">//     field: "customer.firstName"</span>
+<span class="c1">//     code: "blank"</span>
+<span class="c1">//     detail: "Customer.First Name cannot be blank."</span>
 <span class="c1">//   },</span>
+<span class="c1">//   </span>
+<span class="c1">//   {</span>
+<span class="c1">//     field: "customer.lastName"</span>
+<span class="c1">//     code: "blank"</span>
+<span class="c1">//     detail: "Customer.Last Name cannot be blank."</span>
+<span class="c1">//   },</span>
+<span class="c1">//   </span>
+<span class="c1">//   {</span>
+<span class="c1">//     field: "customer.email"</span>
+<span class="c1">//     code: "invalid"</span>
+<span class="c1">//     detail: "Customer.Email is invalid."</span>
+<span class="c1">//   }</span>
 <span class="c1">// ]</span>
 
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">errors</span><span class="p">().</span><span class="nx">forField</span><span class="p">(</span><span class="s1">'timeSlots'</span><span class="p">));</span> <span class="c1">// =&gt;</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">errors</span><span class="p">().</span><span class="nx">detailsForField</span><span class="p">(</span><span class="s1">'timeSlots'</span><span class="p">));</span> <span class="c1">// =&gt;</span>
+<span class="c1">// {</span>
+<span class="c1">//   blank: "Orders for product id: '94hn_pte' require at least one time slot."</span>
+<span class="c1">// }</span>
+
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">errors</span><span class="p">().</span><span class="nx">forField</span><span class="p">(</span><span class="s1">'answers'</span><span class="p">).</span><span class="nx">toArray</span><span class="p">());</span> <span class="c1">// =&gt;</span>
 <span class="c1">// [</span>
 <span class="c1">//   {</span>
+<span class="c1">//     field: "answers.option"</span>
+<span class="c1">//     code: "blank"</span>
+<span class="c1">//     detail: "Answer option cannot be blank."</span>
 <span class="c1">//   },</span>
+<span class="c1">//</span>
+<span class="c1">//   {</span>
+<span class="c1">//     field: "answers.value"</span>
+<span class="c1">//     code: "invalid"</span>
+<span class="c1">//     detail: "Answer value is invalid."</span>
+<span class="c1">//   }</span>
 <span class="c1">// ]</span>
 
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">errors</span><span class="p">().</span><span class="nx">forField</span><span class="p">(</span><span class="s1">'answers'</span><span class="p">));</span> <span class="c1">// =&gt;</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">errors</span><span class="p">().</span><span class="nx">forField</span><span class="p">(</span><span class="s1">'coupon'</span><span class="p">).</span><span class="nx">toArray</span><span class="p">());</span> <span class="c1">// =&gt;</span>
 <span class="c1">// [</span>
 <span class="c1">//   {</span>
+<span class="c1">//     field: "coupon"</span>
+<span class="c1">//     code: "invalid"</span>
+<span class="c1">//     detail: "Coupon is invalid."</span>
 <span class="c1">//   },</span>
+<span class="c1">//</span>
+<span class="c1">//   {</span>
+<span class="c1">//     field: "coupon"</span>
+<span class="c1">//     code: "inactive"</span>
+<span class="c1">//     detail: "Coupon is inactive at this time."</span>
+<span class="c1">//   },</span>
+<span class="c1">//</span>
+<span class="c1">//   {</span>
+<span class="c1">//     field: "coupon"</span>
+<span class="c1">//     code: "depleted"</span>
+<span class="c1">//     detail: "Coupon is no longer available."</span>
+<span class="c1">//   }</span>
 <span class="c1">// ]</span>
 
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">errors</span><span class="p">().</span><span class="nx">forField</span><span class="p">(</span><span class="s1">'coupon'</span><span class="p">));</span> <span class="c1">// =&gt;</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">errors</span><span class="p">().</span><span class="nx">forField</span><span class="p">(</span><span class="s1">'transactions'</span><span class="p">).</span><span class="nx">toArray</span><span class="p">());</span> <span class="c1">// =&gt;</span>
 <span class="c1">// [</span>
 <span class="c1">//   {</span>
+<span class="c1">//     field: "transactions.amount"</span>
+<span class="c1">//     code: "invalid"</span>
+<span class="c1">//     detail: "Transactions.Amount is invalid."</span>
 <span class="c1">//   },</span>
+<span class="c1">//   </span>
+<span class="c1">//   {</span>
+<span class="c1">//     field: "transactions.paymentMethod"</span>
+<span class="c1">//     code: "blank"</span>
+<span class="c1">//     detail: "Transactions.Payment Method cannot be blank."</span>
+<span class="c1">//   },</span>
+<span class="c1">//   </span>
+<span class="c1">//   {</span>
+<span class="c1">//     field: "transactions.paymentMethod"</span>
+<span class="c1">//     code: "declined"</span>
+<span class="c1">//     detail: "Transactions.Payment Method declined."</span>
+<span class="c1">//   }</span>
 <span class="c1">// ]</span>
 
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">errors</span><span class="p">().</span><span class="nx">forField</span><span class="p">(</span><span class="s1">'transactions'</span><span class="p">));</span> <span class="c1">// =&gt;</span>
-<span class="c1">// [</span>
-<span class="c1">//   {</span>
-<span class="c1">//   },</span>
-<span class="c1">// ]</span>
-
-<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">errors</span><span class="p">().</span><span class="nx">forBase</span><span class="p">());</span> <span class="c1">// =&gt;</span>
-<span class="c1">// [</span>
-<span class="c1">//   {</span>
-<span class="c1">//   },</span>
-<span class="c1">// ]</span>
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">errors</span><span class="p">().</span><span class="nx">forBase</span><span class="p">().</span><span class="nx">toArray</span><span class="p">());</span> <span class="c1">// =&gt;</span>
+<span class="c1">// []</span>
 </code></pre>
 
 <blockquote>
 <p>All possible errors are shown in this example.</p>
 </blockquote>
 
-<p><strong>TODO: Display possible errors for <code class="prettyprint">order.save</code></strong></p>
-
 <p>An efficient error display will let the customer know what mistakes they&rsquo;ve made on the form or what errors have occurred in processing
 the order.</p>
 
-<p>You can get all of the errors for a given attribute or relationship using <code class="prettyprint">errors().forField(name)</code>. This is useful for displaying errors next to the input(s)
+<p>You can get a collection of all of the errors for a given attribute or relationship using <code class="prettyprint">errors().forField(name)</code>. You can
+also use <code class="prettyprint">errors().detailsForField(name)</code> for an object that summarizes the errors. These are useful for displaying errors next to the input(s)
 that generated them.</p>
 
-<p>You can get all of the errors that are associated with the base <code class="prettyprint">order</code> (rather than a specific field) using <code class="prettyprint">errors.forBase()</code>. You could
-display those at the bottom of the order widget or wherever works best for you.</p>
+<p>You can get all of the errors that are associated with the base <code class="prettyprint">order</code> (rather than a specific field) using <code class="prettyprint">errors.forBase()</code>.</p>
 
           <h1 id="15-conclusion">15. Conclusion</h1>
 
 <p><strong>We made it!</strong> You now have a fully functioning order widget, ready to start booking merchants&rsquo; products on Occasion.</p>
 
 <p>We hope this getting started guide has served you well. If you have any questions that you feel are not answered through this documentation,
-please reach out to <a href="nick@getoccasion.com">nick@getoccasion.com</a>.</p>
+please reach out to <a href="nick@getoccasion.com">nick@getoccasion.com</a>. You can also join our <a href="https://join.slack.com/t/occasion-dev-support/shared_invite/MjQwMjUyOTYyMjU3LTE1MDUzMzY1NTAtNGQ2ZjgzZDRiNw">Slack channel</a>.</p>
 
 <p>Also check out the <em>Advanced Section</em> immediately after this, where you can see lists of many of the useful functions that are
 available for each resource in the Occasion SDK in order to gain a more definitive grasp on our DSL.</p>
