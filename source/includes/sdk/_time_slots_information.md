@@ -3,7 +3,7 @@
 ## Displaying pages of bookable time slots
 
 ```javascript
-window.product.timeSlots().where({ status: 'bookable' }).first(10)
+window.product.timeSlots().where({ status: 'bookable' }).perPage(10).all()
   .then(function(timeSlotsPage) {
     
     // do something with mapped version of time slots page
