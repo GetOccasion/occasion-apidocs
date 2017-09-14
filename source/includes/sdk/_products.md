@@ -73,7 +73,11 @@ occsnClient.Merchant.find('712h3as')
     // merchant.venues().target()
     merchant.venues().load()
       .then(function(venues) {
-        venues.each((venue) => ...) // do something with each venue
+        
+        // Load each venue's products separately
+        venues.each(function(venue) {
+          venue.products().load()
+        });
       });
     
     // Retrieves merchant's product ID 'n2as78' from the server
