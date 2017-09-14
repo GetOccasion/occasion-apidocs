@@ -42,9 +42,11 @@ window.product.redeemables().findBy({ code: 'HOLIDAYS45' })
   }
   
 })
-.catch(function(errors, status) {
+.catch(function(errors) {
   console.log(errors) // =>
-  // status == 404 Not Found
+  //
+  // 404 Not Found
+  //
   // {
   //   parameter: 'filter/code',
   //   code: 'notFound',
@@ -53,7 +55,8 @@ window.product.redeemables().findBy({ code: 'HOLIDAYS45' })
   //
   // *or*
   //
-  // status == 409 Conflict
+  // 409 Conflict
+  //
   // {
   //   parameter: 'filter/code',
   //   code: 'unavailable',
