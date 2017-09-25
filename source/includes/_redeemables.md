@@ -12,18 +12,20 @@ HTTPS/1.1 200 OK
 ```
 
 ```json
-{
-  "data": {
-    "type": "coupons",
-    "id": "h17sle7",
-    "attributes": {
-      "name": "Holiday Coupon",
-      "code": "COUPON-CODE",
-      "discount_fixed": 2.0,
-      "discount_percentage": null
+[
+  {
+    "data": {
+      "type": "coupons",
+      "id": "h17sle7",
+      "attributes": {
+        "name": "Holiday Coupon",
+        "code": "COUPON-CODE",
+        "discount_fixed": 2.0,
+        "discount_percentage": null
+      }
     }
   }
-}
+]
 ```
 
 ```shell
@@ -36,17 +38,19 @@ HTTPS/1.1 200 OK
 ```
 
 ```json
-{
-  "data": {
-    "type": "gift_cards",
-    "id": "h17sle7",
-    "attributes": {
-      "code": "GIFT-CARD-CODE",
-      "initial_value": 50.0,
-      "value": 5.0
+[
+  {
+    "data": {
+      "type": "gift_cards",
+      "id": "h17sle7",
+      "attributes": {
+        "code": "GIFT-CARD-CODE",
+        "initial_value": 50.0,
+        "value": 5.0
+      }
     }
   }
-}
+]
 ```
 
 This endpoint requires a `filter[code]` that is either the code for a coupon that is available for the product, or a gift card that may

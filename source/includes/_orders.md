@@ -434,7 +434,7 @@ HTTPS/1.1 200 OK
     "type": "orders",
     "attributes": {
       "subtotal": "10.0",
-      "coupon": "1.0",
+      "coupon_amount": "1.0",
       "tax": "2.0",
       "total": "11.0"
     }
@@ -465,6 +465,6 @@ Notable response fields include:
 Field | Description
 ----- | -----------
 subtotal | The price of the order before adding tax or coupons. product.price + attributes
-coupon | The amount that the coupon discounts from the order
+coupon_amount | The amount that the coupon discounts from the order
 tax | The amount paid in tax, based on the tax_percentage
 total | The final price of the order that is to be paid by the customer
