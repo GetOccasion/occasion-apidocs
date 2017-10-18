@@ -1,7 +1,7 @@
 # 12. Please enter your payment information
 
 ```javascript
-window.merchant.pspName // => 'Cash'
+window.merchant.pspName // => 'cash'
 ```
 
 After the customer has selected any coupons or gift cards, it is time for them to enter their payment information.
@@ -15,9 +15,9 @@ Possible names include:
 
 PSP | Name
 ---- | -------
-Cash | `Cash`
-Spreedly | `Spreedly`
-Square | `Square`
+Cash | `cash`
+Spreedly | `spreedly`
+Square | `square`
 
 ## Accept cash only
 
