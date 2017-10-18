@@ -1396,68 +1396,13 @@ created in Chapter 9 Section 2 after adding the redeemable to the order.</p>
 See Chapter 9 Section 2.</p>
 </blockquote>
 
-          <h1 id="11-enter-your-payment-information">11. Enter your payment information</h1>
+          <h1 id="11-your-total-today-is">11. Your total today is&hellip;</h1>
 
-<p>After the customer has selected any coupons or gift cards, it is time for them to enter their payment information. Right now only credit
-cards are supported, but Paypal and other platforms may be featured in future releases.</p>
+<p>Displaying the result of a customer&rsquo;s choices on the price of their order in real time is important to the experience. The special method <code class="prettyprint">order.calculatePrice()</code>
+can give you the subtotal, coupon discount, tax, and total price of the order.</p>
 
-<h2 id="build-and-charge-a-credit-card-using-a-payment-processor-payment-method-token">Build and charge a credit card using a payment processor payment method token</h2>
-<pre class="highlight javascript"><code><span class="nb">window</span><span class="p">.</span><span class="nx">onOrderFormSubmit</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-  <span class="nx">THIRD_PARTY_FUNCTION_TO_CREATE_PAYMENT_METHOD_TOKEN</span>
-  <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">token</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kd">var</span> <span class="nx">creditCard</span> <span class="o">=</span> <span class="nx">occsnClient</span><span class="p">.</span><span class="nx">CreditCard</span><span class="p">.</span><span class="nx">build</span><span class="p">({</span> <span class="na">id</span><span class="p">:</span> <span class="nx">token</span> <span class="p">});</span>
-
-    <span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">charge</span><span class="p">(</span><span class="nx">creditCard</span><span class="p">,</span> <span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">outstandingBalance</span><span class="p">);</span>
-
-    <span class="c1">// @todo Implement Chapter 13</span>
-  <span class="p">})</span>
-  <span class="p">.</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">thirdPartyErrors</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// do something with thirdPartyErrors on your own</span>
-  <span class="p">});</span>
-<span class="p">};</span>
-</code></pre>
-
-<p>Occasion does not interpret or store payment information in our application, we outsource PCI compliance to our
-payment processor services <a href="https://docs.spreedly.com/guides/adding-payment-methods/javascript/">Spreedly</a>
-and Payline Data.</p>
-
-<p>You submit the credit card data to them alone and they&rsquo;ll tell you if it&rsquo;s valid. Then they&rsquo;ll give you a secure token for Occasion to process payment with on our server.</p>
-
-<p>The steps involved in checking the validity of a credit card and safely charging it are as follows:</p>
-
-<ol>
-<li>Use Spreedly or Payline&rsquo;s JS libraries to create a credit card form in the order widget. <strong>The fields of these inputs will not be bound to any attribute or relationship of
-<code class="prettyprint">window.order</code>, because we do not want to submit this sensitive information to Occasion, only to the payment processor.</strong></li>
-<li>Add a callback to the submit event of the overall <code class="prettyprint">window.order</code> widget form <em>(not the credit card form)</em>.</li>
-<li>When the submit callback is executed, send the credit card data to the payment processor. The payment processor will provide a function or endpoint that allows you to send credit card data to their server and receive in return
-a payment method token corresponding to the cached payment method on their server.</li>
-<li>Use this payment method token to build a <code class="prettyprint">CreditCard</code> and charge it for the remaining balance of the order. Chapter 12 will explain <code class="prettyprint">order.outstandingBalance</code> in more detail.</li>
-<li>Carry through with the original submit event that was fired, and save the order to the server. See Chapter 13 for implementation.</li>
-</ol>
-
-<p><strong>TODO: INFORMATION ON USING OCCASION&rsquo;S ENV KEYS</strong></p>
-
-<h2 id="edit-or-remove-a-credit-card-charge">Edit or remove a credit card charge</h2>
-<pre class="highlight javascript"><code><span class="c1">// Update the amount charged to the specified credit card to 9.0</span>
-<span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">editCharge</span><span class="p">(</span><span class="nx">chargedCreditCard</span><span class="p">,</span> <span class="mf">9.0</span><span class="p">);</span>
-
-<span class="c1">// Remove the charged credit card from the order</span>
-<span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">removeCharge</span><span class="p">(</span><span class="nx">invalidCreditCard</span><span class="p">);</span>
-</code></pre>
-
-<p>If your order fails to save because the customer&rsquo;s credit card information was wrong, they&rsquo;re going to have to enter new credit card data.</p>
-
-<p>But just because the order doesn&rsquo;t save doesn&rsquo;t mean the credit card is removed from it, the invalid credit card will remain on the order
-even if you call <code class="prettyprint">order.charge()</code> with a new credit card. <strong>An order can only charge one credit card, valid or not valid.</strong></p>
-
-<p>To prevent this scenario, you should remove invalid credit cards if they cause an order not to save, and then go through the process outlined
-in the previous section in order to build a new credit card. </p>
-
-<p>If for any reason you need to edit the amount charged to any item that has already been charged, you can do that too.</p>
-
-          <h1 id="12-your-total-today-is">12. Your total today is&hellip;</h1>
-
-<p>The last section of the order widget takes no input. Instead, it displays the result of a customer&rsquo;s choices: the subtotal, savings, tax, and total of the order.</p>
+<p>It can also calculate the contribution of gift cards toward
+the order&rsquo;s outstanding balance, to be paid using the payment method information collected in the next chapter.</p>
 
 <h2 id="displaying-useful-price-information">Displaying useful price information</h2>
 <pre class="highlight javascript"><code><span class="nb">window</span><span class="p">.</span><span class="nx">afterPriceCalculatingItemChange</span> <span class="o">=</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
@@ -1523,7 +1468,7 @@ which will automatically update <code class="prettyprint">window.order</code> to
 </tr>
 <tr>
 <td><code class="prettyprint">outstandingBalance</code></td>
-<td>The remaining balance after <code class="prettyprint">giftCardAmount</code> has been deducted from <code class="prettyprint">price</code>.</td>
+<td>The remaining balance after <code class="prettyprint">giftCardAmount</code> has been deducted from <code class="prettyprint">price</code>. Other payment methods like credit cards will have to pay this amount for the order to be completed paid for.</td>
 </tr>
 </tbody></table>
 
@@ -1532,18 +1477,185 @@ payment method.</p>
 
 <h2 id="the-numbers-must-add-up">The numbers must add up</h2>
 
-<p>In the previous chapter we made use of <code class="prettyprint">order.outstandingBalance</code> to charge the credit card provided for the remaining balance
+<p>In the next chapter we will make use of <code class="prettyprint">order.outstandingBalance</code> to charge a credit card for the remaining balance
 left on the order.</p>
 
-<p><strong>An order saved to Occasion is only valid if all of the charges add up to <code class="prettyprint">order.price</code>, otherwise your order will fail to save.</strong></p>
+<p><strong>An order with payment methods (credit cards and gift cards), saved to Occasion, is only valid if all of the charges
+to those payment methods add up to <code class="prettyprint">order.price</code>, otherwise your order will fail to save.</strong></p>
 
-<p>This is why it is so useful to wait until the order form has been submitted before processing the credit card data and
-building/charging a <code class="prettyprint">CreditCard</code>. You will know the final <code class="prettyprint">order.outstandingBalance</code> after the customer has finished answering questions and
-adding all of their gift cards and coupons, rather than having to continually edit the credit card charge each time <code class="prettyprint">outstandingBalance</code> changes
-with <code class="prettyprint">price</code>.</p>
+<p>Note, this does not apply to orders that are paid for using cash, since no charges are created with that type of order.</p>
 
-<p>The conclusion is simple: just charge credit cards for <code class="prettyprint">order.outstandingBalance</code> when the order form is submitted.
-Let <code class="prettyprint">calculatePrice()</code> do the rest and the numbers will always add up.</p>
+          <h1 id="12-please-enter-your-payment-information">12. Please enter your payment information</h1>
+<pre class="highlight javascript"><code><span class="nb">window</span><span class="p">.</span><span class="nx">merchant</span><span class="p">.</span><span class="nx">pspName</span> <span class="c1">// =&gt; 'Cash'</span>
+</code></pre>
+
+<p>After the customer has selected any coupons or gift cards, it is time for them to enter their payment information.
+Right now only cash and credit cards are supported, but other platforms may be featured in future releases.</p>
+
+<p>Each merchant on Occasion accepts payments using a payment service provider (PSP): Cash, Spreedly, or Square, and they can only use one. The latter two process credit cards. The following
+sections will show you how to handle each individual case.</p>
+
+<p>First off, though, you must determine which PSP the merchant uses. To do this, read the <code class="prettyprint">merchant.pspName</code> attribute, as shown in the example.
+Possible names include:</p>
+
+<table><thead>
+<tr>
+<th>PSP</th>
+<th>Name</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>Cash</td>
+<td><code class="prettyprint">Cash</code></td>
+</tr>
+<tr>
+<td>Spreedly</td>
+<td><code class="prettyprint">Spreedly</code></td>
+</tr>
+<tr>
+<td>Square</td>
+<td><code class="prettyprint">Square</code></td>
+</tr>
+</tbody></table>
+
+<h2 id="accept-cash-only">Accept cash only</h2>
+
+<p>For merchants with <code class="prettyprint">pspName == &#39;Cash&#39;</code>, payment for an order is collected in cash when the customer
+comes in for their reservation. For these merchants, no additional
+measures must be taken to collect payment information to use to pay for the order.</p>
+
+<h2 id="build-and-charge-a-credit-card-using-a-payment-processor-payment-method-token">Build and charge a credit card using a payment processor payment method token</h2>
+
+<p>Occasion does not process payment information through our own application, we use PCI compliant 
+payment processing services to do this for us, and there are two options. Each provider offers an iFrame script that can
+used to securely send credit card information to their server, and receive a token back that Occasion uses to process
+payment for the order.</p>
+
+<h3 id="spreedly">Spreedly</h3>
+<pre class="highlight javascript"><code><span class="nx">Spreedly</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="s1">'CYJy65Wq5dmc2dGFVQOp6eci1Ka'</span><span class="p">,</span>
+  <span class="p">{}</span> <span class="c1">// ... additional config required, see Spreedly docs</span>
+<span class="p">);</span>
+
+<span class="nb">window</span><span class="p">.</span><span class="nx">onOrderFormSubmit</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+  <span class="kd">var</span> <span class="nx">creditCardData</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1">// see documentation</span>
+  <span class="p">};</span>
+
+  <span class="nx">Spreedly</span><span class="p">.</span><span class="nx">tokenizeCreditCard</span><span class="p">(</span><span class="nx">creditCardData</span><span class="p">)</span>
+
+  <span class="nx">Spreedly</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'paymentMethod'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">token</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kd">var</span> <span class="nx">creditCard</span> <span class="o">=</span> <span class="nx">occsnClient</span><span class="p">.</span><span class="nx">CreditCard</span><span class="p">.</span><span class="nx">build</span><span class="p">({</span> <span class="na">id</span><span class="p">:</span> <span class="nx">token</span> <span class="p">});</span>
+
+    <span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">charge</span><span class="p">(</span><span class="nx">creditCard</span><span class="p">,</span> <span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">outstandingBalance</span><span class="p">);</span>
+
+    <span class="c1">// @todo Implement Chapter 13</span>
+    <span class="c1">// window.order.save</span>
+  <span class="p">});</span>
+
+  <span class="nx">Spreedly</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">'errors'</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">errors</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">// do something with errors</span>
+  <span class="p">});</span>
+<span class="p">};</span>
+</code></pre>
+
+<p><a href="https://www.spreedly.com/">Spreedly</a> supports hundreds of payment gateway services like Stripe, Braintree, Authorize.net, and more.
+<strong>Note:</strong> At this time, Paypal support through Spreedly is not enabled in the Occasion SDK, though a future release will add support.</p>
+
+<p>To add a Spreedly payment form to your application, we suggest using their iFrame payment method script, which you can find a guide
+on <a href="https://docs.spreedly.com/guides/adding-payment-methods/iframe/">here</a>.</p>
+
+<p>The example shows a simplified version of the basic steps you&rsquo;ll have to take to implement this form in your application once the script has been added:</p>
+
+<ol>
+<li>Initialize Spreedly using Occasion&rsquo;s Spreedly environment key</li>
+<li>Create a payment method token from user-input credit card information once the order form is submitted</li>
+<li>Submit order to Occasion with the payment method token using the Occasion SDK</li>
+</ol>
+
+<p>Use our environment key with the Spreedly form:</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>API Key</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>Spreedly</strong></td>
+<td><code class="prettyprint">CYJy65Wq5dmc2dGFVQOp6eci1Ka</code></td>
+</tr>
+</tbody></table>
+
+<h3 id="square">Square</h3>
+<pre class="highlight javascript"><code><span class="nb">window</span><span class="p">.</span><span class="nx">squareForm</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">SqPaymentForm</span><span class="p">({</span>
+    <span class="na">applicationId</span><span class="p">:</span> <span class="s2">"sq0idp-kKdgouNdlT2lj08V0tSJ3g"</span><span class="p">,</span>
+    <span class="c1">// ... additional config required, see Square docs</span>
+    <span class="na">callbacks</span><span class="p">:</span> <span class="p">{</span>
+      <span class="na">cardNonceResponseReceived</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">errors</span><span class="p">,</span> <span class="nx">nonce</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="nx">errors</span><span class="p">)</span> <span class="p">{</span>
+          <span class="c1">// do something with errors</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="kd">var</span> <span class="nx">creditCard</span> <span class="o">=</span> <span class="nx">occsnClient</span><span class="p">.</span><span class="nx">CreditCard</span><span class="p">.</span><span class="nx">build</span><span class="p">({</span> <span class="na">id</span><span class="p">:</span> <span class="nx">nonce</span> <span class="p">});</span>
+
+          <span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">charge</span><span class="p">(</span><span class="nx">creditCard</span><span class="p">,</span> <span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">outstandingBalance</span><span class="p">);</span>
+
+          <span class="c1">// @todo Implement Chapter 13</span>
+          <span class="c1">// window.order.save</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="nb">window</span><span class="p">.</span><span class="nx">onOrderFormSubmit</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nb">window</span><span class="p">.</span><span class="nx">squareForm</span><span class="p">.</span><span class="nx">requestCardNonce</span><span class="p">();</span>
+<span class="p">};</span>
+</code></pre>
+
+<p><a href="https://squareup.com/">Square</a> is a payment gateway much like the hundreds supported under Spreedly, but their closed platform must be implemented
+individually.</p>
+
+<p>To add a Square payment form to your application, we suggest using their iFrame payment method script, which you can find a guide
+on <a href="https://docs.connect.squareup.com/articles/adding-payment-form">here</a>.</p>
+
+<p>The example shows a simplified version of the basic steps you&rsquo;ll have to take to implement this form in your application once the script has been added:</p>
+
+<ol>
+<li>Initialize Square using Occasion&rsquo;s Square application ID</li>
+<li>Request a payment method nonce from user-input credit card information once the order form is submitted</li>
+<li>Submit order to Occasion with the payment method nonce using the Occasion SDK</li>
+</ol>
+
+<p>Use our key with the Square form:</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Application ID</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><strong>Square</strong></td>
+<td><code class="prettyprint">sq0idp-kKdgouNdlT2lj08V0tSJ3g</code></td>
+</tr>
+</tbody></table>
+
+<h2 id="edit-or-remove-a-credit-card-charge">Edit or remove a credit card charge</h2>
+<pre class="highlight javascript"><code><span class="c1">// Update the amount charged to the specified credit card to 9.0</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">editCharge</span><span class="p">(</span><span class="nx">chargedCreditCard</span><span class="p">,</span> <span class="mf">9.0</span><span class="p">);</span>
+
+<span class="c1">// Remove the charged credit card from the order</span>
+<span class="nb">window</span><span class="p">.</span><span class="nx">order</span><span class="p">.</span><span class="nx">removeCharge</span><span class="p">(</span><span class="nx">invalidCreditCard</span><span class="p">);</span>
+</code></pre>
+
+<p>If your order fails to save because the customer&rsquo;s credit card information was wrong, they&rsquo;re going to have to enter new credit card data.</p>
+
+<p>But just because the order doesn&rsquo;t save doesn&rsquo;t mean the credit card is removed from it, the invalid credit card will remain on the order
+even if you call <code class="prettyprint">order.charge()</code> with a new credit card. <strong>An order can only charge one credit card, valid or not valid.</strong></p>
+
+<p>To prevent this scenario, you should remove invalid credit cards if they cause an order not to save, and then go through the process outlined
+in the previous section in order to build a new credit card. </p>
+
+<p>If for any reason you need to edit the amount charged to any item that has already been charged, you can do that too.</p>
 
           <h1 id="13-submit-your-order">13. Submit your order</h1>
 
