@@ -1,6 +1,10 @@
-# 12. Your total today is...
+# 11. Your total today is...
 
-The last section of the order widget takes no input. Instead, it displays the result of a customer's choices: the subtotal, savings, tax, and total of the order.
+Displaying the result of a customer's choices on the price of their order in real time is important to the experience. The special method `order.calculatePrice()`
+can give you the subtotal, coupon discount, tax, and total price of the order.
+
+It can also calculate the contribution of gift cards toward
+the order's outstanding balance, to be paid using the payment method information collected in the next chapter.
 
 ## Displaying useful price information
 
@@ -45,22 +49,17 @@ Attribute | Description
 `tax` | The monetary value of `product.tax_percentage` applied to `order.subtotal - order.couponAmount`
 `giftCardAmount` | The monetary value of all of the gift cards charged to the order. If no gift cards, this will equal `null`.
 `price` | The total price of the order after tax has been applied to the subtotal - discounts
-`outstandingBalance` | The remaining balance after `giftCardAmount` has been deducted from `price`.
+`outstandingBalance` | The remaining balance after `giftCardAmount` has been deducted from `price`. Other payment methods like credit cards will have to pay this amount for the order to be completed paid for.
 
 You should display these attributes to the customer accordingly, so that they have a full understanding of exactly what charges they are receiving on their
 payment method.
 
 ## The numbers must add up
 
-In the previous chapter we made use of `order.outstandingBalance` to charge the credit card provided for the remaining balance
+In the next chapter we will make use of `order.outstandingBalance` to charge a credit card for the remaining balance
 left on the order.
 
-**An order saved to Occasion is only valid if all of the charges add up to `order.price`, otherwise your order will fail to save.**
+**An order with payment methods (credit cards and gift cards), saved to Occasion, is only valid if all of the charges
+to those payment methods add up to `order.price`, otherwise your order will fail to save.**
 
-This is why it is so useful to wait until the order form has been submitted before processing the credit card data and
-building/charging a `CreditCard`. You will know the final `order.outstandingBalance` after the customer has finished answering questions and
-adding all of their gift cards and coupons, rather than having to continually edit the credit card charge each time `outstandingBalance` changes
-with `price`.
-
-The conclusion is simple: just charge credit cards for `order.outstandingBalance` when the order form is submitted.
-Let `calculatePrice()` do the rest and the numbers will always add up.
+Note, this does not apply to orders that are paid for using cash, since no charges are created with that type of order.

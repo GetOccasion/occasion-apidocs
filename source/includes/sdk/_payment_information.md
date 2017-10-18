@@ -1,43 +1,128 @@
-# 11. Enter your payment information
+# 12. Please enter your payment information
 
-After the customer has selected any coupons or gift cards, it is time for them to enter their payment information. Right now only credit
-cards are supported, but Paypal and other platforms may be featured in future releases.
+```javascript
+window.merchant.pspName // => 'Cash'
+```
+
+After the customer has selected any coupons or gift cards, it is time for them to enter their payment information.
+Right now only cash and credit cards are supported, but other platforms may be featured in future releases.
+
+Each merchant on Occasion accepts payments using a payment service provider (PSP): Cash, Spreedly, or Square, and they can only use one. The latter two process credit cards. The following
+sections will show you how to handle each individual case.
+
+First off, though, you must determine which PSP the merchant uses. To do this, read the `merchant.pspName` attribute, as shown in the example.
+Possible names include:
+
+PSP | Name
+---- | -------
+Cash | `Cash`
+Spreedly | `Spreedly`
+Square | `Square`
+
+## Accept cash only
+
+For merchants with `pspName == 'Cash'`, payment for an order is collected in cash when the customer
+comes in for their reservation. For these merchants, no additional
+measures must be taken to collect payment information to use to pay for the order.
 
 ## Build and charge a credit card using a payment processor payment method token
 
+Occasion does not process payment information through our own application, we use PCI compliant 
+payment processing services to do this for us, and there are two options. Each provider offers an iFrame script that can
+used to securely send credit card information to their server, and receive a token back that Occasion uses to process
+payment for the order.
+
+### Spreedly
+
 ```javascript
+Spreedly.init('CYJy65Wq5dmc2dGFVQOp6eci1Ka',
+  {} // ... additional config required, see Spreedly docs
+);
+
 window.onOrderFormSubmit = function(e) {
-  THIRD_PARTY_FUNCTION_TO_CREATE_PAYMENT_METHOD_TOKEN
-  .then(function(token) {
+  var creditCardData = {
+    // see documentation
+  };
+  
+  Spreedly.tokenizeCreditCard(creditCardData)
+  
+  Spreedly.on('paymentMethod', function(token) {
     var creditCard = occsnClient.CreditCard.build({ id: token });
     
     window.order.charge(creditCard, window.order.outstandingBalance);
     
     // @todo Implement Chapter 13
-  })
-  .catch(function(thirdPartyErrors) {
-    // do something with thirdPartyErrors on your own
+    // window.order.save
+  });
+  
+  Spreedly.on('errors', function(errors) {
+    // do something with errors
   });
 };
 ```
 
-Occasion does not interpret or store payment information in our application, we outsource PCI compliance to our
-payment processor services [Spreedly](https://docs.spreedly.com/guides/adding-payment-methods/javascript/)
-and Payline Data.
+[Spreedly](https://www.spreedly.com/) supports hundreds of payment gateway services like Stripe, Braintree, Authorize.net, and more.
+**Note:** At this time, Paypal support through Spreedly is not enabled in the Occasion SDK, though a future release will add support.
 
-You submit the credit card data to them alone and they'll tell you if it's valid. Then they'll give you a secure token for Occasion to process payment with on our server.
+To add a Spreedly payment form to your application, we suggest using their iFrame payment method script, which you can find a guide
+on [here](https://docs.spreedly.com/guides/adding-payment-methods/iframe/).
 
-The steps involved in checking the validity of a credit card and safely charging it are as follows:
+The example shows a simplified version of the basic steps you'll have to take to implement this form in your application once the script has been added:
 
-1. Use Spreedly or Payline's JS libraries to create a credit card form in the order widget. **The fields of these inputs will not be bound to any attribute or relationship of
-`window.order`, because we do not want to submit this sensitive information to Occasion, only to the payment processor.**
-2. Add a callback to the submit event of the overall `window.order` widget form *(not the credit card form)*.
-3. When the submit callback is executed, send the credit card data to the payment processor. The payment processor will provide a function or endpoint that allows you to send credit card data to their server and receive in return
-a payment method token corresponding to the cached payment method on their server.
-4. Use this payment method token to build a `CreditCard` and charge it for the remaining balance of the order. Chapter 12 will explain `order.outstandingBalance` in more detail.
-5. Carry through with the original submit event that was fired, and save the order to the server. See Chapter 13 for implementation.
+1. Initialize Spreedly using Occasion's Spreedly environment key
+2. Create a payment method token from user-input credit card information once the order form is submitted
+3. Submit order to Occasion with the payment method token using the Occasion SDK
 
-**TODO: INFORMATION ON USING OCCASION'S ENV KEYS**
+Use our environment key with the Spreedly form:
+
+Name | API Key
+--------- |  -----------
+**Spreedly** | `CYJy65Wq5dmc2dGFVQOp6eci1Ka`
+
+### Square
+
+```javascript
+window.squareForm = new SqPaymentForm({
+    applicationId: "sq0idp-kKdgouNdlT2lj08V0tSJ3g",
+    // ... additional config required, see Square docs
+    callbacks: {
+      cardNonceResponseReceived: function(errors, nonce) {
+        if(errors) {
+          // do something with errors
+        } else {
+          var creditCard = occsnClient.CreditCard.build({ id: nonce });
+              
+          window.order.charge(creditCard, window.order.outstandingBalance);
+          
+          // @todo Implement Chapter 13
+          // window.order.save
+        }
+      }
+    }
+});
+
+window.onOrderFormSubmit = function(e) {
+  window.squareForm.requestCardNonce();
+};
+```
+
+[Square](https://squareup.com/) is a payment gateway much like the hundreds supported under Spreedly, but their closed platform must be implemented
+individually.
+
+To add a Square payment form to your application, we suggest using their iFrame payment method script, which you can find a guide
+on [here](https://docs.connect.squareup.com/articles/adding-payment-form).
+
+The example shows a simplified version of the basic steps you'll have to take to implement this form in your application once the script has been added:
+
+1. Initialize Square using Occasion's Square application ID
+2. Request a payment method nonce from user-input credit card information once the order form is submitted
+3. Submit order to Occasion with the payment method nonce using the Occasion SDK
+
+Use our key with the Square form:
+
+Name | Application ID
+--------- |  -----------
+**Square** | `sq0idp-kKdgouNdlT2lj08V0tSJ3g`
 
 ## Edit or remove a credit card charge
 

@@ -19,8 +19,8 @@ includes:
   - sdk/time_slots_information
   - sdk/additional_questions
   - sdk/redeemables
-  - sdk/payment_information
   - sdk/price_information
+  - sdk/payment_information
   - sdk/submit
   - sdk/after_submit
   - sdk/conclusion
