@@ -64,7 +64,7 @@ window.onOrderFormSubmit = function(e) {
 [Spreedly](https://www.spreedly.com/) supports hundreds of payment gateway services like Stripe, Braintree, Authorize.net, and more.
 **Note:** At this time, Paypal support through Spreedly is not enabled in the Occasion SDK, though a future release will add support.
 
-To add a Spreedly payment form to your application, we suggest using their iFrame payment method script, which you can find a guide
+To add a Spreedly payment form to your application, you must use their iFrame payment method script, which you can find a guide
 on [here](https://docs.spreedly.com/guides/adding-payment-methods/iframe/).
 
 The example shows a simplified version of the basic steps you'll have to take to implement this form in your application once the script has been added:
@@ -109,7 +109,7 @@ window.onOrderFormSubmit = function(e) {
 [Square](https://squareup.com/) is a payment gateway much like the hundreds supported under Spreedly, but their closed platform must be implemented
 individually.
 
-To add a Square payment form to your application, we suggest using their iFrame payment method script, which you can find a guide
+To add a Square payment form to your application, you must use their iFrame payment method script, which you can find a guide
 on [here](https://docs.connect.squareup.com/articles/adding-payment-form).
 
 The example shows a simplified version of the basic steps you'll have to take to implement this form in your application once the script has been added:
