@@ -35,7 +35,7 @@ payment for the order.
 ### Spreedly
 
 ```javascript
-Spreedly.init('CYJy65Wq5dmc2dGFVQOp6eci1Ka',
+Spreedly.init('UnQhm0g7l3nOIz2hmAoV3eqm26k',
   {} // ... additional config required, see Spreedly docs
 );
 
@@ -77,7 +77,7 @@ Use our environment key with the Spreedly form:
 
 Name | API Key
 --------- |  -----------
-**Spreedly** | `CYJy65Wq5dmc2dGFVQOp6eci1Ka`
+**Spreedly** | `UnQhm0g7l3nOIz2hmAoV3eqm26k`
 
 ### Square
 
