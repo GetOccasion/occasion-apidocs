@@ -555,7 +555,7 @@ the function <code class="prettyprint">Order.construct</code> shown in this exam
 
           <h1 id="8-what-time-slot-s-do-you-want-to-book">8. What time slot(s) do you want to book?</h1>
 
-<h2 id="displaying-pages-of-bookable-time-slots">Displaying pages of bookable time slots</h2>
+<h2 id="displaying-pages-of-bookable-or-upcoming-time-slots">Displaying pages of bookable or upcoming time slots</h2>
 <pre class="highlight javascript"><code><span class="nb">window</span><span class="p">.</span><span class="nx">product</span><span class="p">.</span><span class="nx">timeSlots</span><span class="p">().</span><span class="nx">where</span><span class="p">({</span> <span class="na">status</span><span class="p">:</span> <span class="s1">'bookable'</span> <span class="p">}).</span><span class="nx">perPage</span><span class="p">(</span><span class="mi">10</span><span class="p">).</span><span class="nx">all</span><span class="p">()</span>
   <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">timeSlotsPage</span><span class="p">)</span> <span class="p">{</span>
 

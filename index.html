@@ -2315,7 +2315,7 @@ orders that are purchased using coupons and gift cards.</p>
 
           <h1 id="time-slots">Time Slots</h1>
 
-<h2 id="get-bookable-time-slots-for-a-product">Get Bookable Time Slots For A Product</h2>
+<h2 id="get-bookable-or-upcoming-time-slots-for-a-product">Get Bookable or Upcoming Time Slots For A Product</h2>
 <pre class="highlight shell"><code>curl <span class="s2">"https://app.getoccasion.com/api/v1/products/:id/time_slots?filter[status]=bookable&amp;filter[last]=k182hea&amp;page[size]=2"</span>
   -u <span class="s2">"59a8517fd9458b46d4ee59f8fd717fb80d:de7b7ae9e2e9e01a9508290e599"</span>
 </code></pre>
@@ -2375,12 +2375,12 @@ orders that are purchased using coupons and gift cards.</p>
 </tr>
 <tr>
 <td>&#x203a; last</td>
-<td>The token of the last time slot that was in your previous time slot query. If left blank, will respond with first bookable time slots.</td>
+<td>The token of the last time slot that was in your previous time slot query. If left blank, will respond with first upcoming time slots.</td>
 <td>false</td>
 </tr>
 <tr>
 <td>&#x203a; status</td>
-<td>The status type of time slot to respond with. <code class="prettyprint">bookable</code> required for now.</td>
+<td>The status type of time slot to respond with. Only <code class="prettyprint">bookable</code> or <code class="prettyprint">upcoming</code> are supported. <code class="prettyprint">bookable</code> returns all bookable time slots, and <code class="prettyprint">upcoming</code> also includes time slots that are sold out.</td>
 <td>true</td>
 </tr>
 <tr>
