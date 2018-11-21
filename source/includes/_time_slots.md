@@ -1,6 +1,6 @@
 # Time Slots
 
-## Get Bookable Time Slots For A Product
+## Get Bookable or Upcoming Time Slots For A Product
 
 ```shell
 curl "https://app.getoccasion.com/api/v1/products/:id/time_slots?filter[status]=bookable&filter[last]=k182hea&page[size]=2"
@@ -51,8 +51,8 @@ Parameter | Description | Required
 --------- | ----------- | ---------
 id | The ID of the product to retrieve time slots for. | true
 filter | The filter params to apply to collection of time slots for the product. | true
-&#x203a; last | The token of the last time slot that was in your previous time slot query. If left blank, will respond with first bookable time slots. | false
-&#x203a; status | The status type of time slot to respond with. `bookable` required for now. | true
+&#x203a; last | The token of the last time slot that was in your previous time slot query. If left blank, will respond with first upcoming time slots. | false
+&#x203a; status | The status type of time slot to respond with. Only `bookable` or `upcoming` are supported. `bookable` returns all bookable time slots, and `upcoming` also includes time slots that are sold out. | true
 page | The pagination params to apply to collection of time slots for the product. | false
 &#x203a; size | The number of time slots to respond with. Defaults to 10, max 100. | false
 

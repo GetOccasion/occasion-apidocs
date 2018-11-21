@@ -1,11 +1,11 @@
 # 8. What time slot(s) do you want to book?
 
-## Displaying pages of bookable time slots
+## Displaying pages of bookable or upcoming time slots
 
 ```javascript
 window.product.timeSlots().where({ status: 'bookable' }).perPage(10).all()
   .then(function(timeSlotsPage) {
-    
+
     // do something with mapped version of time slots page
     timeSlotsPage.map(function(timeSlot) {
       console.log(timeSlot.attributes()) // =>
@@ -15,7 +15,7 @@ window.product.timeSlots().where({ status: 'bookable' }).perPage(10).all()
       //   startsAt: '2015-10-24T11:00:44.539-05:00'
       // }
     });
-    
+
     if(timeSlotsPage.hasNextPage()) {
       timeSlotsPage.nextPage()
       .then(function(nextTimeSlotsPage) {
@@ -35,12 +35,12 @@ Product time slots are loaded in pages, and you can specify the page size when y
 timeSlotsPage.map(function(timeSlot) {
   // Always display startsAt
   console.log(timeSlot.startsAt);
-  
+
   // Only display spotsAvailable if product.showOccurrenceAvailability
   if(window.product.showOccurrenceAvailability) {
     console.log(timeSlot.spotsAvailable);
   }
-  
+
   // Only display duration if product.showTimeSlotDuration
   if(window.product.showTimeSlotDuration) {
     console.log(timeSlot.duration);
